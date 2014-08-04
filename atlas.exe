@@ -1,4 +1,16 @@
 #! /usr/bin/env python
+# A. Spiga 06-08/14 
+#########################################################################
+# first a few preliminary stuff to include planetoplot
+import os
+envpython = os.environ["PYTHONPATH"]
+if "planetoplot_v2" not in envpython:
+  os.environ["PYTHONPATH"] = os.getcwd() + "/MODELES/UTIL/PYTHON/planetoplot_v2/" + envpython
+#########################################################################
+
+# OK. then the actual plotting commands.
+# -- people should be encouraged to use the command line pp.py too
+
 from ppclass import pp
 
 fi="resultat.nc"

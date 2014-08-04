@@ -7,15 +7,15 @@
 ini=$PWD
 mod=$ini/MODELES
 net=$mod/LMDZ.COMMON/netcdf/gfortran_netcdf-4.0.1
-log=$mod/install.log
+log=$ini/install.log
 \rm $log > /dev/null 2> /dev/null
 touch $log
 
 ###
 echo "1. communicate with server"
 cd $ini
-rm -rf $mod
-svn co -N http://svn.lmd.jussieu.fr/Planeto/trunk $mod >> $log 2>&1
+rm -rf MODELES
+svn co -N http://svn.lmd.jussieu.fr/Planeto/trunk MODELES >> $log 2>&1
 
 ###
 echo "2. get model code (please wait)"
@@ -77,5 +77,8 @@ makegcm_gfortran_local -d 8x8x8 -debug newstart >> $log 2>&1
 echo "8. get radiative transfer precalculated tables"
 cd $ini/RUN
 wget http://www.spiga.fr/edu/DATAGENERIC.tar.gz -a $log
-tar xzvf DATAGENERIC.tar.gz
+tar xzvf DATAGENERIC.tar.gz >> $log 2>&1
 rm -rf DATAGENERIC.tar.gz
+
+###
+mv $log $mod/
