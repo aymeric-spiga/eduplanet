@@ -1,0 +1,29 @@
+makelmdz -b 20x30 -d 24x24x24 -s 1 -p generic -arch gfortran gcm
+
+(après un full)
+
+
+A REGLER IL FAUT REGLER DEUX FOIS LA PRESSION...
+
+newstart : le premier changement de pression est important pour presnivs
+mais si on repond n la valeur prise pour presnivs et ps est celle de flat
+
+donc on repond n en premier
+le seul souci est si l'on souhaite regler pa
+mais il est regle très haut par defaut deja donc pure pressure levels (ok pour aquaplanete)
+
+si y en premier.... probleme dans ps....
+
+!!!!! attention !!!!!
+<-- Pression de surface (Pa) 1. pour les niveaux
+<-- Pression de surface (Pa) 2. pour la topo
+
+
+makegcm_gfortran_local -d 24x24x24 -debug newstart
+
+
+0.07                 !! <-- Albedo (sol nu, sans dimension) 0.3 0.07
+18000.               !! <-- Inertie thermique (J/m-2/K-1/s-0.5) 2000. 18000.
+
+
+1/3 2000 + 2/3 18000 ~ 12000

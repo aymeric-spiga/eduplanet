@@ -1,0 +1,15 @@
+# gases
+4
+N2_
+CO2
+CH4
+H2O
+0.999611900E+00
+0.375999962E-03
+0.174999983E-05
+-1
+
+# First line is number of gases
+# Followed by gas names (always 3 characters)
+# and then mixing ratios.
+# mixing ratio -1 means the gas is variable.

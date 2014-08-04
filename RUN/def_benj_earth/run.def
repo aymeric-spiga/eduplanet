@@ -1,0 +1,123 @@
+
+planet_type = generic
+
+#
+#----------------------------------------------------------------------- 
+#Parametres de controle du run:                                          
+#------------------------------                                          
+
+# Nombre de jours d'integration                                         
+     nday=360
+     nday=50
+
+# nombre de pas par jour (multiple de iperiod) ( ici pour dt = 1 min )      
+ day_step = 360
+ day_step = 720
+
+# periode pour le pas Matsuno (en pas)                                  
+  iperiod=5
+  iperiod=1
+
+# periode de sortie des variables de controle (en pas)                  
+  iconser=120
+
+# periode d'ecriture du fichier histoire (en jour)                      
+    iecri=1000
+
+# periode de stockage fichier histmoy (en jour)                         
+ periodav=10.
+
+# periode de la dissipation (en pas)                                    
+  idissip=5
+
+# choix de l'operateur de dissipation (star ou  non star )              
+ lstardis=.true.
+
+# avec ou sans coordonnee hybrides
+ hybrid=.true.
+
+# nombre d'iterations de l'operateur de dissipation   gradiv            
+nitergdiv=1
+
+# nombre d'iterations de l'operateur de dissipation  nxgradrot          
+nitergrot=2
+
+# nombre d'iterations de l'operateur de dissipation  divgrad            
+   niterh=2
+
+# temps de dissipation des plus petites long.d ondes pour u,v (gradiv)  
+ tetagdiv=4000.
+ tetagdiv=5200.
+
+# temps de dissipation des plus petites long.d ondes pour u,v(nxgradrot)
+ tetagrot=4000.
+ tetagrot=7400.
+
+# temps de dissipation des plus petites long.d ondes pour  h ( divgrad) 
+ tetatemp=4000.
+ tetagrot=7400.
+
+# coefficient pour gamdissip                                            
+  coefdis=0.
+
+# choix du shema d'integration temporelle (Matsuno ou Matsuno-leapfrog) 
+  purmats=.false.
+
+# avec ou sans physique                                                 
+   physic=.true.
+
+# periode de la physique (en pas)                                       
+  iphysiq=20
+
+# choix d'une grille reguliere                                          
+  grireg=.true.
+
+# frequence (en pas) de l'ecriture du fichier diagfi               
+ ecritphy=45
+ ecritphy=72
+
+# longitude en degres du centre du zoom                                 
+   clon=0.
+
+# latitude en degres du centre du zoom                                  
+   clat=0.
+
+# facteur de grossissement du zoom,selon longitude                      
+  grossismx=1.
+
+# facteur de grossissement du zoom ,selon latitude                      
+ grossismy=1.
+
+#  Fonction  f(y)  hyperbolique  si = .true.  , sinon  sinusoidale         
+  fxyhypb=.false.
+
+# extension en longitude  de la zone du zoom  ( fraction de la zone totale)
+   dzoomx= 0.
+
+# extension en latitude de la zone  du zoom  ( fraction de la zone totale)
+   dzoomy=0.
+
+#  raideur du zoom en  X
+    taux=2.
+
+#  raideur du zoom en  Y
+    tauy=2.
+
+#  Fonction  f(y) avec y = Sin(latit.) si = .TRUE. ,  Sinon  y = latit.
+  ysinus= .false.
+
+# Avec sponge layer
+  callsponge  = .true.
+ 
+# Sponge:  mode0(u=v=0), mode1(u=umoy,v=0), mode2(u=umoy,v=vmoy)
+  mode_sponge= 2
+
+# Sponge:  hauteur de sponge (km)
+  hsponge= 50
+
+# Sponge:  tetasponge (secondes)
+  tetasponge = 50000
+
+# some definitions for the physics, in file 'callphys.def'
+INCLUDEDEF=callphys.def
+INCLUDEDEF=etu.def

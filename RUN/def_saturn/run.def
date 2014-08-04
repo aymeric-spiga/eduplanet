@@ -1,0 +1,191 @@
+###########################################################################
+### RUN.DEF ### RUN.DEF ### RUN.DEF ### RUN.DEF ### RUN.DEF ### RUN.DEF ###
+########################################################################### 
+### A MERGED VERSION TO BE USED WITH OLD OR RECENT LMDZ CORE
+### i.e. compiles gcm.def+run.def in LMDZ5 with run.def in old planeto LMDZ
+### (*) indicates same parameters in old and recent LMDZ core
+###########################################################################
+
+###########################################################################
+### NUMERICAL INTEGRATIONS
+###########################################################################
+### nday --> number of days of integration (*)
+### iperiod --> period for the Matsuno step (in dynamical steps) (*)
+### day_step --> number of steps per day (multiple of iperiod) (*)
+### purmats --> temporal integration: Matsuno or Matsuno-leapfrog? (*)
+### grireg --> regular grid or not (*)
+### adjust --> flag to activate load optimization
+### use_filtre_fft --> flag to activate FFT filtering
+###########################################################################
+nday = 100
+iperiod = 5
+day_step = 360
+purmats = .false.
+grireg = .true.
+adjust = n
+use_filtre_fft = n
+
+###########################################################################
+### WHAT RELATES TO PHYSICS
+###########################################################################
+### iphysiq --> period for calling physics (in dynamical steps) (*)
+### ecritphy --> frequency for outputs in diagfi (in dynamical steps) (*)
+### planet_type --> the planet
+### disvert_type --> type of vertical coordinates (2 for planeto)
+### hybrid --> use hybrid coordinates or not? (*)
+### iflag_phys=0 --> no physics (e.g. shallow water)
+### iflag_phys=1 --> physics (e.g. phylmd)
+### iflag_phys=2 --> simple newtonian relaxation
+### physic --> flag with or without physics (*)
+###########################################################################
+iphysiq = 10
+ecritphy = 10
+planet_type = generic
+disvert_type = 2
+hybrid = .false.
+iflag_phys = 1
+physic = .true.
+
+###########################################################################
+### INITIALIZATION and NUDGING
+###########################################################################
+### read_start --> with or without start files ?
+###                (without: initialization by iniacademic)
+### raz_date=0 --> use the date in start file
+### raz_date=1 --> erase the date and start from scratch
+### ok_guide --> flag for nudging towards winds (needs relax.nc)
+### facwind --> time constant for relaxation 
+###             5.e8 medium 1.e7-5.e6 strong 1.e6 very fast
+###########################################################################
+read_start = y 
+raz_date = 1
+ok_guide = n
+facwind = 1.e6
+
+###########################################################################
+### HORIZONTAL DISSIPATION
+###########################################################################
+### dissip_period --> period call to dissipation (in dynamical steps)
+### - must be a multiple of iperiod
+### - 0 means automatic computation 
+### - use idissip instead if old LMDZ core (idissip ignored in LMDZ5)
+### dissip_fac_mid --> enhancement factor in middle atmosphere
+### - set to 1 to prevent dissipation enhancement
+### lstardis --> star or not star dissipation operator (*)
+### nitergdiv --> number of iterations for gradiv operator (*)
+### nitergrot --> number of iterations for nxgradrot operator (*)
+### niterh --> number of iterations for divgrad operator (*)
+### tetagdiv --> dissipation timescale of smallest wvl: u,v (gradiv) (*)
+### tetagrot --> dissipation timescale of smallest wvl: u,v (nxgradrot) (*)
+### tetatemp --> dissipation timescale of smallest wvl: h (divgrad) (*)
+### coefdis --> coefficient for gamdissip (*)
+###########################################################################
+dissip_period = 5
+dissip_fac_mid = 2
+lstardis = .true. 
+nitergdiv = 1
+nitergrot = 2
+niterh = 2
+tetagdiv = 5400.
+tetagrot = 7200.
+tetatemp = 7200.
+
+###########################################################################
+### ENHANCEMENT OF HORIZONTAL DISSIPATION IN UPPERMOST LEVELS 
+###########################################################################
+### - not activated if ok_strato=n
+### - dissip_fac_up --> enhancement factor
+### - dissip_deltaz --> altitude range of transition (km)
+### - dissip_hdelta --> scale height at transition (km)
+### - dissip_pupstart --> pressure at bottom of transition region (Pa) 
+###########################################################################
+ok_strato = n
+dissip_fac_up = 2
+dissip_deltaz = 150.
+dissip_hdelta = 50.
+dissip_pupstart = 50.
+
+###########################################################################
+### DAMPING ("SPONGE") LAYER AT MODEL TOP
+###########################################################################
+### iflag_top_bound=0 for no sponge
+### iflag_top_bound=1 for sponge over 4 topmost layers
+### iflag_top_bound=2 for sponge from top to ~1% of top layer pressure
+### mode_top_bound=0 for no sponge
+### mode_top_bound=1 for u,v --> 0
+### mode_top_bound=2 for u,v --> zonal mean
+### mode_top_bound=3 for u,v,h --> zonal mean
+### tau_top_bound --> damping frequency at last layer
+### e-5 medium / e-4 strong yet reasonable / e-3 very strong
+###########################################################################
+iflag_top_bound = 2
+mode_top_bound = 2
+tau_top_bound = 1.e-4
+
+###########################################################################
+### OUTPUT FROM DYNAMICS
+###########################################################################
+### prt_level --> level of control prints (1-10)
+### ok_dyn_ins --> flag instantaneous outputs (dyn_hist.nc)
+### iecri --> frequency of instantaneous outputs (in dynamical steps)
+### ok_dyn_ave --> flag averaged outputs (dyn_hist_ave.nc)
+### periodav --> period of output of averages in dynamics (in days) 
+### ok_dynzon --> flag outputs dynzon
+### NB: iecri and periodav used to be in old LMDZ core although useless
+### iconser --> frequency of outputs of control variables (in dyn steps)(*)
+###########################################################################
+prt_level = 1
+ok_dyn_ins = n
+iecri = 480
+ok_dyn_ave = n
+periodav = 1
+ok_dynzon = n
+iconser = 120
+
+###########################################################################
+### ZOOMED GRID (same parameters in old and recent LMDZ core)
+###########################################################################
+### clon --> longitude of center of zoom (deg) (*)
+### clat --> latitude of center of zoom (deg) (*)
+### grossismx --> zoom factor in longitude (*)
+### grossismy --> zoom factor in latitude (*)
+### dzoomx --> longitude extent of zoom zone (fraction of total area) (*)
+### dzoomy --> latitude extent of zoom zone (fraction of total area) (*)
+### taux --> "stifness" of zoom in longitude (*)
+### tauy --> "stifness" of zoom in latitude (*)
+### fxyhypb --> f(y) hyperbolic (T) or sinusoidal (F) (*)
+### ysinus --> f(y) = sin(lat) (T) or lat (F) (*)
+###########################################################################
+clon = 0.
+clat = 0.
+grossismx = 1.
+grossismy = 1.
+dzoomx = 0.
+dzoomy = 0.
+taux = 2.
+tauy = 2.
+fxyhypb = .false.
+ysinus = .false.
+
+###########################################################################
+### LEFTOVERS
+### calend=earth_360d ## specific calendar
+### resetvarc=n   ## reinit des variables de controle
+### iflag_trac=0  ## avec ou sans traceurs
+### dayref=10120  ## initial date
+### anneeref=2000 ## year of initial state
+### --- old version of spong layer
+## Avec sponge layer
+#  callsponge  = .true.
+## Sponge:  mode0(u=v=0), mode1(u=umoy,v=0), mode2(u=umoy,v=vmoy)
+#  mode_sponge= 2
+## Sponge:  hauteur de sponge (km)
+#  hsponge= 50
+## Sponge:  tetasponge (secondes)
+#  tetasponge = 50000
+
+###########################################################################
+### INCLUDE OTHER DEF FILES (physics, specific settings, etc...)
+###########################################################################
+INCLUDEDEF=callphys.def
+INCLUDEDEF=etu.def

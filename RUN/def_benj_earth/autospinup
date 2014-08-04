@@ -1,0 +1,21 @@
+#makegcmSVNgenerikifort -d 64x48x20 -t 2 -b 38x36 -p std gcm
+# @ job_name=gcm_3D
+# @ output = $(job_name).$(jobid)
+# @ error = $(output)
+# @ job_type = serial
+# @ class = D
+# @ queue
+
+cp -f run_spinup.def run.def
+newstart.e < start_earth
+startrestart
+
+echo "Starting GCM spinup year..."
+gcm.e > lruns1
+startrestart0
+
+echo "Running for multiple years to reach equilibrium."
+cp -f run_normal.def run.def
+
+run0
+

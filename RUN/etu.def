@@ -1,0 +1,27 @@
+# Nombre de jours d'integration                
+nday = 730
+
+# Nombre de pas d'integration dynamique par jour
+day_step = 1
+
+# Inclure ou non le cycle diurne
+diurnal = .false.
+
+# Periode de la physique (en pas d'integration dynamique)
+iphysiq = 1
+
+
+
+##########
+# mode simple "gris" (coefficient d'absorption constant selon lambda)
+graybody = .true.
+continuum  = .false.
+corrkdir   = null
+# coefficient d'absorption IR et VIS en m2/kg [--> kappa ~ tau_surf*g/P]
+kappa_IR = 5.e-5
+kappa_VI = 5.e-6
+##########
+
+
+
+

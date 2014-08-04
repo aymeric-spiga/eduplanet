@@ -1,0 +1,6 @@
+# Stellar flux at 1 AU. Examples:
+# 1366.0 W m-2          Sol today
+# 1024.5 W m-2          Sol today x 0.75 = weak early Sun
+# 18.462 W m-2          The feeble Gl581
+# 19.960 W m-2          Gl581 with e=0.38 orbital average
+Fat1AU = 1366.0
