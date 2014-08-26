@@ -32,4 +32,5 @@ p2.vmin = -90. ; p2.vmax = 30. ; p2.div = 12 ; p2.plot()
 q = pp(var="temp",file=fi,x=0,t=360+90,quiet=True,logy=True).getplot(extraplot=1)
 q2 = pp(var="temp",file=fi,x=0,t=360+270,plotin=q,quiet=True,logy=True).getplot()
 
+## just for ref
 #u'zdtsw', u'zdtlw', u'dtrad', u'h2o_ice', u'h2o_ice_surf', u'h2o_ice_col', u'tau_col', u'h2o_vap', u'h2o_vap_surf', u'h2o_vap_col'
