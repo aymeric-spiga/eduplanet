@@ -1,4 +1,3 @@
-
 1) faire varier le nombre de pas par jour
    ... obtient-on le même résultat final ?
 
@@ -42,6 +41,8 @@
    ... comment la température varie-t-elle ?
 
 8) faint young sun... faire baisser la luminosité du Soleil.
+
+9) étudier l'influence du cycle diurne
 
 .) changement climatique récent (TBD)
 
