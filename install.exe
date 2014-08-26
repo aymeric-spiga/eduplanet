@@ -64,14 +64,14 @@ sed s+"/home/aymeric/Science/MODELES"+$mod+g arch-gfortran.path > arch-gfortran_
 ###
 echo "6. compile the model fully at least once (please wait)"
 cd $mod/LMDZ.COMMON
-makelmdz -full -cpp NODYN -d 8x8x8 -b 2x2 -t 3 -s 1 -p generic -arch gfortran_mod gcm >> $log 2>&1
+makelmdz -full -cpp NODYN -d 8x8x16 -b 1x1 -t 3 -s 1 -p generic -arch gfortran_mod gcm >> $log 2>&1
 
 ###
 echo "7. compile the program for initial condition at least once (please wait)"
 cd $mod/LMDZ.GENERIC
 sed s+"/donnees/emlmd/netcdf64-4.0.1_gfortran"+$net+g makegcm_gfortran > makegcm_gfortran_local
 chmod 755 makegcm_gfortran_local
-makegcm_gfortran_local -d 8x8x8 -debug newstart >> $log 2>&1
+makegcm_gfortran_local -d 8x8x16 -debug newstart >> $log 2>&1
 
 ###
 echo "8. get radiative transfer precalculated tables"

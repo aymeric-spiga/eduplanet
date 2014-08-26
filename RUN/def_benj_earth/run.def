@@ -68,6 +68,7 @@ nitergrot=2
 
 # periode de la physique (en pas)                                       
   iphysiq=20
+  iphysiq=1
 
 # choix d'une grille reguliere                                          
   grireg=.true.
