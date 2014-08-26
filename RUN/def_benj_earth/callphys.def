@@ -37,22 +37,23 @@ stelTbb      = 2000.000
 # call multilayer correlated-k radiative transfer ?
 corrk      = .true.
 # Include continuum absorption in radiative transfer (note CO2 is treated separately) ?
-continuum  = .true.
+continuum  = .false.
 # folder in which correlated-k data is stored ?
- corrkdir    = earth
+# corrkdir    = earth
 # corrkdir   = N2CO2poor_H2Ovar
 # corrkdir   = megaCO2
-# corrkdir   = null
+ corrkdir   = null
 # call visible gaseous absorption in radiative transfer ?
-callgasvis = .true.
+callgasvis = .false.
 # Include Rayleigh scattering in the visible ?
-rayleigh   = .true.
+rayleigh   = .false.
 # Uniform absorption coefficient in radiative transfer?
-graybody   = .false.
+graybody   = .true.
 # Constant absorption coefficient in visible 
 #      (in m^2/kg; only if graybody=true):
 #      tau_surf= kappa*P/g
-kappa_VI = 5.e-7
+#kappa_VI = 5.e-7
+kappa_VI = 5.e-20
 # Constant absorption coefficient in IR
 #      (in m^2/kg; only if graybody=true):
 kappa_IR = 1.e-5 
@@ -78,6 +79,7 @@ varfixed   = .false.
 satval     = 0.0
 # Force specific heat capacity and molecular mass values
 force_cpp      = .true.
+force_cpp      = .false.
 # Specific heat capacity in J K-1 kg-1 [only used if force_cpp = T]
 cpp            = 1039.918
 # Molecular mass in g mol-1 [only used if force_cpp = T]
@@ -157,7 +159,7 @@ cloudlvl      = 0.0
 
 
 # To not call abort when temperature is outside boundaries:
-strictboundcorrk = .false.
+strictboundcorrk = .true.
 
 
 ## Water options 

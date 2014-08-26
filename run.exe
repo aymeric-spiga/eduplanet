@@ -13,15 +13,17 @@ b1=32
 b2=36
 b1=3 # recompile with full if you changed this
 b2=2 # recompile with full if you changed this
+b1=1 # recompile with full if you changed this
+b2=1 # recompile with full if you changed this
 
-echo "*** COMPILATION GCM ***"
+echo "*** COMPILATION GCM *** ne pas interrompre ***"
 cd $wheresource/LMDZ.COMMON ; \rm gcm.e
 makelmdz -cpp NODYN -d $nx"x"$ny"x"$nz -b $b1"x"$b2 -t $tr -s 1 -p generic -arch gfortran gcm > logcompilegcm 2> logcompilegcm
 if [[ ! -f gcm.e ]] ; then 
   echo "Il y a eu un probleme. Voir : " $PWD/logcompilegcm ; exit
 fi
 
-echo "*** COMPILATION NEWSTART ***"
+echo "*** COMPILATION NEWSTART *** ne pas interrompre ***"
 cd $wheresource/LMDZ.GENERIC ; \rm newstart.e
 makegcm_gfortran_local -d $nx"x"$ny"x"$nz -debug newstart > logcompilerestart 2> logcompilerestart
 if [[ ! -f newstart.e ]] ; then 
@@ -38,6 +40,8 @@ fi
 echo "*** SIMULATION ***"
 cd $thisfolder/RUN ; \rm resultat.nc > /dev/null 2> /dev/null
 time gcm.e | tee log_gcm | grep "Ls ="
+#time gcm.e > /dev/null 2> /dev/null
+#time gcm.e #| grep "WRITE"
 mv diagfi.nc ../resultat.nc
 
 echo "*** FIN ***"

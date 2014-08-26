@@ -6,6 +6,10 @@ rad                  !! *
 6.3e6                !! <-- Rayon planetaire (m)
 g                    !! *  
 9.81                 !! <-- Acceleration gravite (m/s2)
+mugaz                !! *
+28.0                 !! <-- Masse molaire atmosphérique (g/mol)
+rcp                  !! *
+0.286                !! <-- Rapport r/cp (massiques)
 daysec               !! *
 86400                !! <-- Duree du jour (s)
 omeg                 !! *
@@ -19,7 +23,7 @@ apoastr              !! *
 peri_day             !! *
 0.                   !! <-- Date periastre (jours depuis printemps)
 obliquit             !! *
-25.0                 !! <-- Obliquite (degres)
+23.9                 !! <-- Obliquite (degres)
                   
 none              
 0.3                  !! <-- Albedo (sol nu, sans dimension)

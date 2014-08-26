@@ -8,14 +8,19 @@ if "planetoplot_v2" not in envpython:
   os.environ["PYTHONPATH"] = os.getcwd() + "/MODELES/UTIL/PYTHON/planetoplot_v2/" + envpython
 #########################################################################
 
+# arguments
+from optparse import OptionParser ### TBR by argparse
+parser = OptionParser()
+(opt,args) = parser.parse_args()
+if len(args) == 0: args = "resultat.nc"
+
 # OK. then the actual plotting commands.
 # -- people should be encouraged to use the command line pp.py too
-
 from ppclass import pp
 
-fi="resultat.nc"
+fi=args
 
-t = pp(var="tsurf",file =fi,x="-180,180",y=[-80,-60,-20,0],superpose=True,quiet=True,ylabel=r'surface temperature ($^{\circ}$C)').get()-273.15
+t = pp(var="tsurf",file=fi,x="-180,180",y=[-80,-60,-20,0],superpose=True,quiet=True,ylabel=r'surface temperature ($^{\circ}$C)').get()-273.15
 t.plot()
 
 p = pp(var="ISR",file=fi,x="-180,180",quiet=True).getplot(extraplot=3)
