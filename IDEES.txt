@@ -1,0 +1,47 @@
+
+1) faire varier le nombre de pas par jour
+   ... obtient-on le même résultat final ?
+
+2) changer la température de départ pour la Terre
+   -- départ froid 150 K
+   -- départ chaud 500 K
+   -- départ absurde 1000 K
+   et observer l'équilibrage sur plusieurs années
+   ... obtient-on le même résultat final ?
+
+   [déduire une stratégie de modélisation un peu plus optimisée
+    1. commencer avec une température initiale un peu au hasard
+    2. regarder quelle température finale est obtenue
+    3. recommencer avec une température initiale un peu plus proche
+    4. observer l'équilibrage plus rapide] 
+   
+3) faire varier l'inertie thermique -- de la planète caillou (TI=50) à la planète océan (TI=18000)
+   ... observer les variations saisonnières de température en particulier aux hautes latitudes
+   ... comparer aux maxima saisonniers d'insolation
+   ... où se situe la Terre ? Mars ?
+   ... noter les différences d'équilibrage en fonction de l'inertie thermique
+  
+4) faire varier la distance au soleil de la Terre et déterminer quand
+     l'eau liquide n'est plus stable (réfléchir au critère, la limite est
+     0°C mais quelle température faut-il regarder ? max ? min ? moyenne ?)
+
+5) influence de la pression : Vénus et son effet de serre infernal.
+   ... mettre 90 bars sans changer kappa.
+     -- il peut être nécessaire de faire tourner plusieurs dizaines d'années le modèle
+     -- ou adopter la méthode évoquée en 2 (prendre par exemple une température initiale de 500 K)
+   ... quels autres paramètres faut-il changer pour obtenir un environnement plus proche de Vénus ?
+
+6) étudier le cas martien inclus dans INIT
+   ... comparer au cas de la Terre (voir aussi 3)
+   ... l'eau liquide est-elle stable à la surface de Mars d'après le modèle ?
+   ... faire varier les paramètres du modèle pour rendre l'eau liquide stable à la surface de Mars
+        et discuter de la plausibilité des changements
+
+7) cycles de Milankovic terrestres et martiens
+   ... faire varier l'obliquité et les distances mini/maxi etoile-planete d'après les données
+   ... comment la température varie-t-elle ?
+
+8) faint young sun... faire baisser la luminosité du Soleil.
+
+.) changement climatique récent (TBD)
+
