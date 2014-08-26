@@ -74,11 +74,4 @@ chmod 755 makegcm_gfortran_local
 makegcm_gfortran_local -d 8x8x16 -debug newstart >> $log 2>&1
 
 ###
-echo "8. get radiative transfer precalculated tables"
-cd $ini/RUN
-wget http://www.spiga.fr/edu/DATAGENERIC.tar.gz -a $log
-tar xzvf DATAGENERIC.tar.gz >> $log 2>&1
-rm -rf DATAGENERIC.tar.gz
-
-###
 mv $log $mod/
