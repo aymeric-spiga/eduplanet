@@ -12,7 +12,8 @@ mv yorgl $HOME/.subversion/servers
 cat $HOME/.subversion/servers
 
 touch .wgetrc
-echo "use_proxy=yes" >> .wgetrc
+echo "use_proxy=on" >> .wgetrc
 echo "http_proxy=$px:$po" >> .wgetrc
+echo "ftp_proxy=$px:$po" >> .wgetrc
 mv .wgetrc $HOME/
 cat $HOME/.wgetrc
