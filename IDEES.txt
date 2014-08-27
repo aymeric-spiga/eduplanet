@@ -46,3 +46,12 @@
 
 .) changement climatique récent (TBD)
 
+brainstorm
+- ajouter dynamique sur un état équilibré radiativement
+- stratosphère en utilisant le 2-layer modèle pour Saturne
+- k-correlés réalistes (earth, megaCO2, etc...)
+- activer le cycle de l'eau et précipitations ?
+- albedo variable avec la température
+
+
+
