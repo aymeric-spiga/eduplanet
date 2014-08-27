@@ -1,0 +1,9 @@
+#! /bin/bash
+
+touch yorgl
+echo "[global]" >> yorgl
+echo "http-proxy-host = proxyweb.upmc.fr" >> yorgl
+echo "http-proxy-port = 3128" >> yorgl
+mv $HOME/.subversion/servers $HOME/.subversion/servers.bak
+mv yorgl $HOME/.subversion/servers
+cat $HOME/.subversion/servers
