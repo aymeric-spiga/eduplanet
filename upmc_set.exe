@@ -1,9 +1,18 @@
 #! /bin/bash
 
+px="proxyweb.upmc.fr"
+po="3128"
+
 touch yorgl
 echo "[global]" >> yorgl
-echo "http-proxy-host = proxyweb.upmc.fr" >> yorgl
-echo "http-proxy-port = 3128" >> yorgl
+echo "http-proxy-host = $px" >> yorgl
+echo "http-proxy-port = $po" >> yorgl
 mv $HOME/.subversion/servers $HOME/.subversion/servers.bak
 mv yorgl $HOME/.subversion/servers
 cat $HOME/.subversion/servers
+
+touch .wgetrc
+echo "use_proxy=yes" >> .wgetrc
+echo "http_proxy=$px:$po" >> .wgetrc
+mv .wgetrc $HOME/
+cat $HOME/.wgetrc
