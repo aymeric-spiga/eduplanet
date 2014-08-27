@@ -53,6 +53,7 @@ mv $ze_netcdf $net
 
 ###
 echo "4. get and compile IOIPSL librairies (please wait)"
+cp $ini/fix/install_ioipsl_gfortran.bash  $mod/LMDZ.COMMON/ioipsl/
 cd $mod/LMDZ.COMMON/ioipsl
 sed -i s+"/home/aymeric/Science/MODELES"+$mod+g install_ioipsl_gfortran.bash
 ./install_ioipsl_gfortran.bash >> $log 2>&1
