@@ -52,6 +52,7 @@ brainstorm
 - k-correlés réalistes (earth, megaCO2, etc...)
 - activer le cycle de l'eau et précipitations ?
 - albedo variable avec la température
+- réponse interne (ressorts ?)
 
 
 
