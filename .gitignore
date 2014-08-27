@@ -1,0 +1,4 @@
+*.nc
+log_*
+MODELES/*
+planetoplot/*
