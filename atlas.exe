@@ -4,8 +4,8 @@
 # first a few preliminary stuff to include planetoplot
 import os
 envpython = os.environ["PYTHONPATH"]
-if "planetoplot_v2" not in envpython:
-  os.environ["PYTHONPATH"] = os.getcwd() + "/MODELES/UTIL/PYTHON/planetoplot_v2/" + envpython
+if "planetoplot" not in envpython:
+  os.environ["PYTHONPATH"] = os.getcwd() + "/planetoplot/" + envpython
 #########################################################################
 
 # arguments

@@ -19,8 +19,9 @@ svn co -N http://svn.lmd.jussieu.fr/Planeto/trunk MODELES >> $log 2>&1
 
 ###
 echo "2. get model code (please wait)"
+git clone https://github.com/aymeric-spiga/planetoplot >> $log 2>&1
 cd $mod
-svn update -r 1321 LMDZ.GENERIC LMDZ.COMMON UTIL >> $log 2>&1
+svn update -r 1321 LMDZ.GENERIC LMDZ.COMMON >> $log 2>&1
 cd $mod/LMDZ.COMMON/libf
 ln -sf $mod/LMDZ.GENERIC/libf/phystd phygeneric
 
