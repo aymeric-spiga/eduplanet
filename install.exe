@@ -19,6 +19,7 @@ svn co -N http://svn.lmd.jussieu.fr/Planeto/trunk MODELES >> $log 2>&1
 
 ###
 echo "2. get model code (please wait)"
+rm -rf planetoplot
 git clone https://github.com/aymeric-spiga/planetoplot >> $log 2>&1
 cd $mod
 svn update -r 1321 LMDZ.GENERIC LMDZ.COMMON >> $log 2>&1
@@ -53,7 +54,7 @@ mv $ze_netcdf $net
 
 ###
 echo "4. get and compile IOIPSL librairies (please wait)"
-cp $ini/fix/install_ioipsl_gfortran.bash  $mod/LMDZ.COMMON/ioipsl/
+cp $ini/fix/install_ioipsl_gfortran_noksh.bash $mod/LMDZ.COMMON/ioipsl/install_ioipsl_gfortran.bash
 cd $mod/LMDZ.COMMON/ioipsl
 sed -i s+"/home/aymeric/Science/MODELES"+$mod+g install_ioipsl_gfortran.bash
 ./install_ioipsl_gfortran.bash >> $log 2>&1
