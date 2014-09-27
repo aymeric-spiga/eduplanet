@@ -43,6 +43,7 @@ cd $thisfolder/RUN ; \rm resultat.nc > /dev/null 2> /dev/null
 time ./gcm.e | tee log_gcm | grep "Ls ="
 #time gcm.e > /dev/null 2> /dev/null
 #time gcm.e #| grep "WRITE"
-mv diagfi.nc ../resultat.nc
+zedate=`date --rfc-3339=seconds | sed s+' '+'_'+g | sed s+':'+'-'+g | sed s:'+':'-':g`
+mv diagfi.nc ../resultat_$zedate.nc
 
 echo "*** FIN ***"
