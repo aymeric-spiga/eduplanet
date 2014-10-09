@@ -44,6 +44,14 @@ time ./gcm.e | tee log_gcm | grep "Ls ="
 #time gcm.e > /dev/null 2> /dev/null
 #time gcm.e #| grep "WRITE"
 zedate=`date --rfc-3339=seconds | sed s+' '+'_'+g | sed s+':'+'-'+g | sed s:'+':'-':g`
-mv diagfi.nc ../resultat_$zedate.nc
+#mv diagfi.nc ../resultat_$zedate.nc
+
+echo "*** SAUVEGARDE DANS : expnum_$zedate"
+cd $thisfolder
+mkdir expnum_$zedate
+mv RUN/diagfi.nc expnum_$zedate/resultat.nc
+ln -sf expnum_$zedate/resultat.nc .
+cp INIT/planet_start expnum_$zedate/reglages_init.txt
+cp RUN/etu.def expnum_$zedate/reglages_run.txt
 
 echo "*** FIN ***"
