@@ -7,6 +7,7 @@ touch yorgl
 echo "[global]" >> yorgl
 echo "http-proxy-host = $px" >> yorgl
 echo "http-proxy-port = $po" >> yorgl
+mkdir -p $HOME/.subversion 
 mv $HOME/.subversion/servers $HOME/.subversion/servers.bak
 mv yorgl $HOME/.subversion/servers
 cat $HOME/.subversion/servers
