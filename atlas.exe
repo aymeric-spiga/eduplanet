@@ -1,22 +1,12 @@
 #! /usr/bin/env python
 # A. Spiga 06-08/14 
-#########################################################################
-# first a few preliminary stuff to include planetoplot
-import os
-envpython = os.environ["PYTHONPATH"]
-if "planetoplot" not in envpython:
-  os.environ["PYTHONPATH"] = os.getcwd() + "/planetoplot/" + envpython
-#########################################################################
+from ppclass import pp
 
 # arguments
 from optparse import OptionParser ### TBR by argparse
 parser = OptionParser()
 (opt,args) = parser.parse_args()
 if len(args) == 0: args = "resultat.nc"
-
-# OK. then the actual plotting commands.
-# -- people should be encouraged to use the command line pp.py too
-from ppclass import pp
 
 fi=args
 
