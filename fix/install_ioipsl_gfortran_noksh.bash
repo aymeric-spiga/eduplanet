@@ -4,7 +4,7 @@
 # You'll probably have to change paths to NetCDF library 'lib' and 'include'
 # below to adapt this script to your computer.
 
-setfolder="/home3/spiga/3T054/eduplanet/MODELES/LMDZ.COMMON/netcdf/gfortran_netcdf-4.0.1"
+setfolder="/home/aymeric/Science/MODELES/LMDZ.COMMON/netcdf/gfortran_netcdf-4.0.1"
 #setfolder="/donnees/emlmd/netcdf64-4.0.1_gfortran/"
 
 #0. Preliminary stuff 
