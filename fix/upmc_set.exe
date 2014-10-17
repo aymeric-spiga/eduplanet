@@ -27,7 +27,7 @@ mv -f .wgetrc $HOME/
 num=`grep -c 3T054 $HOME/.bashrc`
 if [ $num -eq 0 ]
 then
-  echo "if [ -f /etc/bashrc.3T054 ]; then . /etc/bashrc.3T054; fi" >> $HOME/.bashrc
+  echo 'if [ -f $HOME/.bashrc.3T054 ]; then . $HOME/.bashrc.3T054; fi' >> $HOME/.bashrc
 fi
 
 \rm $HOME/.bashrc.3T054
