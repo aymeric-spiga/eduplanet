@@ -8,12 +8,12 @@ whereisplanetoplot=$PWD/planetoplot
 num=`grep -c eduplanet $HOME/.bashrc`
 if [ $num -eq 0 ]
 then
-  echo "if [ -f /etc/bashrc.eduplanet ]; then . /etc/bashrc.eduplanet; fi" >> $HOME/.bashrc
+  echo 'if [ -f $HOME/.bashrc.eduplanet ]; then . $HOME/.bashrc.eduplanet; fi' >> $HOME/.bashrc
 fi
 
 \rm $HOME/.bashrc.eduplanet
-echo "export PYTHONPATH=$whereisplanetoplot:$PYTHONPATH " >> $HOME/.bashrc.eduplanet
-echo "export PATH=$whereisplanetoplot:$PATH " >> $HOME/.bashrc.eduplanet
+echo "export PYTHONPATH=$whereisplanetoplot:"'$PYTHONPATH' >> $HOME/.bashrc.eduplanet
+echo "export PATH=$whereisplanetoplot:"'$PATH' >> $HOME/.bashrc.eduplanet
 
 echo "!!!!!!!!!!!!!!!!!!!!!!!!"
 echo "taper la commande"
