@@ -3,6 +3,15 @@
 ### in main folder run
 ### ./fix/upmc_set.exe
 
+safetytest=`echo $PWD | grep -c fix`
+if [ $safetytest -ne 0 ]
+then
+  echo "Ne pas executer ce script dans le dossier fix."
+  echo "Executer ce script depuis eduplanet avec la commande:"
+  echo "./fix/upmc_set.exe"
+  exit
+fi
+
 px="proxyweb.upmc.fr"
 po="3128"
 
