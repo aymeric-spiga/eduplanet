@@ -13,6 +13,8 @@ fi=args
 t = pp(var="tsurf",file=fi,x="-180,180",y=[-80,-60,-20,0],superpose=True,quiet=True,ylabel=r'surface temperature ($^{\circ}$C)').get()-273.15
 t.plot()
 
+p = pp(var="tsurf",file=fi,x="-180,180",y="-90,90",quiet=True,superpose=True,compute="meanarea",ylabel="globally-averaged surface temperature (K)").getplot()
+
 p = pp(var="ISR",file=fi,x="-180,180",quiet=True).getplot(extraplot=3)
 p2 = pp(var="ASR",file=fi,x="-180,180",plotin=p,quiet=True).getplot()
 p2 = pp(var="OLR",file=fi,x="-180,180",plotin=p,quiet=True).getplot()
