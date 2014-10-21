@@ -7,6 +7,5 @@ day_step = 1
 # Coefficient d'absorption IR en m2/kg [--> kappa ~ tau_surf*g/P]
 kappa_IR = 5.e-5
 
-
-
-
+# Frequence (en pas) de l'ecriture du fichier de resultat
+ecritphy=72
