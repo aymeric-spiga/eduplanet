@@ -8,7 +8,7 @@ if [ $safetytest -ne 0 ]
 then
   echo "Ne pas executer ce script dans le dossier fix."
   echo "Executer ce script depuis eduplanet avec la commande:"
-  echo "./fix/upmc_set.exe"
+  echo "./fix/upmc_set.sh"
   exit
 fi
 
