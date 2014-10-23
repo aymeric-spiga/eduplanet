@@ -10,8 +10,15 @@ if len(args) == 0: args = "resultat.nc"
 
 fi=args
 
-t = pp(var="tsurf",file=fi,x="-180,180",y=[-80,-60,-20,0],superpose=True,quiet=True,ylabel=r'surface temperature ($^{\circ}$C)').get()-273.15
-t.plot()
+t = pp(var="tsurf",file=fi,x="-180,180",y=-80,superpose=True,quiet=True,ylabel=r'surface temperature ($^{\circ}$C)',legend="lat=-80").get()-273.15
+t.plot(extraplot=3)
+t2 = pp(var="tsurf",file=fi,x="-180,180",y=-60,superpose=True,quiet=True,ylabel=r'surface temperature ($^{\circ}$C)',legend="lat=-60",plotin=t).get()-273.15
+t2.plot()
+t2 = pp(var="tsurf",file=fi,x="-180,180",y=-20,superpose=True,quiet=True,ylabel=r'surface temperature ($^{\circ}$C)',legend="lat=-20",plotin=t).get()-273.15
+t2.plot()
+t2 = pp(var="tsurf",file=fi,x="-180,180",y=0,superpose=True,quiet=True,ylabel=r'surface temperature ($^{\circ}$C)',legend="lat=0",plotin=t).get()-273.15
+t2.plot()
+
 
 p = pp(var="tsurf",file=fi,x="-180,180",y="-90,90",quiet=True,superpose=True,compute="meanarea",ylabel="globally-averaged surface temperature (K)").getplot()
 
