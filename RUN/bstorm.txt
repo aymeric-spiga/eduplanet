@@ -44,6 +44,8 @@
 
 9) étudier l'influence du cycle diurne sur les résultats
 
+10) considérer une orbite très excentrique en réglant par exemple periastre à 0.1
+
 .) changement climatique récent (TBD)
 
 brainstorm
