@@ -1,11 +1,24 @@
 # Nombre de jours d'intégration                
 nday = 1825
 
+# Fréquence (en pas) de l'écriture du fichier de résultat
+ecritphy = 72
+
 # Nombre de pas d'intégration dynamique par jour
 day_step = 1
 
-# Coefficient d'absorption IR en m2/kg [--> kappa ~ tau_surf*g/P]
+# Coefficient d'absorption IR en m2/kg 
+# [--> voir notations TD : kappa ~ k * r_X * M_X / M]
 kappa_IR = 5.e-5
 
-# Frequence (en pas) de l'ecriture du fichier de resultat
-ecritphy=72
+# Flux stellaire incident instantané à 1 unité astronomique (i.e. distance Terre-Soleil)
+# exemple:
+# - 1366.0 W m-2 (Sol today)
+# - 1024.5 W m-2 (Sol today x 0.75 = weak early Sun)
+Fat1AU = 1366.0
+
+# Coefficient d'absorption dans le VISIBLE en m2/kg
+# épaisseur optique équivalente : tau_surf = kappa_VI * P_s / g
+kappa_VI = 5.e-20
+callgasvis = .false.
+
