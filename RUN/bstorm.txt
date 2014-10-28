@@ -54,7 +54,7 @@ brainstorm
 - k-correlés réalistes (earth, megaCO2, etc...)
 - activer le cycle de l'eau et précipitations ?
 - albedo variable avec la température
-- réponse interne (ressorts ?)
+- réponse interne (feedback vapeur d'eau?)
 
 
 attention on ne peut pas changer z2sig.def
