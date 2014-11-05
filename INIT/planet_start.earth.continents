@@ -1,7 +1,7 @@
 0                    !! *
 y                    !! *
-1.e5                 !! <-- Pression de surface (Pa)
-1.e20                !! *
+1.013e5              !! <-- Pression de surface (Pa)
+1.e1                 !! *
 rad                  !! *
 6.3e6                !! <-- Rayon planetaire (m)
 g                    !! *  
@@ -27,9 +27,7 @@ obliquit             !! *
 
 surface_earth.nc
 6695                 !! *
-flat                 !! *
-y                    !! *
--9999.               !! *
+set_ps_to_preff      !! *
 isotherm             !! *
 300.                 !! <-- Temperature initiale (K)
 emis                 !! *
