@@ -28,7 +28,7 @@ xref = xo - ecc*math.sin(xo)
 
 peri_day = year_day*(1.-xref/(2.*math.pi))
 
-if peri_day > year_day:
+if peri_day >= year_day:
     peri_day = peri_day - year_day
 
 print "peri_day = %.2f days" % (peri_day)
