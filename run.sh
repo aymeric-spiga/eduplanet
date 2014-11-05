@@ -1,9 +1,18 @@
 #! /bin/bash
 
-######
 nx=8
 ny=8
 nz=16
+
+while getopts "x:y:z:" options; do
+  case $options in
+   x ) nx=${OPTARG};;
+   y ) ny=${OPTARG};;
+   z ) nz=${OPTARG};;
+  esac
+done
+
+######
 tr=7
 ######
 
