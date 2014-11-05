@@ -22,7 +22,7 @@ echo "2. get model code (please wait)"
 rm -rf planetoplot
 git clone https://github.com/aymeric-spiga/planetoplot >> $log 2>&1
 cd $mod
-svn update -r 1321 LMDZ.GENERIC LMDZ.COMMON >> $log 2>&1
+svn update -r 1359 LMDZ.GENERIC LMDZ.COMMON >> $log 2>&1
 cd $mod/LMDZ.COMMON/libf
 ln -sf $mod/LMDZ.GENERIC/libf/phystd phygeneric
 
