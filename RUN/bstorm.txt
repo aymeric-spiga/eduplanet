@@ -46,6 +46,8 @@
 
 10) considérer une orbite très excentrique en réglant par exemple periastre à 0.1
 
+11) ajouter un mode "daisyworld"
+
 .) changement climatique récent (TBD)
 
 brainstorm
