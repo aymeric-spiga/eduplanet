@@ -46,11 +46,19 @@
 
 10) considérer une orbite très excentrique en réglant par exemple periastre à 0.1
 
-11) ajouter un mode "daisyworld"
 
 .) changement climatique récent (TBD)
 
-brainstorm
+TODO LIST
+
+>> ajouter fonction A(Ts) (pour Daisyworld, glace, etc.)
+>> ajouter option supercontinent à newstart
+>> tester Vénus et option force_cpp
+>> pouvoir imposer SST
+>> ajouter un diagnostique sur nuages et précip à partir d'un rvap constant
+>> tester la plus basse résolution possible avec dynamique
+
+BRAINSTORM
 - ajouter dynamique sur un état équilibré radiativement
 - stratosphère en utilisant le 2-layer modèle pour Saturne
 - k-correlés réalistes (earth, megaCO2, etc...)
