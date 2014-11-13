@@ -51,12 +51,15 @@
 
 TODO LIST
 
->> ajouter fonction A(Ts) (pour Daisyworld, glace, etc.)
+>> ajouter fonction A=f(Ts) (pour Daisyworld, glace, etc.)
+>> ajouter fonction K_vis=f(Ts) (pour feedback Ts -> GES par activité biologique)
 >> ajouter option supercontinent à newstart
->> tester Vénus et option force_cpp
->> pouvoir imposer SST
->> ajouter un diagnostique sur nuages et précip à partir d'un rvap constant
+>> tester Vénus (modèle plante avec daysec de Vénus; voir aussi option force_cpp)
 >> tester la plus basse résolution possible avec dynamique
+>> pouvoir imposer SST en utilisant le rnat (mail Benjamin)
+>> ajouter un diagnostique sur nuages et précip à partir d'un rvap constant
+
+>> PLANETOPLOT: ajouter une décimale à tsurf sur l'axe verticale (pas assez précis dans certains cas)
 
 BRAINSTORM
 - ajouter dynamique sur un état équilibré radiativement
