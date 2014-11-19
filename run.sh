@@ -3,14 +3,30 @@
 nx=8
 ny=8
 nz=16
+dyncore=0
 
-while getopts "x:y:z:" options; do
+while getopts "x:y:z:-:" options; do
   case $options in
-   x ) nx=${OPTARG};;
-   y ) ny=${OPTARG};;
-   z ) nz=${OPTARG};;
+   x) nx=${OPTARG};;
+   y) ny=${OPTARG};;
+   z) nz=${OPTARG};;
+   -) case $OPTARG in # --dyn long option
+        dyn) dyncore=1
+             echo "Dynamical core turned on";;
+        *) echo "Unknown option $OPTARG"
+           exit;;
+      esac;;
+   *) echo "Unknown option"
+      exit;;
   esac
 done
+
+case $dyncore in
+  0) cppkey="-cpp NODYN" ;;
+  1) cppkey="" ;;
+  *) echo "Wrong value of the -dyn option"
+     exit ;;
+esac
 
 ######
 tr=7
@@ -27,7 +43,7 @@ b2=1 # recompile with full if you changed this
 
 echo "*** COMPILATION GCM *** ne pas interrompre ***"
 cd $wheresource/LMDZ.COMMON ; \rm gcm.e
-./makelmdz -cpp NODYN -d $nx"x"$ny"x"$nz -b $b1"x"$b2 -t $tr -s 1 \
+./makelmdz $cppkey -d $nx"x"$ny"x"$nz -b $b1"x"$b2 -t $tr -s 1 \
   -p generic -arch gfortran_mod gcm > logcompilegcm 2> logcompilegcm
 if [[ ! -f gcm.e ]] ; then 
   echo "Il y a eu un probleme. Voir : " $PWD/logcompilegcm ; exit
