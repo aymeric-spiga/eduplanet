@@ -24,7 +24,7 @@ git clone https://github.com/aymeric-spiga/planetoplot >> $log 2>&1
 cd $mod
 svn update -r 1359 LMDZ.GENERIC LMDZ.COMMON >> $log 2>&1
 cd $mod/LMDZ.COMMON/libf
-ln -sf $mod/LMDZ.GENERIC/libf/phystd phygeneric
+ln -sf ../../LMDZ.GENERIC/libf/phystd phygeneric
 
 ###
 echo "3. get and compile netCDF librairies (please wait)"
