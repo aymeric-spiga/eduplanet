@@ -16,6 +16,8 @@ cd ..
 echo "*** update planetoplot"
 cd planetoplot
 git pull
+\rm -rf planets.py
+\rm -rf planet
 git clone https://github.com/aymeric-spiga/planets
 mv planets/planet* .
 \rm -rf planets
