@@ -30,7 +30,7 @@ ln -sf ../../LMDZ.GENERIC/libf/phystd phygeneric
 echo "3. get and compile netCDF librairies (please wait)"
 cd $ini
 ze_netcdf=netcdf-4.0.1
-wget ftp://ftp.unidata.ucar.edu/pub/netcdf/$ze_netcdf.tar.gz -a $log
+wget ftp://ftp.unidata.ucar.edu/pub/netcdf/old/$ze_netcdf.tar.gz -a $log
 tar xzvf $ze_netcdf.tar.gz >> $log 2>&1
 \rm $ze_netcdf.tar.gz*
 export FC=gfortran 
