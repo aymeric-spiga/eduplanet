@@ -21,8 +21,8 @@ then
 fi
 
 \rm $HOME/.bashrc.eduplanet
-echo "export PYTHONPATH=$whereisplanetoplot:"'$PYTHONPATH' >> $HOME/.bashrc.eduplanet
-echo "export PATH=$whereisplanetoplot:"'$PATH' >> $HOME/.bashrc.eduplanet
+echo "export PYTHONPATH=$whereisplanetoplot/modules/:"'$PYTHONPATH' >> $HOME/.bashrc.eduplanet
+echo "export PATH=$whereisplanetoplot/bin/:"'$PATH' >> $HOME/.bashrc.eduplanet
 
 echo "!!!!!!!!!!!!!!!!!!!!!!!!"
 echo "taper la commande"
