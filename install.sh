@@ -19,8 +19,6 @@ svn co -N http://svn.lmd.jussieu.fr/Planeto/trunk MODELES >> $log 2>&1
 
 ###
 echo "2. get model code (please wait)"
-rm -rf planetoplot
-git clone https://github.com/aymeric-spiga/planetoplot >> $log 2>&1
 cd $mod
 svn update -r 1359 LMDZ.GENERIC LMDZ.COMMON >> $log 2>&1
 cd $mod/LMDZ.COMMON/libf
@@ -78,4 +76,11 @@ chmod 755 makegcm_gfortran_local
 ./makegcm_gfortran_local -d 8x8x6 -debug newstart >> $log 2>&1
 
 ###
+echo "8. get post-processing tools"
+cd $ini/TOOLS
+rm -rf planetoplot
+git clone https://github.com/aymeric-spiga/planetoplot >> $log 2>&1
+
+###
+cd $ini
 mv $log $mod/

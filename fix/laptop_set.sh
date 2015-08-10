@@ -12,7 +12,7 @@ then
   exit
 fi
 
-whereisplanetoplot=$PWD/planetoplot
+whereisplanetoplot=$PWD/TOOLS/planetoplot
 
 num=`grep -c eduplanet $HOME/.bashrc`
 if [ $num -eq 0 ]

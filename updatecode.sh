@@ -14,16 +14,18 @@ svn update
 cd ..
 
 echo "*** update planetoplot"
-cd planetoplot
+cd TOOLS/planetoplot
 git pull
-cd ..
+cd ../..
 
 echo "*** update planets"
+cd TOOLS/
 \rm -rf planets.py
 \rm -rf planet
 git clone https://github.com/aymeric-spiga/planets
 mv planets/planet* .
 \rm -rf planets
+cd ..
 
 echo "*** get supplementary files"
 cd RUN/DATAGENERIC

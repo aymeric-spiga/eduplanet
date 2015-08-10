@@ -12,5 +12,5 @@ how?
 ~~~bash
 ./install.sh
 ./run.sh
-./atlas.py
+./TOOLS/atlas.py
 ~~~

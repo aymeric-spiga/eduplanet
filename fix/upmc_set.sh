@@ -15,7 +15,7 @@ fi
 px="proxyweb.upmc.fr"
 po="3128"
 
-whereisplanetoplot=$PWD/planetoplot
+whereisplanetoplot=$PWD/TOOLS/planetoplot
 
 touch yorgl
 echo "[global]" >> yorgl
