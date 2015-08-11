@@ -80,6 +80,8 @@ echo "8. get post-processing tools"
 cd $ini/TOOLS
 rm -rf planetoplot
 git clone https://github.com/aymeric-spiga/planetoplot >> $log 2>&1
+rm -rf planets
+git clone https://github.com/aymeric-spiga/planets >> $log 2>&1
 
 ###
 cd $ini

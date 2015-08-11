@@ -19,13 +19,9 @@ git pull
 cd ../..
 
 echo "*** update planets"
-cd TOOLS/
-\rm -rf planets.py
-\rm -rf planet
-git clone https://github.com/aymeric-spiga/planets
-mv planets/planet* .
-\rm -rf planets
-cd ..
+cd TOOLS/planets
+git pull
+cd ../..
 
 echo "*** get supplementary files"
 cd RUN/DATAGENERIC
