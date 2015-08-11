@@ -11,6 +11,7 @@ bir=1
 bvi=1
 dyncore=0
 isrestart=0
+quick=0
 
 ## options
 ##--------
@@ -30,6 +31,8 @@ while getopts "x:y:z:t:i:v:-:" options; do
         # --restart long option
         restart) isrestart=1
                  echo "Restart run from previous one";;
+        # --quick long option
+        quick) quick=1;;
         *) echo "Unknown option $OPTARG"
            exit;;
       esac;;
@@ -49,6 +52,8 @@ esac
 
 thisfolder=$PWD
 wheresource=$PWD/MODELES/
+
+if [[ $quick == 0 ]]; then
 
 echo "*** COMPILATION GCM *** ne pas interrompre ***"
 ## perform makbands here 
@@ -80,6 +85,8 @@ if [[ $isrestart == 0 ]]; then
   if [[ ! -f restart.nc ]] ; then
     echo "Il y a eu un probleme. Voir : " $PWD/log_newstart ; exit 
   fi
+
+fi
 
 fi
 
