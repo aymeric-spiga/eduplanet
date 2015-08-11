@@ -24,6 +24,10 @@ fi
 echo "export PYTHONPATH=$whereisplanetoplot/modules/:"'$PYTHONPATH' >> $HOME/.bashrc.eduplanet
 echo "export PATH=$whereisplanetoplot/bin/:"'$PATH' >> $HOME/.bashrc.eduplanet
 
+
+whereisplanets=$PWD/TOOLS/planets
+echo "export PYTHONPATH=$whereisplanets/:"'$PYTHONPATH' >> $HOME/.bashrc.eduplanet
+
 echo "!!!!!!!!!!!!!!!!!!!!!!!!"
 echo "taper la commande"
 echo " source ~/.bashrc"
