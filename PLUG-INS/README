@@ -1,0 +1,9 @@
+Ce fichier contient un ensemble de modifications possibles du code
+pour la réalisation d'expériences spécifiques
+------------------------------------------------------------------
+
+icealbedo:
+------------------
+
+Contient une version de physiq.F90 permettant de changer l'albédo
+avec une fonction simple de la température
