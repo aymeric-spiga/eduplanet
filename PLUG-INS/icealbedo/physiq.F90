@@ -1692,9 +1692,7 @@
             enddo
       endif !(ok_slab_ocean)
 
-! JBM WORKING ZONE
-! TMPJBM
-! A NE PAS COMMETTRE!!!
+! icealbedo BEGIN
       do ig=1,ngrid
         if (tsurf(ig).LE.(273.15-15.0)) then
           albedo(ig) = 0.7 
@@ -1704,7 +1702,7 @@
           albedo(ig) = (albedo0(ig)-0.7)/25.*(tsurf(ig)-(273.15-15.0))+0.7
         endif
       enddo
-! JBM WORKING ZONE
+! icealbedo END
 
 !-------------------------
 ! test energy conservation
