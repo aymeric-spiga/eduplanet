@@ -5,6 +5,9 @@ pour la réalisation d'expériences spécifiques
 Pour rechercher les changements associés, faire un diff avec le .old
 et chercher le flag correspondant au nom du dossier (par exemple "icealbedo")
 
+Les modifications sont à effectuer dans la physique:
+MODELES/LMDZ.GENERIC/libf/phystd
+
 icealbedo:
 ----------
 
