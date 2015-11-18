@@ -1,0 +1,20 @@
+Ce fichier contient un ensemble de modifications possibles du code
+pour la réalisation d'expériences spécifiques
+------------------------------------------------------------------
+
+Pour rechercher les changements associés, faire un diff avec le .old
+et chercher le flag correspondant au nom du dossier (par exemple "icealbedo")
+
+Les modifications sont à effectuer dans la physique:
+MODELES/LMDZ.GENERIC/libf/phystd
+
+icealbedo
+---------
+
+Contient une version de physiq.F90 permettant de changer l'albédo
+avec une fonction simple de la température
+
+change-sst
+----------
+
+Permet de mettre une température constante sur océan (critère sur l'inertie thermique)
