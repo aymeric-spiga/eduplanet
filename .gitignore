@@ -1,7 +1,8 @@
 *.nc
 log_*
 MODELES/*
-planetoplot/*
+TOOLS/planetoplot/*
+TOOLS/planets/*
 *~
 expnum*
 RUN/used_*
