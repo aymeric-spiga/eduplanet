@@ -22,3 +22,24 @@ Fat1AU = 1366.0
 kappa_VI = 5.e-20
 callgasvis = .false.
 
+####################################################
+####################################################
+
+#### Terre avec 387ppm CO2
+#corrkdir = earth
+#graybody = .false.
+
+### 99% CO2 100ppm CH4
+#corrkdir = CO2_CH4
+#graybody = .false.
+
+### A TESTER
+
+### 100% CO2
+#corrkdir = megaCO2
+#graybody = .false.
+#varactive = .false.
+
+# corrkdir = N2CO2poor_H2Ovar
+# corrkdir = CO2_H2Ovar
+# corrkdir = earlymars
