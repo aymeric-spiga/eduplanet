@@ -8,13 +8,13 @@ et chercher le flag correspondant au nom du dossier (par exemple "icealbedo")
 Les modifications sont à effectuer dans la physique:
 MODELES/LMDZ.GENERIC/libf/phystd
 
+Pour créer un patch
+diff old.file new.file > oldtonew.patch
+
 icealbedo
 ---------
-
-Contient une version de physiq.F90 permettant de changer l'albédo
-avec une fonction simple de la température
+Permet de changer l'albédo avec une fonction simple de la température
 
 change-sst
 ----------
-
 Permet de mettre une température constante sur océan (critère sur l'inertie thermique)
