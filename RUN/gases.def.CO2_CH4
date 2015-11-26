@@ -1,11 +1,9 @@
-# gases
-3
-N2_
+# gases.def
+2
 CO2
-H2O
-0.999611900E+00
-0.375999962E-03
--1
+CH4
+0.9998
+0.1e-3
 
 # First line is number of gases
 # Followed by gas names (always 3 characters)

@@ -1,0 +1,9 @@
+# gases.def
+1
+CO2
+99.
+
+# First line is number of gases
+# Followed by gas names (always 3 characters)
+# and then mixing ratios.
+# mixing ratio -1 means the gas is variable.
