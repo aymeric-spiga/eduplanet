@@ -11,10 +11,18 @@ MODELES/LMDZ.GENERIC/libf/phystd
 Pour créer un patch
 diff old.file new.file > oldtonew.patch
 
+Pour appliquer un patch directement
+patch old.file < oldtonew.patch
+
 icealbedo
 ---------
 Permet de changer l'albédo avec une fonction simple de la température
+> patch ../MODELES/LMDZ.GENERIC/libf/phystd/physiq.F90 < icealbedo.patch
 
 change-sst
 ----------
 Permet de mettre une température constante sur océan (critère sur l'inertie thermique)
+> patch ../MODELES/LMDZ.GENERIC/libf/phystd/physiq.F90 < change-sst.patch
+
+NB: pour annuler les patch
+> svn revert ../MODELES/LMDZ.GENERIC/libf/phystd/physiq.F90
