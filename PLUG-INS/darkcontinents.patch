@@ -1,0 +1,23 @@
+Index: ../MODELES/LMDZ.GENERIC/libf/phystd/physiq.F90
+===================================================================
+--- ../MODELES/LMDZ.GENERIC/libf/phystd/physiq.F90	(révision 1370)
++++ ../MODELES/LMDZ.GENERIC/libf/phystd/physiq.F90	(copie de travail)
+@@ -683,6 +683,18 @@
+            print*,'This should be improved e.g. in newstart.F'
+          endif!(.not.ok_slab_ocean)
+ 
++         !!! darkcontinents
++         if (.not.ok_slab_ocean) then
++           do ig=1,ngrid
++             !! continent
++             if(rnat(ig).eq.1)then
++               albedo0(ig) = 0.1
++               inertiedat(ig,1) = 50.
++               albedo(ig) = albedo0(ig)
++             endif
++           enddo
++         endif!(.not.ok_slab_ocean)
++
+ !        initialise surface history variable 
+ !        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+          qsurf_hist(:,:)=qsurf(:,:)
