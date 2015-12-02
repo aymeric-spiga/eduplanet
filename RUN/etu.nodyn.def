@@ -63,6 +63,8 @@ callgasvis = .false.
 #day_step = 8
 #day_step = 24
 #strictboundcorrk = .false.
+### un peu plus robuste avec -z 16 
+### (utiliser -i 8 -v 7 pour plus rapide)
 
 ### A TESTER
 
