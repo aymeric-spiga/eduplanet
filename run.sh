@@ -1,5 +1,7 @@
 #! /bin/bash
 
+## info: dossier 38x36 dans corrk --> option -i 38 -v 36
+
 ## default
 ##--------
 
