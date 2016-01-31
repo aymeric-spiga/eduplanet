@@ -10,18 +10,54 @@ if len(args) == 0: args = "resultat.nc"
 
 fi=args
 
-t = pp(var="tsurf",file=fi,x="-180,180",y=-80,superpose=True,quiet=True,ylabel=r'surface temperature ($^{\circ}$C)',legend="lat=-80",changetime="correctls",fmt="%.1f").get()-273.15
+#t = pp(var="tsurf",file=fi,x="-180,180",y=-80,superpose=True,quiet=True,ylabel=r'surface temperature ($^{\circ}$C)',legend="lat=-80",changetime="correctls",fmt="%.1f").get()-273.15
+#t.plot(extraplot=3)
+#t2 = pp(var="tsurf",file=fi,x="-180,180",y=-60,superpose=True,quiet=True,ylabel=r'surface temperature ($^{\circ}$C)',legend="lat=-60",plotin=t,changetime="correctls",fmt="%.1f").get()-273.15
+#t2.plot()
+#t2 = pp(var="tsurf",file=fi,x="-180,180",y=-20,superpose=True,quiet=True,ylabel=r'surface temperature ($^{\circ}$C)',legend="lat=-20",plotin=t,changetime="correctls",fmt="%.1f").get()-273.15
+#t2.plot()
+#t2 = pp(var="tsurf",file=fi,x="-180,180",y=0,superpose=True,quiet=True,ylabel=r'surface temperature ($^{\circ}$C)',legend="lat=0",plotin=t,changetime="correctls",fmt="%.1f").get()-273.15
+#t2.plot()
+
+t = pp()
+t.var = "tsurf"
+t.file = fi
+t.x = "-180,180"
+t.y = -80 ## latitude
+t.superpose = True
+t.quiet = True
+t.ylabel = r'surface temperature ($^{\circ}$C)'
+t.legend = "lat="+str(t.y)
+t.changetime = "correctls"
+t.fmt="%.1f"
+t.ymin = -100.
+t.ymax = 60.
+t = t.get() - 273.15
 t.plot(extraplot=3)
-t2 = pp(var="tsurf",file=fi,x="-180,180",y=-60,superpose=True,quiet=True,ylabel=r'surface temperature ($^{\circ}$C)',legend="lat=-60",plotin=t,changetime="correctls",fmt="%.1f").get()-273.15
+
+t2 = pp()
+t2 << t
+t2.y = -60
+t2.legend = "lat="+str(t2.y)
+t2 = t2.get() - 273.15
+t2.plotin = t
 t2.plot()
-t2 = pp(var="tsurf",file=fi,x="-180,180",y=-20,superpose=True,quiet=True,ylabel=r'surface temperature ($^{\circ}$C)',legend="lat=-20",plotin=t,changetime="correctls",fmt="%.1f").get()-273.15
+
+t2 = pp()
+t2 << t
+t2.y = -20
+t2.legend = "lat="+str(t2.y)
+t2 = t2.get() - 273.15
+t2.plotin = t
 t2.plot()
-t2 = pp(var="tsurf",file=fi,x="-180,180",y=0,superpose=True,quiet=True,ylabel=r'surface temperature ($^{\circ}$C)',legend="lat=0",plotin=t,changetime="correctls",fmt="%.1f").get()-273.15
+
+t2 = pp()
+t2 << t
+t2.y = 0
+t2.legend = "lat="+str(t2.y)
+t2 = t2.get() - 273.15
+t2.plotin = t
 t2.plot()
-
-
-
-
 
 p = pp(var="tsurf",file=fi,x="-180,180",y="-90,90",quiet=True,superpose=True,compute="meanarea",ylabel="globally-averaged surface temperature (K)",changetime="correctls",fmt="%.1f").getplot()
 
