@@ -29,18 +29,18 @@ callgasvis = .false.
 # -- true : flux solaire varie selon l'heure locale
 diurnal = .false.
 
-####################
-#### DYNAMIQUE #####
-####################
-
-nday = 500
-ecritphy = 144
-day_step = 240
-diurnal = .true. 
-# periode de la physique (en pas)
-iphysiq = 5
-# periode pour le pas Matsuno (en pas)
-iperiod = 5
+#####################
+##### DYNAMIQUE #####
+#####################
+#
+#nday = 500
+#ecritphy = 144
+#day_step = 240
+#diurnal = .true. 
+## periode de la physique (en pas)
+#iphysiq = 5
+## periode pour le pas Matsuno (en pas)
+#iperiod = 5
 
 ####################################################
 ####################################################
