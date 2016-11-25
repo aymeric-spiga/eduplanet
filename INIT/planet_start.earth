@@ -15,7 +15,7 @@ daysec               !! *
 omeg                 !! *
 -9999.               !! *
 year_day             !! *
-365                  !! <-- Duree d'une annee (jours)
+365                  !! <-- Duree d'une annee (en jours de la planete concernee)
 periastr             !! *
 1.0                  !! <-- Distance mini etoile-planete (UA)
 apoastr              !! *
