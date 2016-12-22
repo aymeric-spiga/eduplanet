@@ -42,6 +42,14 @@ diurnal = .false.
 ## periode pour le pas Matsuno (en pas)
 #iperiod = 5
 
+#####################
+#ORBITES VERROUILLEES
+#####################
+# nres vaut T_orbite / T_rotation
+#tlocked   = .true.
+#nres      = 1.
+#diurnal   = .false.
+
 ####################################################
 ####################################################
 
@@ -90,8 +98,3 @@ diurnal = .false.
 
 # corrkdir = N2CO2poor_H2Ovar
 # corrkdir = CO2_H2Ovar
-
-### A TESTER POUR ORBITES VERROUILLEES (callphys.def doit contenir:)
-#tlocked   = .true.
-#nres      = 1.
-#diurnal   = .false.
