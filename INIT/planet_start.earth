@@ -1,7 +1,7 @@
 0                    !! *
 y                    !! *
 1.e5                 !! <-- Pression de surface (Pa)
-1.e20                !! *
+1.e1                 !! *
 rad                  !! *
 6.3e6                !! <-- Rayon planetaire (m)
 g                    !! *  
