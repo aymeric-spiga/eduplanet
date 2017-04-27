@@ -1,0 +1,151 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[frenchb]{babel}
+\usepackage{setspace}
+\usepackage[pdftex]{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{natbib}
+\usepackage{hevea}
+\usepackage{footnote}
+\usepackage{geometry}
+\usepackage{enumitem}
+\setlist[enumerate]{leftmargin=*,labelindent=3mm}
+\setlist[itemize]{leftmargin=*,labelindent=3mm}
+\graphicspath{{img/}}
+\geometry{top=0.cm,bottom=1cm,left=1cm,right=1cm}
+\begin{document}
+%TEXFILE_JBM_BEGIN
+
+\title{\textbf{Fiche pratique n$^\circ$1}\\
+Environnement Linux}
+\author{\normalsize{Jean-Baptiste Madeleine}}
+\date{}
+
+\maketitle
+
+\thispagestyle{empty}
+
+Ce document résume les principales commandes du ``shell'', qui est l'interface
+entre vous et le système d'exploitation Linux\footnote{Linux est un système de
+type Unix, tout comme iOS ou bien Android, utilisés sur la plupart des
+smartphones;} (d'où le nom de ``coquille'' du système). Le shell est accessible
+par un terminal (aussi appelé console). Les logiciels \texttt{eduplanet} et
+\texttt{planetoplot} ont été développés pour
+être utilisés à partir du shell. Il est donc confortable de manipuler également
+les fichiers liés aux expériences à partir du shell. Cependant, l'usage de la
+souris et de l'interface graphique de Mandriva est aussi possible, selon votre
+préférence.
+
+\paragraph{Pour lancer un terminal,} une fois le bureau Mandriva\footnote{La
+distribution de Linux que nous utilisons;} ouvert, cliquer sur le menu Démarrer
+(étoile en bas à gauche de l'écran) puis sur ``Outils $>$ Konsole''. Vous
+pouvez créer un raccourci en cliquant-déplaçant l'icône sur votre bureau.
+
+\begin{savenotes}
+\begin{table}[h!]
+\centering
+\begin{tabular}{lll}
+Commande & Fonction & Exemple \\ \hline
+%-------------------------------------------------------------------
+\texttt{gedit \&} ou \texttt{kwrite \&} & Lance un éditeur de texte
+& \texttt{gedit reglages\_init.txt \&} ouvre le fichier de
+réglage\footnote{Le \texttt{\&} à la fin permet de récupérer la main sur le
+terminal tout en lançant l'éditeur en fond;} \\
+%-------------------------------------------------------------------
+\texttt{xview \&} & Ouvre une image &
+\texttt{xview expnum\-\_DATE\--ET\--HEURE/fig-Ts-Latitude-Ls.png \&} \\
+& & affiche la figure \texttt{fig-Ts-Latitude-Ls.png} \\
+%-------------------------------------------------------------------
+\texttt{pwd} & Print Working Directory & \texttt{pwd} dans le dossier
+WORK affichera \\
+& & le chemin complet vers WORK \\
+%-------------------------------------------------------------------
+\texttt{ls} & Liste les fichiers & \texttt{ls} seul affiche les
+fichiers du dossier courant \\
+& & \texttt{ls WORK} affiche les fichiers du dossier \texttt{WORK} \\
+%-------------------------------------------------------------------
+\texttt{history} ou touche $\uparrow$ & Historique des commandes &
+Permet de rappeler une commande déjà tapée\footnote{\'Egalement,
+le copier-coller se fait en sélectionnant avec la souris la chaîne de
+caractères à copier, puis en collant avec la molette;} \\
+%-------------------------------------------------------------------
+\texttt{more} & Aperçu d'un fichier & \texttt{more reglages\_init.txt}
+affiche le contenu du fichier \\
+& & \texttt{reglages\_init.txt} (barre espace pour défiler)\footnote{La
+commande \texttt{more} est pratique pour afficher le contenu d'un fichier sans
+risquer d'écrire dedans;} \\
+%-------------------------------------------------------------------
+\texttt{cd} & Change Directory & \texttt{cd eduplanet} vous emmène dans
+le dossier \texttt{eduplanet} \\
+%-------------------------------------------------------------------
+\texttt{cp} & Copy & \texttt{cp reglages\_init.txt
+reglages\_init.txt.sav} permet \\
+& & de copier le fichier de réglages dans un nouveau fichier \\
+& & \texttt{reglages\_init.txt.sav} pour le sauvegarder \\
+%-------------------------------------------------------------------
+\texttt{cp -r} & Copier Répertoire &
+\texttt{cp -r eduplanet eduplanet-sav} copie tout le \\
+& & dossier \texttt{eduplanet} dans un autre dossier \\
+%-------------------------------------------------------------------
+\texttt{mv} & Move & Comme \texttt{cp} mais déplace au lieu de copier
+\\
+%-------------------------------------------------------------------
+\texttt{rm} & Remove & \texttt{rm notes.txt} supprime le fichier
+\texttt{notes.txt} \\
+%-------------------------------------------------------------------
+\texttt{mkdir} & Make Directory & \texttt{mkdir WORK} crée un
+répertoire \texttt{WORK} dans le dossier courant \\
+%-------------------------------------------------------------------
+\texttt{clear} & ``Coup d'éponge'' & \texttt{clear} efface tout ce qui
+est affiché sur le terminal \\
+%-------------------------------------------------------------------
+\texttt{man} & Aide d'une commande & \texttt{man ls} affiche toutes les
+informations sur \\
+& & la commande \texttt{ls} (touche \texttt{q} pour sortir) \\
+%-------------------------------------------------------------------
+touche \texttt{TAB} & Auto-complétion & \texttt{cd WO} puis \texttt
+{TAB} complète \\
+& & automatiquement par \texttt{cd WORK}\footnote{On peut appuyer
+plusieurs fois sur \texttt{TAB} pour afficher tous les dossiers commençant par
+les mêmes lettres;} \\ \hline
+%-------------------------------------------------------------------
+\end{tabular}
+\end{table}
+\end{savenotes}
+
+\paragraph{Attention:} \'Eviter absolument d'utiliser les caractères génériques
+de Linux pour vos noms de fichiers (espaces, signe \& et autres). Le plus
+simple est d'utiliser les lettres majuscules, les minuscules sans accent et les
+chiffres, ainsi que le symbole ``\texttt{\_}''.
+
+\paragraph{L'exemple de série de commandes} suivant sera petit à petit naturel
+pour vous:
+\begin{savenotes}
+\begin{table}[h!]
+\centering
+\begin{tabular}{rl}
+%-------------------------------------------------------------------
+\texttt{cd $\sim$/WORK/eduplanet} & va dans le dossier WORK/eduplanet qui
+est dans votre \\
+& dossier utilisateur (donné par $\sim$) \\
+%-------------------------------------------------------------------
+\texttt{cd ..} & remonte dans WORK (chemin relatif) \\
+\texttt{cd eduplanet} & redescend dans \texttt{eduplanet} (chemin relatif)
+\\
+\texttt{cd $\sim$/WORK} & retourne dans \texttt{WORK} mais cette fois par
+le chemin absolu \texttt{$\sim$/WORK} \\
+\texttt{cd} & tout seul retourne dans votre dossier utilisateur $\sim$ (le
+``home''\footnote{Ce ``home'' est un peu l'équivalent du dossier ``Mes
+Documents'' de Windows;}) \\
+\texttt{mkdir WORK} & crée un dossier \texttt{WORK} dans le dossier
+courant \\
+\texttt{mkdir WORK/eduplanet} & crée un sous-dossier dans WORK seulement
+si WORK existe \\
+\end{tabular}
+\end{table}
+\end{savenotes}
+
+%TEXFILE_JBM_END
+\end{document}
