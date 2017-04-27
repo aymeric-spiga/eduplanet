@@ -1,0 +1,171 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[frenchb]{babel}
+\usepackage{setspace}
+\usepackage[pdftex]{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{natbib}
+\usepackage{hevea}
+\usepackage{geometry}
+\usepackage{enumitem}
+\setlist[enumerate]{leftmargin=*,labelindent=3mm}
+\setlist[itemize]{leftmargin=*,labelindent=3mm}
+\graphicspath{{img/}}
+\geometry{top=1cm,bottom=2cm,left=1cm,right=1cm}
+\begin{document}
+%TEXFILE_JBM_BEGIN
+
+\title{\textbf{TP intermédiaire}\\
+Utilisation du modèle \texttt{eduplanet}}
+\author{\normalsize{Jean-Baptiste Madeleine et Aymeric Spiga}}
+\date{Lundi 6 mars 2017}
+
+\maketitle
+
+\renewcommand{\labelitemi}{\textbullet}
+
+\section{Introduction}
+
+Nous allons dans ce TP mener des \textbf{études de sensibilité} du modèle à
+deux paramètres: l'inertie thermique de la surface puis l'épaisseur optique en
+gaz $\tau_s$. De façon générale, une étude de sensibilité consiste à quantifier
+la réponse d'un modèle à un changement de ses paramètres d'entrée. La méthode
+la plus simple est de réaliser d'abord une \textbf{expérience de référence},
+puis de faire une nouvelle expérience en changeant un seul paramètre pour
+constater les changements résultants. Pour mener une telle étude avec le modèle
+\texttt{eduplanet}, la démarche sera toujours la suivante:
+
+% REMARQUE: pour couper les texttt, utiliser des soft hyphen "\-"
+\begin{itemize}
+\item Lancer une première expérience de référence;
+\item Ouvrir ensuite avec un éditeur de texte un fichier de réglage (fichiers
+\texttt{reglages\_init.txt} ou \texttt{regla\-ges\_run.txt} du dossier \texttt
+{eduplanet}) puis remplacer l'ancienne valeur du paramètre par la nouvelle
+valeur en veillant à 1) bien préserver la structure du fichier, et 2) bien
+modifier les fichiers qui se trouvent dans \texttt{eduplanet} et non dans les
+dossiers d'expérience \texttt{expnum};
+\item Enregistrer les fichiers et les nouveaux réglages;
+\item Relancer l'expérience grâce à la commande \texttt{./run.sh};
+\item Comparer les résultats des deux expériences (voir par exemple le script
+\texttt{./TOOLS/compare.sh}).
+\end{itemize}
+
+Pour chaque expérience de sensibilité, on veillera à noter les paramètres
+modifiés et les résultats obtenus. Notons également que les fichiers de
+réglages \texttt{reglages\_init.txt} et \texttt{reglages\_run.txt} sont
+sauvegardés lors de chaque expérience dans le dossier de l'expérience
+\texttt{expnum\_DATE}. Cette sauvegarde permet de consulter les paramètres
+d'une expérience passée si besoin\footnote{\textbf{Attention:} pour des raisons
+techniques, il faut toujours régler les fichiers de réglages \texttt
+{reglages\_init.txt} et \texttt{reglages\_run.txt} se trouvant dans le dossier
+\texttt{eduplanet} à la main. Veiller à ne pas copier les fichiers de réglages
+sauvegardés dans un dossier
+\texttt{expnum\_DATE} dans le dossier \texttt{eduplanet} en écrasant les
+fichiers de réglage originaux;}.
+
+
+\section{Sensibilité du modèle à l'inertie thermique}
+
+Considérons comme expérience de référence l'expérience réalisée au début du TP
+d'introduction (veiller à reprendre le cas initial terrestre).
+L'inertie thermique de la surface utilisée était de 12000~J~K$^{-1}$~m$^{-
+2}$~s$^{-1/2}$ (unité qui sera notée par la suite tiu). Ouvrir un terminal et
+se replacer dans le dossier \texttt{eduplanet} par la commande \texttt{cd
+WORK/eduplanet}.
+
+\begin{enumerate}
+
+\item Afin de mieux observer l'évolution temporelle des résultats du modèle,
+augmenter la résolution temporelle du fichier de résultat \texttt{resultat.nc}.
+Pour cela, se placer dans le dossier \texttt{eduplanet}, ouvrir le fichier
+\texttt{reglages\_run.txt}, et vérifier que le paramètre \texttt{ecritphy} est
+à 18\footnote{Cela signifie que le modèle écrira les résultats tous les 18 pas
+de temps;}. Une fois le paramètre \texttt{ecritphy} modifié, relancer
+l'expérience de référence pour $I=12000$~tiu en tapant \texttt{./run.sh}.
+Afficher les résultats à l'aide de la commande \texttt{./TOOLS/atlas.py},
+constater l'amélioration de la résolution temporelle des résultats et
+sauvegarder chaque figure dans le dossier d'expérience.
+
+\item \`A présent, modifier l'inertie thermique de la surface pour créer une
+planète désertique couverte de sable ($I=50$~tiu). Relancer l'expérience
+numérique (en gardant le paramètre \texttt{ecritphy} à 18) et afficher ses
+résultats à l'aide de la commande \texttt{./TOOLS/atlas.py}. Comparer la
+Figure~1 obtenue pour $I=50$~tiu à celle obtenue pour $I=12000$~tiu. Quel est
+l'impact du changement d'inertie thermique sur la température de surface et
+l'amplitude de ses variations ?
+
+\item Observer sur la Figure~1 l'évolution de la température de surface à
+80$^\circ$S. Quand est-ce-que la température est maximale? Pourquoi la
+température est-elle si élevée malgré la haute latitude?
+
+\item Analyser à présent la Figure~2. Quelle est la durée de la réponse
+transitoire du système (approximativement) ? Comment varie-t-elle avec
+l'inertie thermique?
+
+
+\item Analyser à présent le cycle saisonnier de la Figure~3. Les saisons dans
+chaque hémisphère sont-elles plus ou moins marquées? La température de surface
+$T_s$ (en bas à droite) s'approche-t-elle ou s'éloigne-t-elle des variations du
+flux solaire absorbé par la surface $F_{vis}^{\downarrow_{Surf}}$ (en haut à
+droite) lorsque I diminue?
+
+\item Sur la Figure~4, à quelle latitude l'atmosphère est-elle la plus chaude
+pour les deux saisons? Comment ceci varie-t-il avec l'inertie thermique?
+
+\end{enumerate}
+
+\section{Sensibilité du modèle à l'épaisseur optique de gaz $\tau_s$}
+%-------------------------------------------------------------------
+
+L'épaisseur optique d'un gaz dans la totalité de l'atmosphère\footnote{$\tau_s$
+est aussi appelée opacité totale ou ``column opacity'' en anglais;} $\tau_s$
+peut s'écrire:
+
+\begin{equation}
+\tau_s= k \ \frac{ r_X M_X }{M} \frac{P_s}{g},
+\label{eqn-tausurf}
+\end{equation}
+
+où $k$ est le coefficient d'absorption infrarouge (aussi appelé section
+efficace d'absorption massique), $r_X$ le rapport de mélange volumique (i.e.
+molaire, en ppmv par exemple) du constituant X, $M_X$ la masse molaire du
+constituant X, $M$ la masse molaire de l'atmosphère et $P_s$ la pression
+atmosphérique en surface. Cette opacité totale en gaz peut être modifiée dans
+le modèle par l'intermédiaire d'un paramètre nommé \texttt{kappa\_IR} se
+trouvant dans le fichier \texttt{reglages\_run.txt}.
+
+\begin{enumerate}
+
+\item Sachant que \texttt{kappa\_IR}~$=k \ r_X$, déduire de l'équation~\ref
+{eqn-tausurf} l'expression littérale du paramètre \texttt{kappa\_IR}. Le
+calculer pour X~$\equiv$~CO$_2$ et $\tau_s=0.8$ (le reste des paramètres peut
+être issu des fichiers de réglage du modèle). Constater que cette valeur
+correspond bien à celle déjà renseignée dans le fichier \texttt
+{reglages\_run.txt}. Calculer la valeur du coefficient d'absorption
+$k$~=~\texttt{kappa\_IR}$/r_X$ correspondant à $r_X=300$~ppmv.
+
+\item On élève à présent le rapport de mélange volumique de CO$_2$ de 300~ppmv
+(valeur pré-industrielle) à 400~ppmv (valeur actuelle). Calculer la nouvelle
+valeur du paramètre \texttt{kappa\_IR}~$=k \ r_X$ en préservant le coefficient
+d'absorption $k$ trouvée à la question précédente. Réaliser une expérience avec
+cette nouvelle valeur de \texttt{kappa\_IR} en modifiant le fichier \texttt
+{regla\-ges\_run.txt}. De combien s'élève la température de surface moyenne à
+l'équilibre du modèle ?
+
+\item Nous comparons à présent les résultats du modèle avec nos calculs
+analytiques. Au TP d'introduction, nous avions calculé $T_s$ pour $\tau_s=0.8$.
+Calculer la nouvelle valeur de $\tau_s$ lorsque $r_X = 400$~ppmv et non
+300~ppmv. Recalculer la valeur de $T_s$ correspondante.
+
+\item L'élévation de température prévue par le modèle est-elle en accord avec
+celle calculée ci-dessus ? Est-elle réaliste ? Quelle est la principale
+hypothèse faite dans notre expérience pouvant expliquer ce biais par rapport à
+la réalité ?
+
+\end{enumerate}
+
+
+%TEXFILE_JBM_END
+\end{document}
