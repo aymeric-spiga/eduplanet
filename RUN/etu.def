@@ -42,6 +42,14 @@ diurnal = .false.
 ## periode pour le pas Matsuno (en pas)
 #iperiod = 5
 
+#####################
+#ORBITES VERROUILLEES
+#####################
+# nres vaut T_orbite / T_rotation
+#tlocked   = .true.
+#nres      = 1.
+#diurnal   = .false.
+
 ####################################################
 ####################################################
 
@@ -64,6 +72,29 @@ diurnal = .false.
 #### -- N2 avec CO2 indiqué + H2O var (M. Turbet)
 #corrkdir = CO2_0.1
 #graybody = .false.
+
+#####################
+# ZOOM
+#####################
+
+# longitude en degres du centre du zoom                                 
+#   clon=0.
+# latitude en degres du centre du zoom                                  
+#   clat=0.
+# facteur de grossissement du zoom,selon longitude                      
+#  grossismx=2.
+# facteur de grossissement du zoom ,selon latitude                      
+# grossismy=2.
+#  Fonction  f(y)  hyperbolique  si = .true.  , sinon  sinusoidale         
+#  fxyhypb=.false.
+# extension en longitude  de la zone du zoom  ( fraction de la zone totale)
+#   dzoomx= 30.
+# extension en latitude de la zone  du zoom  ( fraction de la zone totale)
+#   dzoomy=30.
+#  raideur du zoom en  X
+#    taux=2.
+#  raideur du zoom en  Y
+#    tauy=2.
 
 ####################################################
 ####################################################

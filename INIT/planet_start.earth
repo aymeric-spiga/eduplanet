@@ -1,7 +1,7 @@
 0                    !! *
 y                    !! *
 1.e5                 !! <-- Pression de surface (Pa)
-1.e20                !! *
+1.e1                 !! *
 rad                  !! *
 6.3e6                !! <-- Rayon planetaire (m)
 g                    !! *  
@@ -15,7 +15,7 @@ daysec               !! *
 omeg                 !! *
 -9999.               !! *
 year_day             !! *
-365                  !! <-- Duree d'une annee (jours)
+365                  !! <-- Duree d'une annee (en jours de la planete concernee)
 periastr             !! *
 1.0                  !! <-- Distance mini etoile-planete (UA)
 apoastr              !! *

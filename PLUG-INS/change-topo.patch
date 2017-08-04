@@ -1,0 +1,35 @@
+579a580
+>       write(*,*) 'slope : linear dichotomy'
+666a668,699
+> 
+> c       'slope : no topography ("aquaplanet")'
+> c       -------------------------------------
+>         else if (trim(modif) .eq. 'slope') then
+> c         min altitude
+>           val = -4E3
+> c         max altitude
+>           val2 = 2E3
+> c         min latitude
+>           val3 = -30.
+> c         max latitude
+>           val4 = 30.
+> c         set topo
+>           do j=1,jjp1
+>             do i=1,iip1
+>               ig=1+(j-2)*iim +i
+>               if(j.eq.1) ig=1
+>               if(j.eq.jjp1) ig=ngridmx
+> c             Slope
+>               z_reel(i,j) = 
+>      &          (val-val2)/(val4-val3)*(rlatu(j)*180./pi-val3)+val2
+>             enddo
+>           enddo
+> c         Flat north:
+>           z_reel(1:iip1,1:jjp1)=MIN(val2,z_reel)
+> c         Flat south:
+>           z_reel(1:iip1,1:jjp1)=MAX(val,z_reel)
+>           phis(1:iip1,1:jjp1)=g*z_reel(1:iip1,1:jjp1)
+>           CALL gr_dyn_fi(1,iip1,jjp1,ngridmx,phis,phisfi)
+>           write(*,*) 'constant slope initialized.'
+>           write(*,*) 'WARNING : the subgrid topography parameters',
+>      &    ' were not set to zero ! => set calllott to F'                    

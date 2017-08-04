@@ -1,0 +1,6 @@
+Documentation francaise de l'environnement eduplanet
+----------------------------------------------------
+
+il suffit de compiler les fichiers tex en utilisant la commande, par exemple:
+
+pdflatex TP-Introductif.tex

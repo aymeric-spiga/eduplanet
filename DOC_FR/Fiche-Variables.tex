@@ -1,0 +1,107 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[frenchb]{babel}
+\usepackage{setspace}
+\usepackage[pdftex]{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{natbib}
+\usepackage{hevea}
+\usepackage{footnote}
+\usepackage{geometry}
+\usepackage{enumitem}
+\setlist[enumerate]{leftmargin=*,labelindent=3mm}
+\setlist[itemize]{leftmargin=*,labelindent=3mm}
+\graphicspath{{img/}}
+\geometry{top=1cm,bottom=1cm,left=1cm,right=1cm}
+\begin{document}
+%TEXFILE_JBM_BEGIN
+
+\title{\textbf{Fiche pratique n$^\circ$2}\\
+Analyse des résultats du modèle \texttt{eduplanet}}
+\date{}
+
+\maketitle
+
+\thispagestyle{empty}
+
+Ce document résume les principales variables (pronostiques ou diagnostiques)
+disponibles dans le fichier de résultat de l'expérience numérique \texttt
+{resultat.nc}.
+
+\section{Variables dynamiques}
+
+\begin{savenotes}
+\begin{table}[h!]
+\centering
+\begin{tabular}{lllll}
+Variable & Notation usuelle & Nom dans \texttt{resultat.nc} & Unité
+\\ \hline
+
+Température de surface & $T_s(x,y,t)$ & \texttt{tsurf} & K \\
+Pression de surface & $p_s(x,y,t)$ & \texttt{ps} & Pa \\
+Pression atmosphérique & $p(x,y,z,t)$ & \texttt{p} & Pa \\
+Température de l'atmosphère & $T(x,y,z,t)$ & \texttt{temp} & K \\
+Température potentielle & $\theta(x,y,z,t)$ & \texttt{teta} & K \\
+Vent zonal & $u(x,y,z,t)$\footnote{Le vent $\vec{v}$ s'écrivant suivant les
+trois directions de l'espace $\vec{v}=u\ \hat{x}+v\ \hat{y}+w\ \hat{z}$;} &
+\texttt{u} & m~s$^{-1}$ \\
+Vent méridien & $v(x,y,z,t)$ & \texttt{v} & m~s$^{-1}$ \\
+Vent vertical & $w(x,y,z,t)$ & \texttt{w} & m~s$^{-1}$ \\
+
+
+\end{tabular}
+\end{table}
+\end{savenotes}
+
+\section{Variables du transfert radiatif}
+
+\begin{savenotes}
+\begin{table}[h!]
+\centering
+\begin{tabular}{lllll}
+Variable & Notation usuelle & Nom dans \texttt{resultat.nc} & Unité
+\\ \hline
+Albédo & $A_b(x,y,t)$ & \texttt{ALB} & \\
+Flux solaire incident au sommet & $F_{vis}^{\downarrow_{TOA}}(x,y,t)$ &
+\texttt{ISR} & W~m$^{-2}$ \\
+Flux solaire absorbé par la surface & $F_{vis}^{\downarrow_{Surf}}(x,y,t)$
+& \texttt{ASR} & W~m$^{-2}$ \\
+Flux infrarouge émis au sommet & $F_{IR}^{\uparrow_{TOA}}(x,y,t)$ &
+\texttt{OLR} & W~m$^{-2}$ \\
+Flux géothermique à la surface & $F_q^{\uparrow_{Surf}}(x,y,t)$ &
+\texttt{GND} & W~m$^{-2}$ \vspace{2mm} \\
+Taux de chauffage SW\footnote{SW signifie shortwave, donc correspond au domaine
+des courtes longueurs d'onde (appelé aussi domaine ``visible'');} & $Q_
+{rad}^{SW}(x,y,z,t)$ & \texttt{zdtsw} & K~s$^{-1}$ \vspace{2mm} \\
+Taux de chauffage LW\footnote{De la même façon LW signifie longwave, et
+correspond au domaine des grandes longueurs d'onde ou domaine infrarouge);}
+& $Q_{rad}^{LW}(x,y,z,t)$ & \texttt{zdtlw} & K~s$^{-1}$ \vspace
+{2mm} \\
+Taux de chauffage total & $Q_{rad}(x,y,z,t)$ & \texttt{dtrad} &
+K~s$^{-1}$ \vspace{2mm} \\
+\end{tabular}
+\end{table}
+\end{savenotes}
+\section{Variables des paramétrisations}
+
+
+\begin{savenotes}
+\begin{table}[h!]
+\centering
+\begin{tabular}{lllll}
+Variable & Notation usuelle & Nom dans \texttt{resultat.nc} & Unité
+\\ \hline
+RMM\footnote{RMM signifie rapport de mélange massique, en kg de l'espèce
+considérée par kg d'air;} en vapeur d'eau & $q_{vap}(x,y,z,t)$ &
+\texttt{h2o\_vap} & kg~kg$^{-1}$ \\
+RMM en glace d'eau & $q_{glace}(x,y,z,t)$ & \texttt{h2o\_ice} &
+kg~kg$^{-1}$ \\
+Masse de glace au sol par m$^2$ & $m_{glace}(x,y,t)$ & \texttt
+{h2o\_ice\_surf} & kg~m$^{-2}$ \\
+\end{tabular}
+\end{table}
+\end{savenotes}
+%TEXFILE_JBM_END
+\end{document}
