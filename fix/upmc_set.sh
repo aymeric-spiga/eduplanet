@@ -40,8 +40,7 @@ then
 fi
 
 \rm $HOME/.bashrc.3T054
-echo 'export PATH=/opt/epd-7.1-2-rh5-x86/bin/:$PATH' > $HOME/.bashrc.3T054
-echo "export PYTHONPATH=$whereisplanetoplot/modules/:"'$PYTHONPATH' >> $HOME/.bashrc.3T054
+echo "export PYTHONPATH=$whereisplanetoplot/modules/:"'$PYTHONPATH' > $HOME/.bashrc.3T054
 echo "export PATH=$whereisplanetoplot/bin/:"'$PATH' >> $HOME/.bashrc.3T054
 
 whereisplanets=$PWD/TOOLS/planets
