@@ -103,7 +103,7 @@ fi
 ### >>> run gcm command
 time ./gcm.e | tee log_gcm | grep "Ls =" | grep '0\.'
 ### <<< run gcm command
-zedate=`date --rfc-3339=seconds | sed s+' '+'_'+g | sed s+':'+'-'+g | sed s:'+':'-':g`
+zedate=`date --rfc-3339=seconds | sed s+' '+'_'+g | sed s+':'+'-'+g | awk -F '+' '{print $1}'`
 if [[ $isrestart == 1 ]]; then
   rm -rf startfi.nc
   rm -rf start.nc
