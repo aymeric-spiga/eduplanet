@@ -53,7 +53,7 @@ mv $ze_netcdf $net
 # in case netcdf was compiled in 64bits:
 if [ -d $net/lib64 ] && !( [ -d $net/lib ] )
 then
-  ln -sv lib64 $net/lib
+  ln -s lib64 $net/lib
 fi
 
 ###
