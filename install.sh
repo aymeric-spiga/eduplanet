@@ -50,6 +50,12 @@ cd ..
 mkdir $ini/MODELES/LMDZ.COMMON/netcdf
 mv $ze_netcdf $net
 
+# in case netcdf was compiled in 64bits:
+if [ -d $net/lib64 ] && !( [ -d $net/lib ] )
+then
+  ln -sv lib64 $net/lib
+fi
+
 ###
 echo "4. get and compile IOIPSL librairies (please wait)"
 cp $ini/fix/install_ioipsl_gfortran_noksh.bash $mod/LMDZ.COMMON/ioipsl/install_ioipsl_gfortran.bash
