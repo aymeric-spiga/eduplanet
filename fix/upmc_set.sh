@@ -45,6 +45,7 @@ echo "export PATH=$whereisplanetoplot/bin/:"'$PATH' >> $HOME/.bashrc.3T054
 
 whereisplanets=$PWD/TOOLS/planets
 echo "export PYTHONPATH=$whereisplanets/:"'$PYTHONPATH' >> $HOME/.bashrc.3T054
+echo "alias ncview='ncview -no_auto_overlay'" >> $HOME/.bashrc.3T054
 
 echo "!!!!!!!!!!!!!!!!!!!!!!!!"
 echo "taper la commande"
