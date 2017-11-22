@@ -33,6 +33,6 @@ if [[ ! (-f "surface_mars.nc") ]] ; then
   wget "http://data.spiga.fr/eduplanet/surface_mars.nc"
 fi
 if [[ ! (-f "surface_venus.nc") ]] ; then
-  wget "http://www.lmd.jussieu.fr/~mturbet/eduplanet/"
+  wget "http://www.lmd.jussieu.fr/~mturbet/eduplanet/surface_venus.nc"
 fi
 cd ../..
