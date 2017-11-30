@@ -8,4 +8,13 @@ if [[ ! (-f "megaCO2") ]] ; then
 fi
 unzip megaCO2.zip
 rm -f megaCO2.zip
+
+
+if [[ ! (-f "Earth_1mbarH2O") ]] ; then
+  wget "http://www.lmd.jussieu.fr/~mturbet/eduplanet/corrk_data/Earth_1mbarH2O.zip"
+fi
+unzip Earth_1mbarH2O.zip
+rm -f Earth_1mbarH2O.zip
+
+
 cd ../../..
