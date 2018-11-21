@@ -1,5 +1,7 @@
 #! /bin/bash
 
+lmdzserv="http://www.lmd.jussieu.fr/~lmdz/pub/3DInputData/Generic/"
+
 echo "*** record local changes"
 git add INIT/planet_start
 git add RUN/etu.def
@@ -27,12 +29,16 @@ cd ../..
 echo "*** get supplementary files"
 cd RUN/DATAGENERIC
 if [[ ! (-f "surface_earth.nc") ]] ; then
-  wget "http://data.spiga.fr/eduplanet/surface_earth.nc"
+  wget "$lmdzserv/surface_earth.nc"
 fi
 if [[ ! (-f "surface_mars.nc") ]] ; then
-  wget "http://data.spiga.fr/eduplanet/surface_mars.nc"
+  wget "$lmdzserv/surface_mars.nc"
 fi
 if [[ ! (-f "surface_venus.nc") ]] ; then
-  wget "http://www.lmd.jussieu.fr/~mturbet/eduplanet/surface_files/surface_venus.nc"
+  wget "$lmdzserv/surface_venus.nc"
+fi
+if [[ ! (-f "surface_earth_paleo.tar.gz") ]] ; then
+  wget "$lmdzserv/surface_earth_paleo.tar.gz"
+  tar -xvzf surface_earth_paleo.tar.gz
 fi
 cd ../..
