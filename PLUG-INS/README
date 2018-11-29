@@ -41,3 +41,8 @@ Permet de changer albedo et inertie thermique des continents
 > patch ../MODELES/LMDZ.GENERIC/libf/phystd/physiq.F90 < darkcontinents.patch
 -------------------------------------------------
 
+radfluxes.patch
+-------------------------------------------------
+Ajouter les flux LW et SW a la surface sous le nom SSR et SLR
+> patch ../MODELES/LMDZ.GENERIC/libf/phystd/physiq.F90 < radfluxes.patch 
+-------------------------------------------------
