@@ -116,6 +116,8 @@ UseTurbDiff = .true.
 calladj  = .true.
 # call thermal conduction in the soil ?
 callsoil = .true.
+# depth (m) of first full soil layer
+lay1_soil = 3.e-2
 # Internal heat flux (matters only if callsoil=F)
 intheat = 2.6
 # Remove lower boundary (e.g. for gas giant sims)

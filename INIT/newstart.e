@@ -1,1 +1,1 @@
-../MODELES/LMDZ.GENERIC/newstart.e
+../MODELES/LMDZ.COMMON/newstart.e

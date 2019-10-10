@@ -20,9 +20,7 @@ svn co -N http://svn.lmd.jussieu.fr/Planeto/trunk MODELES >> $log 2>&1
 ###
 echo "2. get model code (please wait)"
 cd $mod
-svn update -r 1359 LMDZ.GENERIC LMDZ.COMMON >> $log 2>&1
-cd $mod/LMDZ.COMMON/libf
-ln -sf ../../LMDZ.GENERIC/libf/phystd phygeneric
+svn update -r 2168 LMDZ.GENERIC LMDZ.COMMON >> $log 2>&1
 
 ###
 echo "3. get and compile netCDF librairies (please wait)"
@@ -67,19 +65,18 @@ sed -i s+"/home/aymeric/Science/MODELES"+$mod+g install_ioipsl_gfortran.bash
 echo "5. customize arch files"
 cd $mod/LMDZ.COMMON/arch
 cp arch-gfortran.fcm arch-gfortran_mod.fcm
-sed s+"/home/aymeric/Science/MODELES"+$mod+g arch-gfortran.path > arch-gfortran_mod.path
+cp arch-gfortran.path arch-gfortran_mod.path
+echo NETCDF=$net > arch-gfortran_mod.env
 
 ###
 echo "6. compile the model fully at least once (please wait)"
 cd $mod/LMDZ.COMMON
-./makelmdz -full -cpp NODYN -d 8x8x6 -b 1x1 -t 3 -s 1 -p generic -arch gfortran_mod gcm >> $log 2>&1
+# ici on pourrait utiliser makelmdz_fcm en faisant en svn co de FCM...
+./makelmdz -full -cpp NODYN -d 8x8x6 -b 1x1 -t 3 -s 1 -p std -arch gfortran_mod gcm >> $log 2>&1
 
 ###
 echo "7. compile the program for initial condition at least once (please wait)"
-cd $mod/LMDZ.GENERIC
-sed s+"/donnees/emlmd/netcdf64-4.0.1_gfortran"+$net+g makegcm_gfortran > makegcm_gfortran_local
-chmod 755 makegcm_gfortran_local
-./makegcm_gfortran_local -d 8x8x6 -debug newstart >> $log 2>&1
+./makelmdz -d 8x8x6 -p std -arch gfortran_mod newstart >> $log 2>&1
 
 ###
 echo "8. get post-processing tools"
