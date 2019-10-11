@@ -4,6 +4,8 @@
 # with gfortran on Linux env
 # for teaching purposes
 
+usefcm=1
+
 ini=$PWD
 mod=$ini/MODELES
 net=$mod/LMDZ.COMMON/netcdf/gfortran_netcdf-4.0.1
@@ -70,13 +72,23 @@ echo NETCDF=$net > arch-gfortran_mod.env
 
 ###
 echo "6. compile the model fully at least once (please wait)"
-cd $mod/LMDZ.COMMON
-# ici on pourrait utiliser makelmdz_fcm en faisant en svn co de FCM...
-./makelmdz -full -cpp NODYN -d 8x8x6 -b 1x1 -t 3 -s 1 -p std -arch gfortran_mod gcm >> $log 2>&1
-
+if [ $usefcm -eq 1 ] ; then
+  cd $mod
+  svn co http://forge.ipsl.jussieu.fr/fcm/svn/PATCHED/FCM_V1.2 >> $log 2>&1
+  fcmpath=$mod/FCM_V1.2/bin
+  cd $mod/LMDZ.COMMON
+  ./makelmdz_fcm -full -fcm_path $fcmpath -cpp NODYN -d 8x8x6 -b 1x1 -t 3 -s 1 -p std -arch gfortran_mod gcm >> $log 2>&1
+else
+  cd $mod/LMDZ.COMMON
+  ./makelmdz -full -cpp NODYN -d 8x8x6 -b 1x1 -t 3 -s 1 -p std -arch gfortran_mod gcm >> $log 2>&1
+fi
 ###
 echo "7. compile the program for initial condition at least once (please wait)"
-./makelmdz -d 8x8x6 -p std -arch gfortran_mod newstart >> $log 2>&1
+if [ $usefcm -eq 1 ] ; then
+  ./makelmdz_fcm -fcm_path $fcmpath -d 8x8x6 -p std -arch gfortran_mod newstart >> $log 2>&1
+else
+  ./makelmdz -d 8x8x6 -p std -arch gfortran_mod newstart >> $log 2>&1
+fi
 
 ###
 echo "8. get post-processing tools"
