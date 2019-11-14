@@ -29,6 +29,9 @@ callgasvis = .false.
 # -- true : flux solaire varie selon l'heure locale
 diurnal = .false.
 
+# Profondeur (en m) de la premiere couche du sous-sol
+lay1_soil = 3.e-2
+
 #####################
 ##### DYNAMIQUE #####
 #####################

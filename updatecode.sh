@@ -12,8 +12,7 @@ git pull
 
 echo "*** update LMD models"
 cd MODELES
-svn update -r 1370
-#svn update -r 1423 #marche pas
+svn update -r 2168
 cd ..
 
 echo "*** update planetoplot"
