@@ -3,11 +3,9 @@
 lmdzserv="http://www.lmd.jussieu.fr/~lmdz/pub/3DInputData/Generic/"
 
 echo "*** record local changes"
-#git add INIT/planet_start
-#git add RUN/etu.def
-#git commit -m "save local"
-mv INIT/planet_start.earth INIT/planet_start.earth.backup
-mv RUN/etu.def RUN/etu.def.backup
+git add INIT/planet_start.earth
+git add RUN/etu.def
+git commit -m "save local"
 
 echo "*** update eduplanet"
 git pull
