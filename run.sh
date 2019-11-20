@@ -9,7 +9,7 @@ usefcm=1
 
 nx=8
 ny=8 
-nz=6
+nz=16
 tr=2
 bir=1
 bvi=1
