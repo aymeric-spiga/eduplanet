@@ -2,12 +2,10 @@
 
 lmdzserv="http://www.lmd.jussieu.fr/~lmdz/planets/LMDZ.GENERIC/surfaces/"
 
-echo "*** record local changes"
-git add INIT/planet_start.earth
-git add RUN/etu.def
-git commit -m "save local"
-
 echo "*** update eduplanet"
+# This line will reset the model setup files;
+# They are saved in each exp folder anyway;
+git reset HEAD --hard
 git pull
 
 echo "*** update planetoplot"
