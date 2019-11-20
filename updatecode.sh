@@ -1,6 +1,6 @@
 #! /bin/bash
 
-lmdzserv="http://www.lmd.jussieu.fr/~lmdz/pub/3DInputData/Generic/"
+lmdzserv="http://www.lmd.jussieu.fr/~lmdz/planets/LMDZ.GENERIC/surfaces/"
 
 echo "*** record local changes"
 git add INIT/planet_start.earth
@@ -9,11 +9,6 @@ git commit -m "save local"
 
 echo "*** update eduplanet"
 git pull
-
-echo "*** update LMD models"
-cd MODELES
-svn update -r 2168
-cd ..
 
 echo "*** update planetoplot"
 cd TOOLS/planetoplot
