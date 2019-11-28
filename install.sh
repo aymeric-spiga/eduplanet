@@ -77,17 +77,17 @@ if [ $usefcm -eq 1 ] ; then
   svn co http://forge.ipsl.jussieu.fr/fcm/svn/PATCHED/FCM_V1.2 >> $log 2>&1
   fcmpath=$mod/FCM_V1.2/bin
   cd $mod/LMDZ.COMMON
-  ./makelmdz_fcm -full -fcm_path $fcmpath -cpp NODYN -d 8x8x6 -b 1x1 -t 3 -s 1 -p std -arch gfortran_mod gcm >> $log 2>&1
+  ./makelmdz_fcm -full -fcm_path $fcmpath -cpp NODYN -d 8x8x16 -b 1x1 -t 3 -s 1 -p std -arch gfortran_mod gcm >> $log 2>&1
 else
   cd $mod/LMDZ.COMMON
-  ./makelmdz -full -cpp NODYN -d 8x8x6 -b 1x1 -t 3 -s 1 -p std -arch gfortran_mod gcm >> $log 2>&1
+  ./makelmdz -full -cpp NODYN -d 8x8x16 -b 1x1 -t 3 -s 1 -p std -arch gfortran_mod gcm >> $log 2>&1
 fi
 ###
 echo "7. compile the program for initial condition at least once (please wait)"
 if [ $usefcm -eq 1 ] ; then
-  ./makelmdz_fcm -fcm_path $fcmpath -d 8x8x6 -p std -arch gfortran_mod newstart >> $log 2>&1
+  ./makelmdz_fcm -fcm_path $fcmpath -d 8x8x16 -p std -arch gfortran_mod newstart >> $log 2>&1
 else
-  ./makelmdz -d 8x8x6 -p std -arch gfortran_mod newstart >> $log 2>&1
+  ./makelmdz -d 8x8x16 -p std -arch gfortran_mod newstart >> $log 2>&1
 fi
 
 ###
