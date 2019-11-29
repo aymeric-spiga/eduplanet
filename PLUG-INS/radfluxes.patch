@@ -1,13 +1,11 @@
-Index: physiq.F90
-===================================================================
---- physiq.F90	(révision 1370)
-+++ physiq.F90	(copie de travail)
-@@ -2109,6 +2109,8 @@
-         if(callrad.and.(.not.newtonian))then
-            call writediagfi(ngrid,"ALB","Surface albedo"," ",2,albedo)
-            call writediagfi(ngrid,"ISR","incoming stellar rad.","W m-2",2,fluxtop_dn)
-+           call writediagfi(ngrid,"SSR","surface stellar rad.","W m-2",2,fluxsurf_sw)
-+           call writediagfi(ngrid,"SLR","surface longwave rad.","W m-2",2,fluxsurf_lw)
-            call writediagfi(ngrid,"ASR","absorbed stellar rad.","W m-2",2,fluxabs_sw)
-            call writediagfi(ngrid,"OLR","outgoing longwave rad.","W m-2",2,fluxtop_lw)
-            call writediagfi(ngrid,"shad","rings"," ", 2, fract)
+2138,2139c2138
+<       
+<          !call writediagfi(ngrid,"ALB","Surface albedo"," ",2,albedo_equivalent)
+---
+>          call writediagfi(ngrid,"ALB","Surface albedo"," ",2,albedo_equivalent)
+2148,2149c2147,2148
+< !           call writediagfi(ngrid,"fluxsurfsw","sw surface flux.","W m-2",2,fluxsurf_sw)
+< !           call writediagfi(ngrid,"fluxsurflw","lw back radiation.","W m-2",2,fluxsurf_lw)
+---
+>          call writediagfi(ngrid,"SSR","sw surface rad.","W m-2",2,fluxsurf_sw)
+>          call writediagfi(ngrid,"SLR","lw surface rad.","W m-2",2,fluxsurf_lw)

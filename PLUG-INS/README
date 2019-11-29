@@ -17,32 +17,32 @@ Pour appliquer un patch directement
 patch old.file < oldtonew.patch
 
 NB: pour annuler les patch
-> svn revert ../MODELES/LMDZ.GENERIC/libf/phystd/physiq.F90
+> svn revert ../MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90
 
 *** PATCHS ***
 
 icealbedo
 -------------------------------------------------
 Permet de changer l'albédo avec une fonction simple de la température
-> patch ../MODELES/LMDZ.GENERIC/libf/phystd/physiq.F90 < icealbedo.patch
+> patch ../MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90 < icealbedo.patch
 -------------------------------------------------
 
 
 change-sst
 -------------------------------------------------
 Permet de mettre une température constante sur océan (critère sur l'inertie thermique)
-> patch ../MODELES/LMDZ.GENERIC/libf/phystd/physiq.F90 < change-sst.patch
+> patch ../MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90 < change-sst.patch
 -------------------------------------------------
 
 
 darkcontinents
 -------------------------------------------------
 Permet de changer albedo et inertie thermique des continents
-> patch ../MODELES/LMDZ.GENERIC/libf/phystd/physiq.F90 < darkcontinents.patch
+> patch ../MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90 < darkcontinents.patch
 -------------------------------------------------
 
 radfluxes.patch
 -------------------------------------------------
 Ajouter les flux LW et SW a la surface sous le nom SSR et SLR
-> patch ../MODELES/LMDZ.GENERIC/libf/phystd/physiq.F90 < radfluxes.patch 
+> patch ../MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90 < radfluxes.patch 
 -------------------------------------------------
