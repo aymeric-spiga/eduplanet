@@ -21,28 +21,27 @@ NB: pour annuler les patch
 
 *** PATCHS ***
 
-icealbedo
+icealbedo (réalisé sur la release 2168)
 -------------------------------------------------
 Permet de changer l'albédo avec une fonction simple de la température
 > patch ../MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90 < icealbedo.patch
 -------------------------------------------------
 
+radfluxes.patch (réalisé sur la release 2168)
+-------------------------------------------------
+Ajouter les flux LW et SW a la surface sous le nom SSR et SLR
+> patch ../MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90 < radfluxes.patch 
+-------------------------------------------------
 
-change-sst
+change-sst (ATTENTION: MISE A JOUR NECESSAIRE)
 -------------------------------------------------
 Permet de mettre une température constante sur océan (critère sur l'inertie thermique)
 > patch ../MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90 < change-sst.patch
 -------------------------------------------------
 
-
-darkcontinents
+darkcontinents (ATTENTION: MISE A JOUR NECESSAIRE)
 -------------------------------------------------
 Permet de changer albedo et inertie thermique des continents
 > patch ../MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90 < darkcontinents.patch
 -------------------------------------------------
 
-radfluxes.patch
--------------------------------------------------
-Ajouter les flux LW et SW a la surface sous le nom SSR et SLR
-> patch ../MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90 < radfluxes.patch 
--------------------------------------------------
