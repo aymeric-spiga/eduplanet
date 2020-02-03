@@ -4,6 +4,9 @@
 # with gfortran on Linux env
 # for teaching purposes
 
+version="1359"
+version="HEAD"
+
 ini=$PWD
 mod=$ini/MODELES
 net=$mod/LMDZ.COMMON/netcdf/gfortran_netcdf-4.0.1
@@ -20,9 +23,8 @@ svn co -N http://svn.lmd.jussieu.fr/Planeto/trunk MODELES >> $log 2>&1
 ###
 echo "2. get model code (please wait)"
 cd $mod
-svn update -r 1359 LMDZ.GENERIC LMDZ.COMMON >> $log 2>&1
+svn update -r $version LMDZ.GENERIC LMDZ.COMMON >> $log 2>&1
 cd $mod/LMDZ.COMMON/libf
-ln -sf ../../LMDZ.GENERIC/libf/phystd phygeneric
 
 ###
 echo "3. get and compile netCDF librairies (please wait)"
@@ -72,7 +74,7 @@ sed s+"/home/aymeric/Science/MODELES"+$mod+g arch-gfortran.path > arch-gfortran_
 ###
 echo "6. compile the model fully at least once (please wait)"
 cd $mod/LMDZ.COMMON
-./makelmdz -full -cpp NODYN -d 8x8x6 -b 1x1 -t 3 -s 1 -p generic -arch gfortran_mod gcm >> $log 2>&1
+./makelmdz -full -cpp NODYN -d 8x8x6 -b 1x1 -t 3 -s 1 -p std -arch gfortran_mod gcm >> $log 2>&1
 
 ###
 echo "7. compile the program for initial condition at least once (please wait)"
@@ -80,6 +82,8 @@ cd $mod/LMDZ.GENERIC
 sed s+"/donnees/emlmd/netcdf64-4.0.1_gfortran"+$net+g makegcm_gfortran > makegcm_gfortran_local
 chmod 755 makegcm_gfortran_local
 ./makegcm_gfortran_local -d 8x8x6 -debug newstart >> $log 2>&1
+#./makelmdz -full -cpp NODYN -d 8x8x6 -b 1x1 -t 3 -s 1 -p std -arch gfortran_mod newstart
+
 
 ###
 echo "8. get post-processing tools"

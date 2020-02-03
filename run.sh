@@ -61,13 +61,13 @@ echo "*** COMPILATION GCM *** ne pas interrompre ***"
 ## perform makbands here 
 ## to be sure to take into account
 ## changes in bir and/or bvi  
-cd $wheresource/LMDZ.COMMON/libf/phygeneric/bands
+cd $wheresource/LMDZ.COMMON/libf/phystd/bands
 \rm bands.$bir.$bvi > /dev/null 2> /dev/null
 ./makbands $bir $bvi > /dev/null 2> /dev/null
 ## OK now compile GCM
 cd $wheresource/LMDZ.COMMON ; \rm gcm.e
 ./makelmdz $cppkey -d $nx"x"$ny"x"$nz -b $bir"x"$bvi -t $tr -s 1 \
-  -p generic -arch gfortran_mod gcm > logcompilegcm 2> logcompilegcm
+  -p std -arch gfortran_mod gcm > logcompilegcm 2> logcompilegcm
 if [[ ! -f gcm.e ]] ; then 
   echo "Il y a eu un probleme. Voir : " $PWD/logcompilegcm ; exit
 fi
