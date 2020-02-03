@@ -1,0 +1,11 @@
+2138,2139c2138
+<       
+<          !call writediagfi(ngrid,"ALB","Surface albedo"," ",2,albedo_equivalent)
+---
+>          call writediagfi(ngrid,"ALB","Surface albedo"," ",2,albedo_equivalent)
+2148,2149c2147,2148
+< !           call writediagfi(ngrid,"fluxsurfsw","sw surface flux.","W m-2",2,fluxsurf_sw)
+< !           call writediagfi(ngrid,"fluxsurflw","lw back radiation.","W m-2",2,fluxsurf_lw)
+---
+>          call writediagfi(ngrid,"SSR","sw surface rad.","W m-2",2,fluxsurf_sw)
+>          call writediagfi(ngrid,"SLR","lw surface rad.","W m-2",2,fluxsurf_lw)

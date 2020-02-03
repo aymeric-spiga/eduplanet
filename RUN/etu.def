@@ -11,7 +11,7 @@ day_step = 1
 
 # Coefficient d'absorption IR en m2/kg 
 # [--> voir notations TD : kappa = k * r_X]
-kappa_IR = 5.e-5
+kappa_IR = 5.0e-5
 
 # Flux stellaire incident instantané à 1 unité astronomique (i.e. distance Terre-Soleil)
 # exemple:
@@ -28,6 +28,9 @@ callgasvis = .false.
 # -- false : flux solaire en moyenne diurne
 # -- true : flux solaire varie selon l'heure locale
 diurnal = .false.
+
+# Profondeur (en m) de la premiere couche du sous-sol
+lay1_soil = 3.e-2
 
 #####################
 ##### DYNAMIQUE #####

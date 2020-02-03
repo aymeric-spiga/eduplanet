@@ -2,12 +2,14 @@
 
 ## info: dossier 38x36 dans corrk --> option -i 38 -v 36
 
+usefcm=1
+
 ## default
 ##--------
 
 nx=8
 ny=8 
-nz=6
+nz=16
 tr=2
 bir=1
 bvi=1
@@ -53,7 +55,7 @@ esac
 ##-------
 
 thisfolder=$PWD
-wheresource=$PWD/MODELES/
+mod=$PWD/MODELES/
 
 if [[ $quick == 0 ]]; then
 
@@ -61,27 +63,56 @@ echo "*** COMPILATION GCM *** ne pas interrompre ***"
 ## perform makbands here 
 ## to be sure to take into account
 ## changes in bir and/or bvi  
-cd $wheresource/LMDZ.COMMON/libf/phystd/bands
+cd $mod/LMDZ.COMMON/libf/phystd/bands
 \rm bands.$bir.$bvi > /dev/null 2> /dev/null
 ./makbands $bir $bvi > /dev/null 2> /dev/null
 ## OK now compile GCM
-cd $wheresource/LMDZ.COMMON ; \rm gcm.e
-./makelmdz $cppkey -d $nx"x"$ny"x"$nz -b $bir"x"$bvi -t $tr -s 1 \
-  -p std -arch gfortran_mod gcm > logcompilegcm 2> logcompilegcm
-if [[ ! -f gcm.e ]] ; then 
-  echo "Il y a eu un probleme. Voir : " $PWD/logcompilegcm ; exit
+if [ $usefcm -eq 1 ] ; then
+  fcmpath=$mod/FCM_V1.2/bin
+  cd $mod/LMDZ.COMMON
+  gcmexec="gcm_"$nx"x"$ny"x"$nz"_phystd_seq.e"
+  \rm "bin/"$gcmexec
+  ./makelmdz_fcm -fcm_path $fcmpath $cppkey -d $nx"x"$ny"x"$nz \
+    -b $bir"x"$bvi -t $tr -s 1 \
+    -p std -arch gfortran_mod gcm > logcompilegcm 2> logcompilegcm
+  if [[ ! -f "bin/"$gcmexec ]] ; then 
+    echo "Il y a eu un probleme. Voir : " $PWD/logcompilegcm ; exit
+  fi
+else
+  cd $mod/LMDZ.COMMON ; \rm gcm.e
+  ./makelmdz $cppkey -d $nx"x"$ny"x"$nz -b $bir"x"$bvi -t $tr -s 1 \
+    -p std -arch gfortran_mod gcm > logcompilegcm 2> logcompilegcm
+  if [[ ! -f gcm.e ]] ; then 
+    echo "Il y a eu un probleme. Voir : " $PWD/logcompilegcm ; exit
+  fi
 fi
+
 
 if [[ $isrestart == 0 ]]; then
 
   echo "*** COMPILATION NEWSTART *** ne pas interrompre ***"
-  cd $wheresource/LMDZ.GENERIC ; \rm newstart.e
-  ./makegcm_gfortran_local -d $nx"x"$ny"x"$nz -debug newstart > logcompilerestart 2> logcompilerestart
-  if [[ ! -f newstart.e ]] ; then 
-    echo "Il y a eu un probleme. Voir : " $PWD/logcompilenewstart ; exit
+  if [ $usefcm -eq 1 ] ; then
+    cd $mod/LMDZ.COMMON
+    newstartexec="newstart_"$nx"x"$ny"x"$nz"_phystd_seq.e"
+    \rm "bin/"$newstartexec
+    ./makelmdz_fcm -fcm_path $fcmpath -d $nx"x"$ny"x"$nz -p std \
+      -arch gfortran_mod newstart > logcompilenewstart 2> logcompilenewstart
+    if [[ ! -f "bin/"$newstartexec ]] ; then
+      echo "Il y a eu un probleme. Voir : " $PWD/logcompilenewstart ; exit
+    fi
+  else
+    cd $mod/LMDZ.COMMON ; \rm newstart.e
+    ./makelmdz -d $nx"x"$ny"x"$nz -p std \
+      -arch gfortran_mod newstart > logcompilenewstart 2> logcompilenewstart
+    if [[ ! -f newstart.e ]] ; then 
+      echo "Il y a eu un probleme. Voir : " $PWD/logcompilenewstart ; exit
+    fi
   fi
-
   echo "*** INITIALISATION ***"
+  if [ $usefcm -eq 1 ] ; then
+    cd $mod/LMDZ.COMMON
+    ln -sf "bin/"$newstartexec newstart.e
+  fi
   cd $thisfolder/INIT ; \rm restartfi.nc restart.nc > /dev/null 2> /dev/null
   ./newstart.e < planet_start > log_newstart 2> log_newstart
   if [[ ! -f restart.nc ]] ; then
@@ -93,6 +124,10 @@ fi
 fi
 
 echo "*** SIMULATION ***"
+if [ $usefcm -eq 1 ] ; then
+  cd $mod/LMDZ.COMMON
+  ln -sf "bin/"$gcmexec gcm.e
+fi
 cd $thisfolder/RUN ; \rm resultat.nc > /dev/null 2> /dev/null
 if [[ $isrestart == 1 ]]; then
   mv startfi.nc   startfi.nc.ref

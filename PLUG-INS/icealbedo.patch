@@ -1,23 +1,13 @@
-*** ../MODELES/LMDZ.GENERIC/libf/phystd/physiq.F90	2015-11-25 17:14:44.000000000 +0100
---- physiq.F90	2015-11-25 17:12:34.000000000 +0100
-***************
-*** 1692,1697 ****
---- 1692,1709 ----
-              enddo
-        endif !(ok_slab_ocean)
-  
-+ ! icealbedo BEGIN
-+       do ig=1,ngrid
-+         if (tsurf(ig).LE.(273.15-15.0)) then
-+           albedo(ig) = 0.7 
-+         else if (tsurf(ig).GE.(273.15+10.0)) then
-+           albedo(ig) = albedo0(ig)
-+         else
-+           albedo(ig) = (albedo0(ig)-0.7)/25.*(tsurf(ig)-(273.15-15.0))+0.7
-+         endif
-+       enddo
-+ ! icealbedo END
-+ 
-  !-------------------------
-  ! test energy conservation
-        if(enertest)then
+1719a1720,1731
+>       ! icealbedo BEGIN
+>             do ig=1,ngrid
+>               if (tsurf(ig).LE.(273.15-15.0)) then
+>                 albedo(ig,1:L_NSPECTV) = 0.7 
+>               else if (tsurf(ig).GE.(273.15+10.0)) then
+>                 albedo(ig,1:L_NSPECTV) = albedo_bareground(ig)
+>               else
+>                 albedo(ig,1:L_NSPECTV) = &
+>                 (albedo_bareground(ig)-0.7)/25.*(tsurf(ig)-(273.15-15.0))+0.7
+>               endif
+>             enddo
+>       ! icealbedo END 

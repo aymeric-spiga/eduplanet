@@ -65,7 +65,7 @@ p = pp(var="ISR",file=fi,x="-180,180",quiet=True,changetime="correctls").getplot
 p2 = pp(var="ASR",file=fi,x="-180,180",plotin=p,quiet=True,changetime="correctls").getplot()
 p2 = pp(var="OLR",file=fi,x="-180,180",plotin=p,quiet=True,changetime="correctls").getplot()
 p2 = pp(var="tsurf",file =fi,x="-180,180",plotin=p,quiet=True,units=r'$^{\circ}$C',changetime="correctls").get()-273.15
-p2.vmin = -90. ; p2.vmax = 30. ; p2.div = 12 ; p2.plot()
+p2.vmin = -90. ; p2.vmax = 60. ; p2.div = 12 ; p2.plot()
 
 q = pp(var="temp",file=fi,x=0,t=360+90,quiet=True,logy=True,changetime="correctls").getplot(extraplot=1)
 q2 = pp(var="temp",file=fi,x=0,t=360+270,plotin=q,quiet=True,logy=True,changetime="correctls").getplot()

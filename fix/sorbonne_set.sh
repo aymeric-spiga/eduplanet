@@ -1,14 +1,14 @@
 #! /bin/bash
 
 ### in main folder run
-### ./fix/upmc_set.exe
+### ./fix/sorbonne_set.exe
 
 safetytest=`echo $PWD | grep -c fix`
 if [ $safetytest -ne 0 ]
 then
   echo "Ne pas executer ce script dans le dossier fix."
   echo "Executer ce script depuis eduplanet avec la commande:"
-  echo "./fix/upmc_set.sh"
+  echo "./fix/sorbonne_set.sh"
   exit
 fi
 

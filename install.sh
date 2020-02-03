@@ -4,8 +4,14 @@
 # with gfortran on Linux env
 # for teaching purposes
 
+#######################
 version="1359"
+version="1370"
 version="HEAD"
+version="2168"
+#######################
+usefcm=1
+#######################
 
 ini=$PWD
 mod=$ini/MODELES
@@ -24,13 +30,12 @@ svn co -N http://svn.lmd.jussieu.fr/Planeto/trunk MODELES >> $log 2>&1
 echo "2. get model code (please wait)"
 cd $mod
 svn update -r $version LMDZ.GENERIC LMDZ.COMMON >> $log 2>&1
-cd $mod/LMDZ.COMMON/libf
 
 ###
 echo "3. get and compile netCDF librairies (please wait)"
 cd $ini
 ze_netcdf=netcdf-4.0.1
-wget ftp://ftp.unidata.ucar.edu/pub/netcdf/old/$ze_netcdf.tar.gz -a $log
+wget http://www.lmd.jussieu.fr/~lmdz/Distrib/$ze_netcdf.tar.gz -a $log
 tar xzvf $ze_netcdf.tar.gz >> $log 2>&1
 \rm $ze_netcdf.tar.gz*
 export FC=gfortran 
@@ -69,21 +74,34 @@ sed -i s+"/home/aymeric/Science/MODELES"+$mod+g install_ioipsl_gfortran.bash
 echo "5. customize arch files"
 cd $mod/LMDZ.COMMON/arch
 cp arch-gfortran.fcm arch-gfortran_mod.fcm
-sed s+"/home/aymeric/Science/MODELES"+$mod+g arch-gfortran.path > arch-gfortran_mod.path
+cp arch-gfortran.path arch-gfortran_mod.path
+echo NETCDF=$net > arch-gfortran_mod.env
 
 ###
 echo "6. compile the model fully at least once (please wait)"
-cd $mod/LMDZ.COMMON
-./makelmdz -full -cpp NODYN -d 8x8x6 -b 1x1 -t 3 -s 1 -p std -arch gfortran_mod gcm >> $log 2>&1
-
+if [ $usefcm -eq 1 ] ; then
+  cd $mod
+  svn co http://forge.ipsl.jussieu.fr/fcm/svn/PATCHED/FCM_V1.2 >> $log 2>&1
+  fcmpath=$mod/FCM_V1.2/bin
+  cd $mod/LMDZ.COMMON
+  ./makelmdz_fcm -full -fcm_path $fcmpath -cpp NODYN -d 8x8x16 -b 1x1 -t 3 -s 1 -p std -arch gfortran_mod gcm >> $log 2>&1
+else
+  cd $mod/LMDZ.COMMON
+  ./makelmdz -full -cpp NODYN -d 8x8x16 -b 1x1 -t 3 -s 1 -p std -arch gfortran_mod gcm >> $log 2>&1
+fi
 ###
 echo "7. compile the program for initial condition at least once (please wait)"
-cd $mod/LMDZ.GENERIC
-sed s+"/donnees/emlmd/netcdf64-4.0.1_gfortran"+$net+g makegcm_gfortran > makegcm_gfortran_local
-chmod 755 makegcm_gfortran_local
-./makegcm_gfortran_local -d 8x8x6 -debug newstart >> $log 2>&1
-#./makelmdz -full -cpp NODYN -d 8x8x6 -b 1x1 -t 3 -s 1 -p std -arch gfortran_mod newstart
+if [ $usefcm -eq 1 ] ; then
+  ./makelmdz_fcm -fcm_path $fcmpath -d 8x8x16 -p std -arch gfortran_mod newstart >> $log 2>&1
+else
+  ./makelmdz -d 8x8x16 -p std -arch gfortran_mod newstart >> $log 2>&1
+fi
 
+#### previous old local method
+#cd $mod/LMDZ.GENERIC
+#sed s+"/donnees/emlmd/netcdf64-4.0.1_gfortran"+$net+g makegcm_gfortran > makegcm_gfortran_local
+#chmod 755 makegcm_gfortran_local
+#./makegcm_gfortran_local -d 8x8x6 -debug newstart >> $log 2>&1
 
 ###
 echo "8. get post-processing tools"

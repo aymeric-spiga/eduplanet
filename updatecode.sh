@@ -1,19 +1,12 @@
 #! /bin/bash
 
-echo "*** record local changes"
-git add INIT/planet_start
-git add RUN/etu.def
-git commit -m "save local"
+lmdzserv="http://www.lmd.jussieu.fr/~lmdz/planets/LMDZ.GENERIC/surfaces/"
 
 echo "*** update eduplanet"
+# This line will reset the model setup files;
+# They are saved in each exp folder anyway;
+git reset HEAD --hard
 git pull
-
-echo "*** update LMD models"
-cd MODELES
-#svn update -r 1370
-##svn update -r 1423 #marche pas
-svn update
-cd ..
 
 echo "*** update planetoplot"
 cd TOOLS/planetoplot
@@ -28,12 +21,16 @@ cd ../..
 echo "*** get supplementary files"
 cd RUN/DATAGENERIC
 if [[ ! (-f "surface_earth.nc") ]] ; then
-  wget "http://data.spiga.fr/eduplanet/surface_earth.nc"
+  wget "$lmdzserv/surface_earth.nc"
 fi
 if [[ ! (-f "surface_mars.nc") ]] ; then
-  wget "http://data.spiga.fr/eduplanet/surface_mars.nc"
+  wget "$lmdzserv/surface_mars.nc"
 fi
 if [[ ! (-f "surface_venus.nc") ]] ; then
-  wget "http://www.lmd.jussieu.fr/~mturbet/eduplanet/surface_files/surface_venus.nc"
+  wget "$lmdzserv/surface_venus.nc"
+fi
+if [[ ! (-f "surface_earth_paleo.tar.gz") ]] ; then
+  wget "$lmdzserv/surface_earth_paleo.tar.gz"
+  tar -xvzf surface_earth_paleo.tar.gz
 fi
 cd ../..
