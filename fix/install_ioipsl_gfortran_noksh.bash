@@ -19,7 +19,7 @@ svn co http://forge.ipsl.jussieu.fr/igcmg/svn/modipsl/trunk modipsl
 cd modipsl/util
 
 find * -exec sed -i s:ksh:bash:g {} \;
-./model IOIPSL
+./model IOIPSL_PLUS
 
 # 2. Set correct settings:
 # modify path to netcdf in 'AA_make.gdef'
