@@ -8,10 +8,16 @@
 version="1359"
 version="1370"
 version="HEAD"
-version="2168"
+#version="2168"
 #######################
 usefcm=1
 #######################
+zedim="8x8x16"
+#######################
+zeoptall=" -d "${zedim}" -p std -arch gfortran_mod "
+zeopt=${zeoptall}" -full -cpp NODYN -b 1x1 -t 3 -s 1 -io noioipsl "
+#######################
+
 
 ini=$PWD
 mod=$ini/MODELES
@@ -20,7 +26,7 @@ log=$ini/install.log
 \rm $log > /dev/null 2> /dev/null
 touch $log
 
-###
+##
 echo "1. communicate with server"
 cd $ini
 rm -rf MODELES
@@ -63,12 +69,13 @@ then
   ln -sf lib64 $net/lib
 fi
 
-###
-echo "4. get and compile IOIPSL librairies (please wait)"
-cp $ini/fix/install_ioipsl_gfortran_noksh.bash $mod/LMDZ.COMMON/ioipsl/install_ioipsl_gfortran.bash
-cd $mod/LMDZ.COMMON/ioipsl
-sed -i s+"/home/aymeric/Science/MODELES"+$mod+g install_ioipsl_gfortran.bash
-./install_ioipsl_gfortran.bash >> $log 2>&1
+####
+#echo "4. get and compile IOIPSL librairies (please wait)"
+##cp $ini/fix/install_ioipsl_gfortran_noksh.bash $mod/LMDZ.COMMON/ioipsl/install_ioipsl_gfortran.bash
+#cd $mod/LMDZ.COMMON/ioipsl
+##sed -i s+"/home/aymeric/Science/MODELES"+$mod+g install_ioipsl_gfortran.bash
+#./install_ioipsl_gfortran.bash >> $log 2>&1
+#ls -l $mod/LMDZ.COMMON/ioipsl/modipsl/lib
 
 ###
 echo "5. customize arch files"
@@ -84,17 +91,18 @@ if [ $usefcm -eq 1 ] ; then
   svn co http://forge.ipsl.jussieu.fr/fcm/svn/PATCHED/FCM_V1.2 >> $log 2>&1
   fcmpath=$mod/FCM_V1.2/bin
   cd $mod/LMDZ.COMMON
-  ./makelmdz_fcm -full -fcm_path $fcmpath -cpp NODYN -d 8x8x16 -b 1x1 -t 3 -s 1 -p std -arch gfortran_mod gcm >> $log 2>&1
+  ./makelmdz_fcm -j 8 -fcm_path $fcmpath $zeopt gcm >> $log 2>&1
 else
   cd $mod/LMDZ.COMMON
-  ./makelmdz -full -cpp NODYN -d 8x8x16 -b 1x1 -t 3 -s 1 -p std -arch gfortran_mod gcm >> $log 2>&1
+  ./makelmdz                        $zeopt gcm >> $log 2>&1
 fi
 ###
 echo "7. compile the program for initial condition at least once (please wait)"
+cd $mod/LMDZ.COMMON
 if [ $usefcm -eq 1 ] ; then
-  ./makelmdz_fcm -fcm_path $fcmpath -d 8x8x16 -p std -arch gfortran_mod newstart >> $log 2>&1
+  ./makelmdz_fcm -j 8 -fcm_path $fcmpath $zeoptall newstart >> $log 2>&1
 else
-  ./makelmdz -d 8x8x16 -p std -arch gfortran_mod newstart >> $log 2>&1
+  ./makelmdz $zeoptall newstart >> $log 2>&1
 fi
 
 #### previous old local method

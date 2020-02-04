@@ -74,6 +74,7 @@ if [ $usefcm -eq 1 ] ; then
   \rm "bin/"$gcmexec
   ./makelmdz_fcm -fcm_path $fcmpath $cppkey -d $nx"x"$ny"x"$nz \
     -b $bir"x"$bvi -t $tr -s 1 \
+    -io noioipsl \
     -p std -arch gfortran_mod gcm > logcompilegcm 2> logcompilegcm
   if [[ ! -f "bin/"$gcmexec ]] ; then 
     echo "Il y a eu un probleme. Voir : " $PWD/logcompilegcm ; exit
@@ -81,6 +82,7 @@ if [ $usefcm -eq 1 ] ; then
 else
   cd $mod/LMDZ.COMMON ; \rm gcm.e
   ./makelmdz $cppkey -d $nx"x"$ny"x"$nz -b $bir"x"$bvi -t $tr -s 1 \
+    -io noioipsl \
     -p std -arch gfortran_mod gcm > logcompilegcm 2> logcompilegcm
   if [[ ! -f gcm.e ]] ; then 
     echo "Il y a eu un probleme. Voir : " $PWD/logcompilegcm ; exit
@@ -96,6 +98,7 @@ if [[ $isrestart == 0 ]]; then
     newstartexec="newstart_"$nx"x"$ny"x"$nz"_phystd_seq.e"
     \rm "bin/"$newstartexec
     ./makelmdz_fcm -fcm_path $fcmpath -d $nx"x"$ny"x"$nz -p std \
+      -io noioipsl \
       -arch gfortran_mod newstart > logcompilenewstart 2> logcompilenewstart
     if [[ ! -f "bin/"$newstartexec ]] ; then
       echo "Il y a eu un probleme. Voir : " $PWD/logcompilenewstart ; exit
@@ -103,6 +106,7 @@ if [[ $isrestart == 0 ]]; then
   else
     cd $mod/LMDZ.COMMON ; \rm newstart.e
     ./makelmdz -d $nx"x"$ny"x"$nz -p std \
+      -io noioipsl \
       -arch gfortran_mod newstart > logcompilenewstart 2> logcompilenewstart
     if [[ ! -f newstart.e ]] ; then 
       echo "Il y a eu un probleme. Voir : " $PWD/logcompilenewstart ; exit
