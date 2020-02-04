@@ -130,6 +130,7 @@ fi
 echo "*** SIMULATION ***"
 if [ $usefcm -eq 1 ] ; then
   cd $mod/LMDZ.COMMON
+  \rm gcm.e
   ln -sf "bin/"$gcmexec gcm.e
 fi
 cd $thisfolder/RUN ; \rm resultat.nc > /dev/null 2> /dev/null
