@@ -17,6 +17,8 @@ zedim="8x8x16"
 zeoptall=" -d "${zedim}" -p std -arch gfortran_mod "
 zeopt=${zeoptall}" -full -cpp NODYN -b 1x1 -t 3 -s 1 -io noioipsl "
 #######################
+useplanetoplot=0
+#######################
 
 
 ini=$PWD
@@ -112,12 +114,14 @@ fi
 #./makegcm_gfortran_local -d 8x8x6 -debug newstart >> $log 2>&1
 
 ###
-echo "8. get post-processing tools"
-cd $ini/TOOLS
-rm -rf planetoplot
-git clone https://github.com/aymeric-spiga/planetoplot >> $log 2>&1
-rm -rf planets
-git clone https://github.com/aymeric-spiga/planets >> $log 2>&1
+if [ $useplanetoplot -eq 1 ] ; then
+  echo "8. get post-processing tools"
+  cd $ini/TOOLS
+  rm -rf planetoplot
+  git clone https://github.com/aymeric-spiga/planetoplot >> $log 2>&1
+  rm -rf planets
+  git clone https://github.com/aymeric-spiga/planets >> $log 2>&1
+fi
 
 ###
 cd $ini
