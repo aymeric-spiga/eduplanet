@@ -21,13 +21,13 @@ NB: pour annuler les patch
 
 *** PATCHS ***
 
-icealbedo (réalisé sur la release 2168)
+icealbedo (last update: SVN release 2233)
 -------------------------------------------------
 Permet de changer l'albédo avec une fonction simple de la température
 > patch ../MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90 < icealbedo.patch
 -------------------------------------------------
 
-radfluxes.patch (réalisé sur la release 2168)
+radfluxes.patch (ATTENTION: MISE A JOUR NECESSAIRE)
 -------------------------------------------------
 Ajouter les flux LW et SW a la surface sous le nom SSR et SLR
 > patch ../MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90 < radfluxes.patch 
