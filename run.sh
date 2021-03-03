@@ -158,9 +158,11 @@ dirname="expnum_"$zedate"_"$name
 echo "*** SAUVEGARDE DANS : $dirname"
 cd $thisfolder
 mkdir $dirname
-mv RUN/diagfi.nc     $dirname/resultat.nc
-cp INIT/planet_start $dirname/reglages_init.txt
-cp RUN/etu.def       $dirname/reglages_run.txt
-cp $setupfile        $dirname/$setupfile
+mv RUN/diagfi.nc       $dirname/resultat.nc
+cp INIT/planet_start   $dirname/reglages_init.txt
+cp RUN/etu.def         $dirname/reglages_run.txt
+cp $setupfile          $dirname/$setupfile
+sed 's/keyexp/'$dirname'/g' \
+  TOOLS/atlas.ipynb >> $dirname/atlas.ipynb
 
 echo "*** FIN ***"
