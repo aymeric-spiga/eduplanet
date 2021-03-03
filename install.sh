@@ -20,7 +20,6 @@ zeopt=${zeoptall}" -full -cpp NODYN -b 1x1 -t 3 -s 1 -io noioipsl "
 useplanetoplot=0
 #######################
 
-
 ini=$PWD
 mod=$ini/MODELES
 net=$mod/LMDZ.COMMON/netcdf/gfortran_netcdf-4.0.1
@@ -80,31 +79,31 @@ fi
 #ls -l $mod/LMDZ.COMMON/ioipsl/modipsl/lib
 
 ###
-echo "5. customize arch files"
+echo "4. customize arch files"
 cd $mod/LMDZ.COMMON/arch
 cp arch-gfortran.fcm arch-gfortran_mod.fcm
 cp arch-gfortran.path arch-gfortran_mod.path
 echo NETCDF=$net > arch-gfortran_mod.env
 
 ###
-echo "6. compile the model fully at least once (please wait)"
+echo "5. compile the model fully at least once (please wait)"
 if [ $usefcm -eq 1 ] ; then
   cd $mod
   svn co http://forge.ipsl.jussieu.fr/fcm/svn/PATCHED/FCM_V1.2 >> $log 2>&1
   fcmpath=$mod/FCM_V1.2/bin
   cd $mod/LMDZ.COMMON
-  ./makelmdz_fcm -j 8 -fcm_path $fcmpath $zeopt gcm >> $log 2>&1
+  ./makelmdz_fcm -j 2 -fcm_path $fcmpath $zeopt gcm >> $log 2>&1
 else
   cd $mod/LMDZ.COMMON
   ./makelmdz                        $zeopt gcm >> $log 2>&1
 fi
 ###
-echo "7. compile the program for initial condition at least once (please wait)"
+echo "6. compile the program for initial condition at least once (please wait)"
 cd $mod/LMDZ.COMMON
 if [ $usefcm -eq 1 ] ; then
-  ./makelmdz_fcm -j 8 -fcm_path $fcmpath $zeoptall newstart >> $log 2>&1
+  ./makelmdz_fcm -j 2 -fcm_path $fcmpath $zeopt newstart >> $log 2>&1
 else
-  ./makelmdz $zeoptall newstart >> $log 2>&1
+  ./makelmdz $zeopt newstart >> $log 2>&1
 fi
 
 #### previous old local method
@@ -112,6 +111,24 @@ fi
 #sed s+"/donnees/emlmd/netcdf64-4.0.1_gfortran"+$net+g makegcm_gfortran > makegcm_gfortran_local
 #chmod 755 makegcm_gfortran_local
 #./makegcm_gfortran_local -d 8x8x6 -debug newstart >> $log 2>&1
+
+###
+echo "7. download supplementary surface files" 
+cd $ini/RUN/DATAGENERIC
+lmdzserv="http://www.lmd.jussieu.fr/~lmdz/planets/LMDZ.GENERIC/surfaces/"
+if [[ ! (-f "surface_earth.nc") ]] ; then
+  wget "$lmdzserv/surface_earth.nc"
+fi
+if [[ ! (-f "surface_mars.nc") ]] ; then
+  wget "$lmdzserv/surface_mars.nc"
+fi
+if [[ ! (-f "surface_venus.nc") ]] ; then
+  wget "$lmdzserv/surface_venus.nc"
+fi
+if [[ ! (-f "surface_earth_paleo.tar.gz") ]] ; then
+  wget "$lmdzserv/surface_earth_paleo.tar.gz"
+  tar -xvzf surface_earth_paleo.tar.gz
+fi
 
 ###
 if [ $useplanetoplot -eq 1 ] ; then
