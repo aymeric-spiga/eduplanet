@@ -4,52 +4,55 @@
 
 usefcm=1
 
-## default
-##--------
+#------------------------------------------------------------------
+# Opening compiler setting file
 
-nx=8
-ny=8 
-nz=16
-tr=2
-bir=1
-bvi=1
-dyncore=0
-isrestart=0
-quick=0
+if [ $# -eq 1 ]
+then
+  setupfile=$1
+else
+  setupfile="reglages_compiler.txt"
+fi
 
-## options
-##--------
+if ! [ -e $setupfile ]
+then
+  echo "Sorry, $setupfile file does not exist."
+  exit
+fi
 
-while getopts "x:y:z:t:i:v:-:" options; do
-  case $options in
-   x) nx=${OPTARG};;
-   y) ny=${OPTARG};;
-   z) nz=${OPTARG};;
-   t) tr=${OPTARG};;  ## ne change rien si pas dynamique
-   i) bir=${OPTARG};; ## combinaison doit etre dans DATAGENERIC e.g. 3 32
-   v) bvi=${OPTARG};; ## combinaison doit etre dans DATAGENERIC e.g. 2 36
-   -) case $OPTARG in 
-        # --dyn long option
-        dyn) dyncore=1
-             echo "Dynamical core turned on";;
-        # --restart long option
-        restart) isrestart=1
-                 echo "Restart run from previous one";;
-        # --quick long option
-        quick) quick=1;;
-        *) echo "Unknown option $OPTARG"
-           exit;;
-      esac;;
-   *) echo "Unknown option"
-      exit;;
-  esac
+# Setting the variables
+for skey in keyname keynx keyny keynz keytr keybir keybvi keydyn keyrestart keyquick ; do
+  if [ "`grep -c $skey $setupfile`" = 0 ] ; then
+    echo $skey is not specified in $setupfile;
+    exit
+  else
+    paramval=`grep $skey $setupfile | awk '{print $1}' | tail -n 1`
+    case $skey in
+      keyname) name=$paramval && echo $skey=$name ;; 
+      keydyn) dyncore=$paramval && echo $skey=$dyncore ;; 
+      keyrestart) isrestart=$paramval && echo $skey=$isrestart ;; 
+      keynx) nx=$paramval && echo $skey=$nx ;;
+      keyny) ny=$paramval && echo $skey=$ny ;; 
+      keynz) nz=$paramval && echo $skey=$nz ;; 
+      keytr) tr=$paramval && echo $skey=$tr ;; 
+      keybir) bir=$paramval && echo $skey=$bir ;; 
+      keybvi) bvi=$paramval && echo $skey=$bvi ;; 
+      keyquick) quick=$paramval && echo $skey=$quick ;;
+      *) echo "Unknown option"
+         exit;;
+    esac
+  fi
 done
+
+# Activating the dynamical core if necessary
 case $dyncore in
   0) cppkey="-cpp NODYN" ;;
   1) cppkey="" ;;
   *) echo "Wrong value of the -dyn option"
      exit ;;
 esac
+#------------------------------------------------------------------
+
 
 ## script
 ##-------
@@ -143,7 +146,6 @@ fi
 ### >>> run gcm command
 time ./gcm.e | tee log_gcm | grep "Ls =" | grep '0\.'
 ### <<< run gcm command
-zedate=`date --rfc-3339=seconds | sed s+' '+'_'+g | sed s+':'+'-'+g | awk -F '+' '{print $1}'`
 if [[ $isrestart == 1 ]]; then
   rm -rf startfi.nc
   rm -rf start.nc
@@ -151,12 +153,14 @@ if [[ $isrestart == 1 ]]; then
   mv start.nc.ref   start.nc
 fi
 
-echo "*** SAUVEGARDE DANS : expnum_$zedate"
+zedate=`date --rfc-3339=seconds | sed s+' '+'_'+g | sed s+':'+'-'+g | awk -F '+' '{print $1}'`
+dirname="expnum_"$zedate"_"$name
+echo "*** SAUVEGARDE DANS : $dirname"
 cd $thisfolder
-mkdir expnum_$zedate
-mv RUN/diagfi.nc     expnum_$zedate/resultat.nc
-cp INIT/planet_start expnum_$zedate/reglages_init.txt
-cp RUN/etu.def       expnum_$zedate/reglages_run.txt
-ln -sf expnum_$zedate/resultat.nc .
+mkdir $dirname
+mv RUN/diagfi.nc     $dirname/resultat.nc
+cp INIT/planet_start $dirname/reglages_init.txt
+cp RUN/etu.def       $dirname/reglages_run.txt
+cp $setupfile        $dirname/$setupfile
 
 echo "*** FIN ***"
