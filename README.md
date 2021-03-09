@@ -10,6 +10,8 @@ how?
 ----
 
 ~~~bash
+git clone https://github.com/aymeric-spiga/eduplanet eduplanet
+cd eduplanet
 ./install.sh
 ./run.sh
 ./TOOLS/atlas.py
