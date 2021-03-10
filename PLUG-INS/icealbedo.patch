@@ -4,11 +4,11 @@
 >                do ig=1,ngrid
 >                  if (tsurf(ig).LE.(273.15-15.0)) then
 >                    albedo(ig,1:L_NSPECTV) = 0.7
->                  else if (tsurf(ig).GE.(273.15+10.0)) then
+>                  else if (tsurf(ig).GE.(273.15+15.0)) then
 >                    albedo(ig,1:L_NSPECTV) = albedo_bareground(ig)
 >                  else
 >                    albedo(ig,1:L_NSPECTV) = &
->                    (albedo_bareground(ig)-0.7)/25.*(tsurf(ig)-(273.15-15.0))+0.7
+>                    (albedo_bareground(ig)-0.7)/30.*(tsurf(ig)-(273.15-15.0))+0.7
 >                  endif
 >                enddo
 >       ! icealbedo END 
