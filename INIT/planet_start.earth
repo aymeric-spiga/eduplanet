@@ -24,7 +24,7 @@ peri_day             !! *
 0.                   !! <-- Date periastre (jours depuis printemps)
 obliquit             !! *
 23.9                 !! <-- Obliquite (degres)
-                  
+                     !! <-------------------------separateur (ne pas supprimer)
 none              
 0.3                  !! <-- Albedo (sol nu, sans dimension)
 12000.               !! <-- Inertie thermique (J/m-2/K-1/s-0.5)
@@ -38,4 +38,4 @@ emis                 !! *
 0.9                  !! <-- Emissivite de la surface
 slab_ocean_0         !! *
 therm_ini_s          !! *
-
+                     !! <-------------------------separateur (ne pas supprimer)
