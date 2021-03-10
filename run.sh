@@ -154,7 +154,7 @@ if [[ $isrestart == 1 ]]; then
 fi
 
 zedate=`date --rfc-3339=seconds | sed s+' '+'_'+g | sed s+':'+'-'+g | awk -F '+' '{print $1}'`
-dirname="expnum_"$zedate"_"$name
+dirname="expnum_"$name"_"$zedate
 echo "*** SAUVEGARDE DANS : $dirname"
 cd $thisfolder
 mkdir $dirname
