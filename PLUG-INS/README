@@ -33,7 +33,7 @@ Ajouter les flux LW et SW a la surface sous le nom SSR et SLR
 > patch ../MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90 < radfluxes.patch 
 -------------------------------------------------
 
-change-sst (ATTENTION: MISE A JOUR NECESSAIRE)
+change-sst (last update: SVN release 2233)
 -------------------------------------------------
 Permet de mettre une température constante sur océan (critère sur l'inertie thermique)
 > patch ../MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90 < change-sst.patch

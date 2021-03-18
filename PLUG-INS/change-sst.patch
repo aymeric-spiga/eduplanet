@@ -1,22 +1,8 @@
-*** ../MODELES/LMDZ.GENERIC/libf/phystd/physiq.F90	2015-11-25 17:14:44.000000000 +0100
---- physiq.F90	2015-11-25 17:12:34.000000000 +0100
-***************
-*** 1692,1697 ****
---- 1692,1708 ----
-              enddo
-        endif !(ok_slab_ocean)
-  
-+ ! JBM WORKING ZONE
-+ ! TMPJBM
-+ ! A NE PAS COMMETTRE!!!
-+       do ig=1,ngrid
-+         if (inertiedat(ig,1).gt.1.E4) then
-+ !         tsurf(ig)=273.15+24.0
-+           tsurf(ig)=273.15+27.0
-+         endif
-+       enddo
-+ ! JBM WORKING ZONE
-+ 
-  !-------------------------
-  ! test energy conservation
-        if(enertest)then
+1690a1691,1697
+>       ! change-sst BEGIN
+>       do ig=1,ngrid
+>         if (inertiedat(ig,1).gt.1.E4) then
+>           tsurf(ig)=273.15+27.0
+>         endif
+>       enddo
+>       ! change-sst END
