@@ -4,6 +4,18 @@
 
 usefcm=1
 
+ini=$PWD
+mod=$ini/MODELES
+ze_netcdf=netcdf-fortran-4.4.2
+net=$mod/LMDZ.COMMON/netcdf/$ze_netcdf
+export NETCDF=$net
+export NETCDFINCLUDE=$net/include
+export NETCDFDIR=$net/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$net/lib
+echo "Path to NETCDF library :"
+echo $NETCDF
+echo "------------------------"
+
 #------------------------------------------------------------------
 # Opening compiler setting file
 
@@ -72,10 +84,11 @@ cd $mod/LMDZ.COMMON/libf/phystd/bands
 ## OK now compile GCM
 if [ $usefcm -eq 1 ] ; then
   fcmpath=$mod/FCM_V1.2/bin
+  PATH=$PATH:$fcmpath
   cd $mod/LMDZ.COMMON
   gcmexec="gcm_"$nx"x"$ny"x"$nz"_phystd_seq.e"
   \rm "bin/"$gcmexec
-  ./makelmdz_fcm -fcm_path $fcmpath $cppkey -d $nx"x"$ny"x"$nz \
+  ./makelmdz_fcm $cppkey -d $nx"x"$ny"x"$nz \
     -b $bir"x"$bvi -t $tr -s 1 \
     -io noioipsl \
     -p std -arch gfortran_mod gcm > logcompilegcm 2> logcompilegcm
@@ -100,7 +113,7 @@ if [[ $isrestart == 0 ]]; then
     cd $mod/LMDZ.COMMON
     newstartexec="newstart_"$nx"x"$ny"x"$nz"_phystd_seq.e"
     \rm "bin/"$newstartexec
-    ./makelmdz_fcm -fcm_path $fcmpath -d $nx"x"$ny"x"$nz -p std \
+    ./makelmdz_fcm -d $nx"x"$ny"x"$nz -p std \
       -io noioipsl \
       -arch gfortran_mod newstart > logcompilenewstart 2> logcompilenewstart
     if [[ ! -f "bin/"$newstartexec ]] ; then

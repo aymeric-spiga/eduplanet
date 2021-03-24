@@ -8,7 +8,8 @@
 version="1359"
 version="1370"
 version="HEAD"
-version="2233"
+version="2233" # updated 2019-2020
+version="2482" # updated 2020-2021
 #######################
 usefcm=1
 #######################
@@ -22,7 +23,8 @@ useplanetoplot=0
 
 ini=$PWD
 mod=$ini/MODELES
-net=$mod/LMDZ.COMMON/netcdf/gfortran_netcdf-4.0.1
+ze_netcdf=netcdf-fortran-4.4.2
+net=$mod/LMDZ.COMMON/netcdf/$ze_netcdf
 log=$ini/install.log
 \rm $log > /dev/null 2> /dev/null
 touch $log
@@ -41,25 +43,27 @@ svn update -r $version LMDZ.GENERIC LMDZ.COMMON >> $log 2>&1
 ###
 echo "3. get and compile netCDF librairies (please wait)"
 cd $ini
-ze_netcdf=netcdf-4.0.1
 wget http://www.lmd.jussieu.fr/~lmdz/Distrib/$ze_netcdf.tar.gz -a $log
 tar xzvf $ze_netcdf.tar.gz >> $log 2>&1
 \rm $ze_netcdf.tar.gz*
-export FC=gfortran 
-export FFLAGS=" -O2"
-export F90=gfortran 
-export FCFLAGS="-O2 -ffree-form"
-export CPPFLAGS="" 
-export CC=gcc
-export CFLAGS="-O2"
-export CXX=g++
-export CXXFLAGS="-O2"
 cd $ze_netcdf 
-PREFIX=$PWD
-./configure --prefix=${PREFIX} >> $log 2>&1  #--disable-cxx
-make >> $log 2>&1
-make test >> $log 2>&1
-make install >> $log 2>&1
+install_dir=$ini/$ze_netcdf
+f_compiler="gfortran"
+c_compiler="gcc"
+cxx_compiler="g++"
+export FC=$f_compiler
+export F90=$f_compiler
+export CC=$c_compiler
+export CXX=$cxx_compiler
+export FFLAGS=" -O2 -fPIC"
+export FCFLAGS="-O2 -ffree-form -fPIC"
+export CPPFLAGS=""
+export CFLAGS="-O2 -fPIC"
+export CXXFLAGS="-O2 -fPIC"
+./configure --prefix=$install_dir >> $log 2>&1 
+make >> $log 2>&1 
+make test >> $log 2>&1 
+make install >> $log 2>&1 
 cd ..
 mkdir $ini/MODELES/LMDZ.COMMON/netcdf
 mv $ze_netcdf $net
@@ -84,6 +88,9 @@ cd $mod/LMDZ.COMMON/arch
 cp arch-gfortran.fcm arch-gfortran_mod.fcm
 cp arch-gfortran.path arch-gfortran_mod.path
 echo NETCDF=$net > arch-gfortran_mod.env
+echo NETCDFINCLUDE=$net/include >> arch-gfortran_mod.env
+echo NETCDFDIR=$net/lib >> arch-gfortran_mod.env
+echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:'$net'/lib' >> arch-gfortran_mod.env
 
 ###
 echo "5. compile the model fully at least once (please wait)"
@@ -91,8 +98,9 @@ if [ $usefcm -eq 1 ] ; then
   cd $mod
   svn co http://forge.ipsl.jussieu.fr/fcm/svn/PATCHED/FCM_V1.2 >> $log 2>&1
   fcmpath=$mod/FCM_V1.2/bin
+  PATH=$PATH:$fcmpath
   cd $mod/LMDZ.COMMON
-  ./makelmdz_fcm -j 2 -fcm_path $fcmpath $zeopt gcm >> $log 2>&1
+  ./makelmdz_fcm -j 2 $zeopt gcm >> $log 2>&1
 else
   cd $mod/LMDZ.COMMON
   ./makelmdz                        $zeopt gcm >> $log 2>&1
@@ -101,7 +109,7 @@ fi
 echo "6. compile the program for initial condition at least once (please wait)"
 cd $mod/LMDZ.COMMON
 if [ $usefcm -eq 1 ] ; then
-  ./makelmdz_fcm -j 2 -fcm_path $fcmpath $zeopt newstart >> $log 2>&1
+  ./makelmdz_fcm -j 2 $zeopt newstart >> $log 2>&1
 else
   ./makelmdz $zeopt newstart >> $log 2>&1
 fi
