@@ -3,13 +3,21 @@
 # install the generic model 
 # with gfortran on Linux env
 # for teaching purposes
+# updated 2021 J-B Madeleine
 
+#######################
+# On ciclad or climserv, load a recent gfortran compiler
+hostname=`hostname`
+case ${hostname:0:6} in
+   ciclad|camelo|merlin) module load gnu/7.2.0 ;
+     echo Loaded gnu/7.2.0 ;;
+esac
 #######################
 version="1359"
 version="1370"
 version="HEAD"
 version="2233" # updated 2019-2020
-version="2482" # updated 2020-2021
+version="2483" # updated 2020-2021
 #######################
 usefcm=1
 #######################
@@ -127,6 +135,9 @@ if [[ ! (-f "surface_mars.nc") ]] ; then
 fi
 if [[ ! (-f "surface_venus.nc") ]] ; then
   wget "$lmdzserv/surface_venus.nc"
+fi
+if [[ ! (-f "surface_titan.nc") ]] ; then
+  wget "$lmdzserv/surface_titan.nc"
 fi
 if [[ ! (-f "surface_earth_paleo.tar.gz") ]] ; then
   wget "$lmdzserv/surface_earth_paleo.tar.gz"

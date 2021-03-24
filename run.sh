@@ -3,7 +3,13 @@
 ## info: dossier 38x36 dans corrk --> option -i 38 -v 36
 
 usefcm=1
-
+#------------------------------------------------------------------
+# On ciclad or climserv, load a recent gfortran compiler
+hostname=`hostname`
+case ${hostname:0:6} in
+   ciclad|camelo|merlin) module load gnu/7.2.0 ;
+     echo Loaded gnu/7.2.0 ;;
+esac
 #------------------------------------------------------------------
 # Opening compiler setting file
 
