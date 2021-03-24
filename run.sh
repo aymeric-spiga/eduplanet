@@ -4,18 +4,6 @@
 
 usefcm=1
 
-ini=$PWD
-mod=$ini/MODELES
-ze_netcdf=netcdf-fortran-4.4.2
-net=$mod/LMDZ.COMMON/netcdf/$ze_netcdf
-export NETCDF=$net
-export NETCDFINCLUDE=$net/include
-export NETCDFDIR=$net/lib
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$net/lib
-echo "Path to NETCDF library :"
-echo $NETCDF
-echo "------------------------"
-
 #------------------------------------------------------------------
 # Opening compiler setting file
 
