@@ -63,6 +63,11 @@ case $dyncore in
   *) echo "Wrong value of the -dyn option"
      exit ;;
 esac
+
+# Simulation folder
+zedate=`date --rfc-3339=seconds | sed s+' '+'_'+g | sed s+':'+'-'+g | awk -F '+' '{print $1}'`
+dirname="expnum_"$name"_"$zedate
+echo "*** Simulation folder : $dirname"
 #------------------------------------------------------------------
 
 
@@ -82,12 +87,14 @@ cd $mod/LMDZ.COMMON/libf/phystd/bands
 \rm bands.$bir.$bvi > /dev/null 2> /dev/null
 ./makbands $bir $bvi > /dev/null 2> /dev/null
 ## OK now compile GCM
+# In case a previous compilation went wrong...
+\rm $mod/LMDZ.COMMON/libf/grid/dimensions.h 2> /dev/null
 if [ $usefcm -eq 1 ] ; then
   fcmpath=$mod/FCM_V1.2/bin
   PATH=$PATH:$fcmpath
   cd $mod/LMDZ.COMMON
   gcmexec="gcm_"$nx"x"$ny"x"$nz"_phystd_seq.e"
-  \rm "bin/"$gcmexec
+  \rm "bin/"$gcmexec 2> /dev/null
   ./makelmdz_fcm $cppkey -d $nx"x"$ny"x"$nz \
     -b $bir"x"$bvi -t $tr -s 1 \
     -io noioipsl \
@@ -96,7 +103,7 @@ if [ $usefcm -eq 1 ] ; then
     echo "Il y a eu un probleme. Voir : " $PWD/logcompilegcm ; exit
   fi
 else
-  cd $mod/LMDZ.COMMON ; \rm gcm.e
+  cd $mod/LMDZ.COMMON ; \rm gcm.e 2> /dev/null
   ./makelmdz $cppkey -d $nx"x"$ny"x"$nz -b $bir"x"$bvi -t $tr -s 1 \
     -io noioipsl \
     -p std -arch gfortran_mod gcm > logcompilegcm 2> logcompilegcm
@@ -112,7 +119,7 @@ if [[ $isrestart == 0 ]]; then
   if [ $usefcm -eq 1 ] ; then
     cd $mod/LMDZ.COMMON
     newstartexec="newstart_"$nx"x"$ny"x"$nz"_phystd_seq.e"
-    \rm "bin/"$newstartexec
+    \rm "bin/"$newstartexec 2> /dev/null
     ./makelmdz_fcm -d $nx"x"$ny"x"$nz -p std \
       -io noioipsl \
       -arch gfortran_mod newstart > logcompilenewstart 2> logcompilenewstart
@@ -120,7 +127,7 @@ if [[ $isrestart == 0 ]]; then
       echo "Il y a eu un probleme. Voir : " $PWD/logcompilenewstart ; exit
     fi
   else
-    cd $mod/LMDZ.COMMON ; \rm newstart.e
+    cd $mod/LMDZ.COMMON ; \rm newstart.e 2> /dev/null
     ./makelmdz -d $nx"x"$ny"x"$nz -p std \
       -io noioipsl \
       -arch gfortran_mod newstart > logcompilenewstart 2> logcompilenewstart
@@ -146,10 +153,23 @@ fi
 echo "*** SIMULATION ***"
 if [ $usefcm -eq 1 ] ; then
   cd $mod/LMDZ.COMMON
-  \rm gcm.e
+  \rm gcm.e 2> /dev/null
   ln -sf "bin/"$gcmexec gcm.e
 fi
-cd $thisfolder/RUN ; \rm resultat.nc > /dev/null 2> /dev/null
+
+# Create new folder where simulation is run
+cd $thisfolder
+mkdir $dirname
+cp INIT/planet_start   $dirname/reglages_init.txt
+cp RUN/etu.def         $dirname/reglages_run.txt
+cp $setupfile          $dirname/$setupfile
+sed 's/keyexp/'$dirname'/g' \
+  TOOLS/atlas.ipynb >> $dirname/atlas.ipynb
+cp -P RUN/* $dirname/.  2> /dev/null
+cp -r RUN/def_benj_earth $dirname/.
+cp -r RUN/def_saturn $dirname/.
+cd $dirname
+ln -s ../RUN/DATAGENERIC .
 if [[ $isrestart == 1 ]]; then
   mv startfi.nc   startfi.nc.ref
   mv start.nc     start.nc.ref
@@ -160,22 +180,12 @@ fi
 time ./gcm.e | tee log_gcm | grep "Ls =" | grep '0\.'
 ### <<< run gcm command
 if [[ $isrestart == 1 ]]; then
-  rm -rf startfi.nc
+  rm -rf startfi.nc 
   rm -rf start.nc
   mv startfi.nc.ref startfi.nc
   mv start.nc.ref   start.nc
 fi
 
-zedate=`date --rfc-3339=seconds | sed s+' '+'_'+g | sed s+':'+'-'+g | awk -F '+' '{print $1}'`
-dirname="expnum_"$name"_"$zedate
-echo "*** SAUVEGARDE DANS : $dirname"
-cd $thisfolder
-mkdir $dirname
-mv RUN/diagfi.nc       $dirname/resultat.nc
-cp INIT/planet_start   $dirname/reglages_init.txt
-cp RUN/etu.def         $dirname/reglages_run.txt
-cp $setupfile          $dirname/$setupfile
-sed 's/keyexp/'$dirname'/g' \
-  TOOLS/atlas.ipynb >> $dirname/atlas.ipynb
+mv diagfi.nc resultat.nc
 
 echo "*** FIN ***"
