@@ -1,0 +1,13 @@
+#PBS -S  /bin/bash
+#PBS -j  oe
+#PBS -q  week
+#PBS -N  eduplanet
+#PBS -l  nodes=1:ppn=1
+#PBS -l  mem=10gb
+#PBS -l  vmem=20gb
+
+ulimit -s unlimited
+
+cd $PBS_O_WORKDIR
+
+./run.sh > run.log 2>&1
