@@ -1,0 +1,35 @@
+Index: ../MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90
+===================================================================
+--- ../MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90	(révision 2483)
++++ ../MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90	(copie de travail)
+@@ -878,6 +878,16 @@
+ 
+             if (corrk) then
+             
++
++      ! forestalbedo BEGIN
++               do ig=1,ngrid
++                 if ((tsurf(ig).LE.(273.15+15.0)).or.(tsurf(ig).GE.(273.15+35.0)) then
++                   albedo(ig,1:L_NSPECTV) = albedo_bareground(ig)
++                 else
++                   albedo(ig,1:L_NSPECTV) = 0.10
++                 endif
++               enddo
++      ! forestalbedo END 
+ ! ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ! II.a Call correlated-k radiative transfer scheme
+ ! ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@@ -2126,6 +2136,13 @@
+       call writediagfi(ngrid,"Ls","solar longitude","deg",0,zls*180./pi)
+       call writediagfi(ngrid,"Lss","sub solar longitude","deg",0,zlss*180./pi)
+       call writediagfi(ngrid,"RA","right ascension","deg",0,right_ascen*180./pi)
++
++! forestalbedo BEGIN
++         call writediagfi(ngrid,"ALB","Surface albedo"," ",2,albedo(:,1))
++         call writediagfi(ngrid,"SSR","sw surface rad.","W m-2",2,fluxsurf_sw)
++         call writediagfi(ngrid,"SLR","lw surface rad.","W m-2",2,fluxsurf_lw)
++! forestalbedo END
++
+       call writediagfi(ngrid,"Declin","solar declination","deg",0,declin*180./pi)
+       call writediagfi(ngrid,"tsurf","Surface temperature","K",2,tsurf)
+       call writediagfi(ngrid,"ps","Surface pressure","Pa",2,ps)
