@@ -70,7 +70,7 @@ echo "*** Simulation folder : $dirname"
 
 thisfolder=$PWD
 mod=$PWD/MODELES/
-
+gcmexec="gcm_"$nx"x"$ny"x"$nz"_phystd_seq.e"
 if [[ $quick == 0 ]]; then
 
 echo "*** COMPILATION GCM *** ne pas interrompre ***"
@@ -87,7 +87,6 @@ if [ $usefcm -eq 1 ] ; then
   fcmpath=$mod/FCM_V1.2/bin
   PATH=$PATH:$fcmpath
   cd $mod/LMDZ.COMMON
-  gcmexec="gcm_"$nx"x"$ny"x"$nz"_phystd_seq.e"
   \rm "bin/"$gcmexec 2> /dev/null
   ./makelmdz_fcm $cppkey -d $nx"x"$ny"x"$nz \
     -b $bir"x"$bvi -t $tr -s 1 \
