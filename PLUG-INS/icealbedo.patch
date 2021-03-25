@@ -1,22 +1,39 @@
-880a881,893
-> 
->       ! icealbedo BEGIN
->                do ig=1,ngrid
->                  if (tsurf(ig).LE.(273.15-15.0)) then
->                    albedo(ig,1:L_NSPECTV) = 0.7
->                  else if (tsurf(ig).GE.(273.15+15.0)) then
->                    albedo(ig,1:L_NSPECTV) = albedo_bareground(ig)
->                  else
->                    albedo(ig,1:L_NSPECTV) = &
->                    (albedo_bareground(ig)-0.7)/30.*(tsurf(ig)-(273.15-15.0))+0.7
->                  endif
->                enddo
->       ! icealbedo END 
-2128a2142,2148
-> 
-> ! icealbedo BEGIN
->          call writediagfi(ngrid,"ALB","Surface albedo"," ",2,albedo(:,1))
->          call writediagfi(ngrid,"SSR","sw surface rad.","W m-2",2,fluxsurf_sw)
->          call writediagfi(ngrid,"SLR","lw surface rad.","W m-2",2,fluxsurf_lw)
-> ! icealbedo END
-> 
+Index: MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90
+===================================================================
+--- MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90	(révision 2483)
++++ MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90	(copie de travail)
+@@ -902,7 +902,20 @@
+                      endif
+                   enddo
+                endif !(ok_slab_ocean)
+-                
++               
++      ! icealbedo BEGIN
++               do ig=1,ngrid
++                 if (tsurf(ig).LE.(273.15-15.0)) then
++                   albedo(ig,1:L_NSPECTV) = 0.7
++                 else if (tsurf(ig).GE.(273.15+15.0)) then
++                   albedo(ig,1:L_NSPECTV) = albedo_bareground(ig)
++                 else
++                   albedo(ig,1:L_NSPECTV) = &
++                   (albedo_bareground(ig)-0.7)/30.*(tsurf(ig)-(273.15-15.0))+0.7
++                 endif
++               enddo
++      ! icealbedo END 
++ 
+                ! standard callcorrk
+                clearsky=.false.
+                call callcorrk(ngrid,nlayer,pq,nq,qsurf,                           &
+@@ -2188,6 +2201,12 @@
+ !           call writediagfi(ngrid,"fluxsurfswcs","sw surface flux (cs).","W m-2",2,fluxsurf_sw1)
+ !           call writediagfi(ngrid,"fluxsurflwcs","lw back radiation (cs).","W m-2",2,fluxsurf_lw1)
+ 
++! icealbedo BEGIN
++         call writediagfi(ngrid,"ALB","Surface albedo"," ",2,albedo(:,1))
++         call writediagfi(ngrid,"SSR","sw surface rad.","W m-2",2,fluxsurf_sw)
++         call writediagfi(ngrid,"SLR","lw surface rad.","W m-2",2,fluxsurf_lw)
++! icealbedo END
++
+          if(ok_slab_ocean) then
+             call writediagfi(ngrid,"GND","heat flux from ground","W m-2",2,fluxgrdocean)
+          else

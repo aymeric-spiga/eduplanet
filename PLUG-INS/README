@@ -21,7 +21,7 @@ NB: pour annuler les patch
 
 *** PATCHS ***
 
-icealbedo (last update: SVN release 2233)
+icealbedo (last update: SVN release 2484)
 -------------------------------------------------
 Permet de changer l'albédo avec une fonction simple de la température
 > patch ../MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90 < icealbedo.patch
