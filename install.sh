@@ -46,6 +46,11 @@ svn co -N http://svn.lmd.jussieu.fr/Planeto/trunk MODELES >> $log 2>&1
 echo "2. get model code (please wait)"
 cd $mod
 svn update -r $version LMDZ.GENERIC LMDZ.COMMON >> $log 2>&1
+# Temporary fix for r2483
+if [ $version = "2483" ]
+then
+  patch LMDZ.GENERIC/libf/dynphy_lonlat/phystd/lect_start_archive.F < ../PLUG-INS/fix-r2483.patch
+fi
 
 ###
 echo "3. get and compile netCDF librairies (please wait)"
