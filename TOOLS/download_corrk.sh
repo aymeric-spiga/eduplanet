@@ -3,6 +3,12 @@
 echo "*** download all the correlated-k absorption coefficient databases"
 cd ../RUN/DATAGENERIC/corrk_data/
 
+if [[ ! (-f "earth") ]] ; then
+  wget "http://www.lmd.jussieu.fr/~jnaar/eduplanet/corrk_data/earth.zip"
+fi
+unzip earth.zip
+rm -f earth.zip
+
 if [[ ! (-f "megaCO2") ]] ; then
   wget "http://www.lmd.jussieu.fr/~mturbet/eduplanet/corrk_data/megaCO2.zip"
 fi
