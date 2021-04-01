@@ -1,0 +1,42 @@
+0                    !! *
+y                    !! *
+1.e5                 !! <-- Pression de surface (Pa)
+1.e1                 !! *
+rad                  !! *
+7.3e6                !! <-- Rayon planetaire (m)
+g                    !! *  
+8.54                 !! <-- Acceleration gravite (m/s2)
+mugaz                !! *
+28.0                 !! <-- Masse molaire atmosphérique (g/mol)
+rcp                  !! *
+0.286                !! <-- Rapport r/cp (massiques)
+daysec               !! *
+1.067e6                !! <-- Duree du jour (s)
+omeg                 !! *
+-9999.               !! *
+year_day             !! *
+12                  !! <-- Duree d'une annee (en jours de la planete concernee)
+periastr             !! *
+0.04678                  !! <-- Distance mini etoile-planete (UA)
+apoastr              !! *
+0.04697                !! <-- Distance maxi etoile-planete (UA)
+peri_day             !! *
+0.                   !! <-- Date periastre (jours depuis printemps)
+obliquit             !! *
+0                 !! <-- Obliquite (degres)
+                     !! <-------------------------separateur (ne pas supprimer)
+none              
+0.3                  !! <-- Albedo (sol nu, sans dimension)
+12000.               !! <-- Inertie thermique (J/m-2/K-1/s-0.5)
+6695                 !! *
+flat                 !! *
+y                    !! *
+-9999.               !! *
+isotherm             !! *
+300.                 !! <-- Temperature initiale (K)
+emis                 !! *
+0.9                  !! <-- Emissivite de la surface
+slab_ocean_0         !! *
+therm_ini_s          !! *
+oceanball            !! * Planete ocean - a supprimer si on met une topo
+                     !! <-------------------------separateur (ne pas supprimer)
