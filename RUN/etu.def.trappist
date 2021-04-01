@@ -1,0 +1,88 @@
+# Nombre de jours d'intégration                
+nday = 1825
+
+# Fréquence (en pas) de l'écriture du fichier de résultat
+# -- nombre de sorties total = nday*day_step/ecritphy/iphysiq
+# -- nombre de sorties / jour = day_step/ecritphy/iphysiq
+ecritphy = 18
+
+# Nombre de pas d'intégration dynamique par jour
+day_step = 1
+
+# Coefficient d'absorption IR en m2/kg 
+# [--> voir notations TD : kappa = k * r_X]
+kappa_IR = 5.0e-5
+
+
+# Coefficient d'absorption dans le VISIBLE en m2/kg
+# épaisseur optique équivalente : tau_surf = kappa_VI * P_s / g
+kappa_VI = 5.e-20
+callgasvis = .false.
+
+# Profondeur (en m) de la premiere couche du sous-sol
+lay1_soil = 3.e-2
+
+#####################
+##### DYNAMIQUE #####
+#####################
+#
+#nday = 500
+#ecritphy = 144
+#day_step = 240
+#diurnal = .true. 
+## periode de la physique (en pas)
+#iphysiq = 5
+## periode pour le pas Matsuno (en pas)
+#iperiod = 5
+
+#####################
+#ORBITES VERROUILLEES
+#####################
+# nres vaut T_orbite / T_rotation
+tlocked   = .true.
+nres      = 1.
+diurnal   = .false.
+
+## Star type
+## ~~~~~~~~~
+startype = 9
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# The choices are:
+#
+#       startype = 1            Sol        (G2V-class main sequence)
+#       startype = 2            Ad Leo     (M-class, synthetic)
+#       startype = 3            GJ644
+#       startype = 4            HD128167
+#       startype = 9            TRAPPIST1  (Mturbet)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Stellar flux at 1 AU. Examples:
+# 1366.0 W m-2          Sol today
+# 1024.5 W m-2          Sol today x 0.75 = weak early Sun
+# 18.462 W m-2          The feeble Gl581
+# 19.960 W m-2          Gl581 with e=0.38 orbital average
+Fat1AU = 1366.0
+
+
+####################################################
+####################################################
+
+#### 1. ajouter dossier corrk_data
+#### 2. modifier gases.def
+#### 3. lancer e.g. ./run.sh -i 38 -v 36 pour 38x36
+
+#### earth
+#### -- Terre avec 387ppm CO2
+#corrkdir = earth
+#graybody = .false.
+
+#### CO2_CH4
+#### -- 99% CO2 100ppm CH4
+#corrkdir = CO2_CH4
+#graybody = .false.
+
+#### CO2_0.1 CO2_0.01 CO2_0.5 
+#### CO2_300ppm_H2Ovar CO2_400ppm_H2Ovar CO2_900ppm
+#### -- N2 avec CO2 indiqué + H2O var (M. Turbet)
+#corrkdir = CO2_0.1
+#graybody = .false.
+
