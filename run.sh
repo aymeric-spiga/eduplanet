@@ -158,6 +158,8 @@ cp RUN/etu.def         $dirname/reglages_run.txt
 cp $setupfile          $dirname/$setupfile
 sed 's/keyexp/'$dirname'/g' \
   TOOLS/atlas.ipynb >> $dirname/atlas.ipynb
+sed 's/keyexp/'$dirname'/g' \
+  TOOLS/atlas-dyn.ipynb >> $dirname/atlas-dyn.ipynb
 cp -P RUN/* $dirname/.  2> /dev/null
 cp -r RUN/def_benj_earth $dirname/.
 cp -r RUN/def_saturn $dirname/.
