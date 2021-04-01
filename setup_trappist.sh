@@ -5,7 +5,7 @@ thisfolder=$PWD
 
 echo "Hello student !"
 echo "You are on "`hostname`
-echo "You are about to change settings in order to get starting configuration for a slab ocean earth :"
+echo "You are about to change settings in order to get starting configuration for the exoplanet TRAPPIST-1g :"
 echo "Do you want to continue ? (1=YES, 0=NO)"
 read answer
 
