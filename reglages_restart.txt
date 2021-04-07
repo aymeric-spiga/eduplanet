@@ -1,0 +1,3 @@
+expnum_default_2021-04-07_19-56-08
+# Ce fichier doit comporter sur la premiere ligne le
+# dossier de la simulation utilisee pour l'option isrestart

@@ -163,23 +163,34 @@ sed 's/keyexp/'$dirname'/g' \
 cp -P RUN/* $dirname/.  2> /dev/null
 cp -r RUN/def_benj_earth $dirname/.
 cp -r RUN/def_saturn $dirname/.
+
+if [[ $isrestart == 1 ]]; then
+  restartdir=`head -n 1 reglages_restart.txt`
+  if [[ ! -d $restartdir ]]; then
+    echo "Desole mais le dossier $restartdir n'existe pas ;"
+    exit
+  fi
+  echo "-----------------------------------------------------------"
+  echo "On redemarre de l'etat final de la simulation :"
+  echo $restartdir
+  echo "-----------------------------------------------------------"
+  if [[ ! -f $restartdir/restart.nc ]] ||
+    [[ ! -f $restartdir/restartfi.nc ]]; then
+    echo "Desole, mais cette simulation ne contient pas de fichiers"
+    echo "finaux ; elle ne s'est peut-etre pas termine correctement;"
+    exit
+  else
+    cp -f $restartdir/restart.nc $dirname/start.nc
+    cp -f $restartdir/restartfi.nc $dirname/startfi.nc
+  fi
+fi
+
 cd $dirname
 ln -s ../RUN/DATAGENERIC .
-if [[ $isrestart == 1 ]]; then
-  mv startfi.nc   startfi.nc.ref
-  mv start.nc     start.nc.ref
-  mv restartfi.nc startfi.nc
-  mv restart.nc   start.nc
-fi
+
 ### >>> run gcm command
 time ./gcm.e | tee log_gcm | grep "Ls =" | grep '0\.'
 ### <<< run gcm command
-if [[ $isrestart == 1 ]]; then
-  rm -rf startfi.nc 
-  rm -rf start.nc
-  mv startfi.nc.ref startfi.nc
-  mv start.nc.ref   start.nc
-fi
 
 mv diagfi.nc resultat.nc
 
