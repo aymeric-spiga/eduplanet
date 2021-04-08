@@ -27,9 +27,10 @@ Permet de changer l'albédo avec une fonction simple de la température
 > patch ../MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90 < icealbedo.patch
 -------------------------------------------------
 
-radfluxes.patch (ATTENTION: MISE A JOUR NECESSAIRE)
+radfluxes.patch (last update: SVN release 2484)
 -------------------------------------------------
 Ajouter les flux LW et SW a la surface sous le nom SSR et SLR
+Ajouter l'albédo de la surface sous le nom ALB
 > patch ../MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90 < radfluxes.patch 
 -------------------------------------------------
 
