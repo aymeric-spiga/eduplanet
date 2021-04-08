@@ -1,0 +1,70 @@
+Index: MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90
+===================================================================
+--- MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90	(révision 2484)
++++ MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90	(copie de travail)
+@@ -244,8 +244,12 @@
+ ! ----------------------
+       integer,save :: day_ini                                      ! Initial date of the run (sol since Ls=0).
+       integer,save :: icount                                       ! Counter of calls to physiq during the run.
+-!$OMP THREADPRIVATE(day_ini,icount)
++      ! darkcity  BEGIN
++      logical,allocatable,save :: firstcallalb(:)                  ! albedo is now fixed to a given value
+ 
++!$OMP THREADPRIVATE(day_ini,icount,firstcallalb)
++      ! darkcity  END
++
+ ! Local variables :
+ ! -----------------
+ 
+@@ -648,6 +652,12 @@
+ !        Initialize surface history variable.
+ !        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+          qsurf_hist(:,:)=qsurf(:,:)
++         ! darkcity  BEGIN
++         if (.not.allocated(firstcallalb)) then
++           allocate(firstcallalb(ngrid))
++           firstcallalb(:)=.true.
++         endif
++         ! darkcity  END
+ 
+ !        Initialize variable for dynamical heating and zonal wind tendency diagnostic
+ !        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@@ -902,7 +912,24 @@
+                      endif
+                   enddo
+                endif !(ok_slab_ocean)
+-                
++               
++      ! darkcity  BEGIN
++               do ig=1,ngrid
++                 if (firstcallalb(ig)) then
++                   if (inertiedat(ig,1).LT.1.E4) then
++                     if (tsurf(ig).LE.(273.15+10.0)) then
++                       albedo(ig,1:L_NSPECTV) = albedo_bareground(ig)
++                     else if (tsurf(ig).GE.(273.15+25.0)) then
++                       albedo(ig,1:L_NSPECTV) = albedo_bareground(ig)
++                     else
++                       albedo(ig,1:L_NSPECTV) = 0.3
++                       firstcallalb(ig)=.false.
++                     endif
++                   endif
++                 endif
++               enddo
++      ! darkcity  END 
++ 
+                ! standard callcorrk
+                clearsky=.false.
+                call callcorrk(ngrid,nlayer,pq,nq,qsurf,                           &
+@@ -2188,6 +2215,12 @@
+ !           call writediagfi(ngrid,"fluxsurfswcs","sw surface flux (cs).","W m-2",2,fluxsurf_sw1)
+ !           call writediagfi(ngrid,"fluxsurflwcs","lw back radiation (cs).","W m-2",2,fluxsurf_lw1)
+ 
++! darkcity  BEGIN
++         call writediagfi(ngrid,"ALB","Surface albedo"," ",2,albedo(:,1))
++         call writediagfi(ngrid,"SSR","sw surface rad.","W m-2",2,fluxsurf_sw)
++         call writediagfi(ngrid,"SLR","lw surface rad.","W m-2",2,fluxsurf_lw)
++! darkcity  END
++
+          if(ok_slab_ocean) then
+             call writediagfi(ngrid,"GND","heat flux from ground","W m-2",2,fluxgrdocean)
+          else
