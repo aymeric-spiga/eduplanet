@@ -48,8 +48,8 @@ Permet de changer albedo et inertie thermique des continents
 
 darkcity (last update: SVN release 2484)
 -------------------------------------------------
-Permet de changer l'albédo de façon irréversible dans un intervalle de 
-température donné.
+Permet de changer l'albédo et l'inertie thermique de façon irréversible
+dans un intervalle de température donné.
 > patch ../MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90 < darkcity.patch
 -------------------------------------------------
 

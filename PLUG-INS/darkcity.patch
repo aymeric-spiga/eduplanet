@@ -29,7 +29,7 @@ Index: MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90
  
  !        Initialize variable for dynamical heating and zonal wind tendency diagnostic
  !        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-@@ -902,7 +912,24 @@
+@@ -902,7 +912,25 @@
                       endif
                    enddo
                 endif !(ok_slab_ocean)
@@ -45,6 +45,7 @@ Index: MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90
 +                       albedo(ig,1:L_NSPECTV) = albedo_bareground(ig)
 +                     else
 +                       albedo(ig,1:L_NSPECTV) = 0.3
++                       inertiedat(ig,1:nsoilmx) = 8000.
 +                       firstcallalb(ig)=.false.
 +                     endif
 +                   endif
@@ -55,12 +56,13 @@ Index: MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90
                 ! standard callcorrk
                 clearsky=.false.
                 call callcorrk(ngrid,nlayer,pq,nq,qsurf,                           &
-@@ -2188,6 +2215,12 @@
+@@ -2188,6 +2216,13 @@
  !           call writediagfi(ngrid,"fluxsurfswcs","sw surface flux (cs).","W m-2",2,fluxsurf_sw1)
  !           call writediagfi(ngrid,"fluxsurflwcs","lw back radiation (cs).","W m-2",2,fluxsurf_lw1)
  
 +! darkcity  BEGIN
 +         call writediagfi(ngrid,"ALB","Surface albedo"," ",2,albedo(:,1))
++         call writediagfi(ngrid,"THERM","Surface thermal inertia","TIU",2,inertiedat(:,1))
 +         call writediagfi(ngrid,"SSR","sw surface rad.","W m-2",2,fluxsurf_sw)
 +         call writediagfi(ngrid,"SLR","lw surface rad.","W m-2",2,fluxsurf_lw)
 +! darkcity  END
