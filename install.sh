@@ -51,7 +51,8 @@ svn update -r $version LMDZ.GENERIC LMDZ.COMMON >> $log 2>&1
 echo "3. get and compile netCDF librairies (please wait)"
 cd $ini
 ze_netcdf=netcdf-4.0.1
-wget http://www.lmd.jussieu.fr/~lmdz/Distrib/$ze_netcdf.tar.gz -a $log
+mywget="wget --no-check-certificate"
+$mywget --no-check-certificate http://www.lmd.jussieu.fr/~lmdz/Distrib/$ze_netcdf.tar.gz -a $log
 tar xzvf $ze_netcdf.tar.gz >> $log 2>&1
 \rm $ze_netcdf.tar.gz*
 export FC=gfortran
@@ -128,19 +129,19 @@ echo "7. download supplementary surface files"
 cd $ini/RUN/DATAGENERIC
 lmdzserv="http://www.lmd.jussieu.fr/~lmdz/planets/LMDZ.GENERIC/surfaces/"
 if [[ ! (-f "surface_earth.nc") ]] ; then
-  wget "$lmdzserv/surface_earth.nc"
+  $mywget --no-check-certificate "$lmdzserv/surface_earth.nc"
 fi
 if [[ ! (-f "surface_mars.nc") ]] ; then
-  wget "$lmdzserv/surface_mars.nc"
+  $mywget "$lmdzserv/surface_mars.nc"
 fi
 if [[ ! (-f "surface_venus.nc") ]] ; then
-  wget "$lmdzserv/surface_venus.nc"
+  $mywget "$lmdzserv/surface_venus.nc"
 fi
 if [[ ! (-f "surface_titan.nc") ]] ; then
-  wget "$lmdzserv/surface_titan.nc"
+  $mywget "$lmdzserv/surface_titan.nc"
 fi
 if [[ ! (-f "surface_earth_paleo.tar.gz") ]] ; then
-  wget "$lmdzserv/surface_earth_paleo.tar.gz"
+  $mywget "$lmdzserv/surface_earth_paleo.tar.gz"
   tar -xvzf surface_earth_paleo.tar.gz
 fi
 
