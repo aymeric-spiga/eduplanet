@@ -52,7 +52,7 @@ echo "3. get and compile netCDF librairies (please wait)"
 cd $ini
 ze_netcdf=netcdf-4.0.1
 mywget="wget --no-check-certificate"
-$mywget --no-check-certificate http://www.lmd.jussieu.fr/~lmdz/Distrib/$ze_netcdf.tar.gz -a $log
+$mywget http://www.lmd.jussieu.fr/~lmdz/Distrib/$ze_netcdf.tar.gz -a $log
 tar xzvf $ze_netcdf.tar.gz >> $log 2>&1
 \rm $ze_netcdf.tar.gz*
 export FC=gfortran
@@ -129,7 +129,7 @@ echo "7. download supplementary surface files"
 cd $ini/RUN/DATAGENERIC
 lmdzserv="http://www.lmd.jussieu.fr/~lmdz/planets/LMDZ.GENERIC/surfaces/"
 if [[ ! (-f "surface_earth.nc") ]] ; then
-  $mywget --no-check-certificate "$lmdzserv/surface_earth.nc"
+  $mywget "$lmdzserv/surface_earth.nc"
 fi
 if [[ ! (-f "surface_mars.nc") ]] ; then
   $mywget "$lmdzserv/surface_mars.nc"
