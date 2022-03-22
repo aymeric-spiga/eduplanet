@@ -60,7 +60,7 @@ esac
 
 # Simulation folder
 zedate=`date --rfc-3339=seconds | sed s+' '+'_'+g | sed s+':'+'-'+g | awk -F '+' '{print $1}'`
-dirname="expnum_"$name"_"$zedate
+dirname="exp_"$name"_"$zedate
 echo "*** Simulation folder : $dirname"
 #------------------------------------------------------------------
 
