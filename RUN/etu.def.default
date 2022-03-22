@@ -1,0 +1,33 @@
+# Nombre de jours d'intégration                
+nday = 1825
+
+# Fréquence (en pas) de l'écriture du fichier de résultat
+# -- nombre de sorties total = nday*day_step/ecritphy/iphysiq
+# -- nombre de sorties / jour = day_step/ecritphy/iphysiq
+ecritphy = 18
+
+# Nombre de pas d'intégration dynamique par jour
+day_step = 1
+
+# Coefficient d'absorption IR en m2/kg 
+# [--> voir notations TD : kappa = k * r_X]
+kappa_IR = 5.0e-5
+
+# Flux stellaire incident instantané à 1 unité astronomique (i.e. distance Terre-Soleil)
+# exemple:
+# - 1366.0 W m-2 (Sol today)
+# - 1024.5 W m-2 (Sol today x 0.75 = weak early Sun)
+Fat1AU = 1366.0
+
+# Coefficient d'absorption dans le VISIBLE en m2/kg
+# épaisseur optique équivalente : tau_surf = kappa_VI * P_s / g
+kappa_VI = 5.e-20
+callgasvis = .false.
+
+# Cycle diurne ?
+# -- false : flux solaire en moyenne diurne
+# -- true : flux solaire varie selon l'heure locale
+diurnal = .false.
+
+# Profondeur (en m) de la premiere couche du sous-sol
+lay1_soil = 3.e-2
