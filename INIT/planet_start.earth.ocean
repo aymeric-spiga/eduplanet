@@ -23,7 +23,7 @@ apoastr              !! *
 peri_day             !! *
 0.                   !! <-- Date periastre (jours depuis printemps)
 obliquit             !! *
-23.9                 !! <-- Obliquite (degres)
+23.4                 !! <-- Obliquite (degres)
 
 surface_earth.nc
 6695                 !! *
