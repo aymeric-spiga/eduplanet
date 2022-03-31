@@ -18,6 +18,7 @@ cat <<EOL
   1) Default "billard ball" - no dyn
   2) Earth present day topo - no dyn
   3) Earth with slab ocean - no dyn
+  9) Show available topographies
 > Apply a specific patch :
   71) Albedo feedback
   79) Disable all patches
@@ -43,6 +44,8 @@ case $userchoice in
     cat RUN/etu.def.ocean > reglages_run.txt
     cat RUN/gases.def.default > reglages_gases.txt
     cat INIT/compiler.ocean > reglages_compiler.txt ;;
+ 9) cd INIT/DATAGENERIC
+    ls surface_*.nc ;;
 #------------------------------------------------------------------
  71) patch ./$phystd/physiq_mod.F90 < PLUG-INS/icealbedo.patch ;;
  79) cd ./$phystd
