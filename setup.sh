@@ -15,9 +15,10 @@ cat <<EOL
        eduplanet quick setup menu
 
 > Setup a new simulation :
-  1) Default "billard ball" - no dyn
-  2) Earth present day topo - no dyn
-  3) Earth with slab ocean - no dyn
+  1) Default "billard ball" (nodyn)
+  2) Earth present day topo (nodyn)
+  3) Earth with slab ocean (nodyn)
+  4) Earth with specified supercontinent (nodyn)
   9) Show available topographies
 > Apply a specific patch :
   71) Albedo feedback
@@ -44,6 +45,10 @@ case $userchoice in
     cat RUN/etu.def.ocean > reglages_run.txt
     cat RUN/gases.def.default > reglages_gases.txt
     cat INIT/compiler.ocean > reglages_compiler.txt ;;
+ 4) cat INIT/planet_start.earth.supercontinent > reglages_init.txt
+    cat INIT/compiler.default > reglages_compiler.txt
+    cat RUN/gases.def.default > reglages_gases.txt
+    cat RUN/etu.def.default > reglages_run.txt ;;
  9) cd INIT/DATAGENERIC
     ls surface_*.nc ;;
 #------------------------------------------------------------------
