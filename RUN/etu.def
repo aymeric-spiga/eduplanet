@@ -1,5 +1,5 @@
 # Nombre de jours d'intégration                
-nday = 169
+nday = 1825
 
 # Periode d'appel a la physique (en pas)
 iphysiq = 1
@@ -7,7 +7,7 @@ iphysiq = 1
 # Fréquence (en pas) de l'écriture du fichier de résultat
 # -- nombre de sorties total = nday*day_step/ecritphy
 # -- nombre de sorties / jour = day_step/ecritphy
-ecritphy = 33
+ecritphy = 18
 
 # Nombre de pas d'intégration dynamique par jour
 day_step = 1
@@ -24,8 +24,8 @@ Fat1AU = 1366.0
 
 # Coefficient d'absorption dans le VISIBLE en m2/kg
 # épaisseur optique équivalente : tau_surf = kappa_VI * P_s / g
-kappa_VI = 9.0e-4
-callgasvis = .true.
+kappa_VI = 5.e-20
+callgasvis = .false.
 
 # Cycle diurne ?
 # -- false : flux solaire en moyenne diurne
@@ -34,26 +34,3 @@ diurnal = .false.
 
 # Profondeur (en m) de la premiere couche du sous-sol
 lay1_soil = 3.e-2
-
-#------------------------------------------------------------------
-# Default parameters for dyncore using 32x32 grid
-#------------------------------------------------------------------
-ecritphy = 4000
-day_step = 16000
-diurnal = .true.
-iphysiq = 5
-# Periode pour l'appel a Matsuno (en pas)
-iperiod = 5
-# Nombre d'iterations de l'operateur de dissipation gradiv            
-nitergdiv=1
-# Nombre d'iterations de l'operateur de dissipation nxgradrot          
-nitergrot=2
-# Nnombre d'iterations de l'operateur de dissipation divgrad            
-niterh=2
-# Temps de dissipation des plus petites long.d ondes pour u,v (gradiv)  
-tetagdiv=50000.
-# Temps de dissipation des plus petites long.d ondes pour u,v (nxgradrot)
-tetagrot=50000.
-# Temps de dissipation des plus petites long.d ondes pour h (divgrad) 
-tetatemp=50000.
-
