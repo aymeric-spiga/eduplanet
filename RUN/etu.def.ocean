@@ -1,8 +1,8 @@
 # Nombre de jours d'intégration                
 
 # Fréquence (en pas) de l'écriture du fichier de résultat
-# -- nombre de sorties total = nday*day_step/ecritphy/iphysiq
-# -- nombre de sorties / jour = day_step/ecritphy/iphysiq
+# -- nombre de sorties total = nday*day_step/ecritphy
+# -- nombre de sorties / jour = day_step/ecritphy
 
 # Nombre de pas d'intégration dynamique par jour
 
