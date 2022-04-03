@@ -8,11 +8,11 @@ import math
 # PARAMETRES A RENSEIGNER:
 #------------------------------------------------------------------
 # Distance moyenne de la planete d (en unites astronomiques):
-distUA = 1.
+distUA = 1.00
 # Excentricite de l'orbite e (Terre: e = 0.0167) :
 ecc = 0.0167
 # Longitude solaire du perihelie Lp (Terre: Lp = 283.) :
-Lp = 283.
+Lp = 283.0
 # Nombre de jours dans l'annee:
 #  (voir year_day dans reglages_init.txt)
 year_day = 365.
@@ -31,9 +31,9 @@ peri_day = year_day*(1.-xref/(2.*math.pi))
 if peri_day >= year_day:
     peri_day = peri_day - year_day
 
-print "peri_day = %.2f days" % (peri_day)
-print "periastr = %.2f UA" % (distUA*(1-ecc))
-print "apoastr  = %.2f UA" % (distUA*(1+ecc))
+print("peri_day = "+str(peri_day))
+print("periastr = "+str(distUA*(1-ecc)))
+print("apoastr  = "+str(distUA*(1+ecc)))
 
 # Remarque: equinoxe printemps date --date=3/20/2010 '+%j'
 #------------------------------------------------------------------
