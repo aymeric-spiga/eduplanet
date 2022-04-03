@@ -14,18 +14,19 @@ cat <<EOL
 ----------------------------------------------
        eduplanet quick setup menu
 
-> Setup a new simulation :
-  1) Default "billard ball" (nodyn)
-  2) Earth present day topo (nodyn)
-  3) Earth with slab ocean (nodyn)
-  4) Earth with specified supercontinent (nodyn)
-  5) Titan (notopo nodyn)
+> Setup a new simulation (nodyn)
+  1) Default "billard ball"
+  2) Earth present day topo
+  3) Earth with slab ocean
+  4) Earth with specified supercontinent
+  5) Titan
   9) Show available topographies
 > Apply a specific patch :
   71) Albedo feedback
   79) Disable all patches
-> Turn on the dynamical core
-  81) Default 32x32 setup
+> Turn on the dynamical core (dyn)
+  81) Earth 32x32x16
+  82) Titan 32x32x28
 > File operations :
   91) Clean simulation directories
 > 0) Exit
@@ -65,7 +66,8 @@ case $userchoice in
      svn revert physiq_mod.F90 
      cd $edufolder ;;
 #------------------------------------------------------------------
- 81) cat RUN/etu.def.dyn >> reglages_run.txt ;;
+ 81) cat RUN/etu.def.dyn.earth >> reglages_run.txt ;;
+ 82) cat RUN/etu.def.dyn.titan >> reglages_run.txt ;;
 #------------------------------------------------------------------
  91) find . -maxdepth 1 -type d -iname "exp_*" -print | \
        awk '{print NR"-> "$1}'

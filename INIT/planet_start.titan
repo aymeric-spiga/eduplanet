@@ -1,0 +1,41 @@
+0                    !! *
+y                    !! *
+1.5e5                !! <-- Pression de surface (Pa)
+1.e1                 !! *
+rad                  !! *
+2.575e6              !! <-- Rayon planetaire (m)
+g                    !! *  
+1.35                 !! <-- Acceleration gravite (m/s2)
+mugaz                !! *
+28.0                 !! <-- Masse molaire atmosphérique (g/mol)
+rcp                  !! *
+0.265                !! <-- Rapport r/cp (massiques)
+daysec               !! *
+1378080              !! <-- Duree du jour (s)
+omeg                 !! *
+-9999.               !! *
+year_day             !! *
+676                  !! <-- Duree d'une annee (jours)
+periastr             !! *
+9.04                 !! <-- Distance mini etoile-planete (UA)
+apoastr              !! *
+10.12                !! <-- Distance maxi etoile-planete (UA)
+peri_day             !! *
+532.91               !! <-- Date periastre (jours depuis printemps)
+obliquit             !! *
+26.7                 !! <-- Obliquite (degres)
+                  
+none              
+0.21                 !! <-- Albedo (sol nu, sans dimension)
+1000 	             !! <-- Inertie thermique (J/m-2/K-1/s-0.5)
+6695                 !! *
+flat                 !! *
+y                    !! *
+-9999.               !! *
+isotherm             !! *
+90                   !! <-- Temperature initiale (K)
+emis                 !! *
+0.9                  !! <-- Emissivite de la surface
+slab_ocean_0         !! *
+therm_ini_s          !! *
+
