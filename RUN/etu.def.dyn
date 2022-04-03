@@ -1,0 +1,11 @@
+
+#------------------------------------------------------------------
+# Default parameters for dyncore using 32x32 grid
+#------------------------------------------------------------------
+ecritphy = 480
+day_step = 240
+diurnal = .true.
+iphysiq = 5
+# Periode pour l'appel a Matsuno (en pas)
+iperiod = 5
+

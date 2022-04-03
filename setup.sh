@@ -19,11 +19,15 @@ cat <<EOL
   2) Earth present day topo (nodyn)
   3) Earth with slab ocean (nodyn)
   4) Earth with specified supercontinent (nodyn)
+  5) Titan (notopo nodyn)
   9) Show available topographies
 > Apply a specific patch :
   71) Albedo feedback
   79) Disable all patches
-> 91) Clean simulation directories
+> Turn on the dynamical core
+  81) Default 32x32 setup
+> File operations :
+  91) Clean simulation directories
 > 0) Exit
 ----------------------------------------------
 EOL
@@ -49,6 +53,10 @@ case $userchoice in
     cat INIT/compiler.default > reglages_compiler.txt
     cat RUN/gases.def.default > reglages_gases.txt
     cat RUN/etu.def.default > reglages_run.txt ;;
+ 5) cat INIT/planet_start.titan > reglages_init.txt
+    cat INIT/compiler.default > reglages_compiler.txt
+    cat RUN/gases.def.default > reglages_gases.txt
+    cat RUN/etu.def.titan > reglages_run.txt ;;
  9) cd INIT/DATAGENERIC
     ls surface_*.nc ;;
 #------------------------------------------------------------------
@@ -56,6 +64,8 @@ case $userchoice in
  79) cd ./$phystd
      svn revert physiq_mod.F90 
      cd $edufolder ;;
+#------------------------------------------------------------------
+ 81) cat RUN/etu.def.dyn >> reglages_run.txt ;;
 #------------------------------------------------------------------
  91) find . -maxdepth 1 -type d -iname "exp_*" -print | \
        awk '{print NR"-> "$1}'
@@ -68,6 +78,13 @@ case $userchoice in
   *) echo "Unknown option; Exiting;"
      exit ;;
 esac
+
+case $userchoice in
+ 8?) echo "Dynamical core setup was added to reglages_run.txt"
+     echo "Don't forget to change keydyn, keynx and keyny"
+     echo "  accordingly in reglages_compiler.txt" ;;
+esac
+
 
 # WORK IN PROGRESS : TRAPPIST
 #cp $thisfolder/INIT/DATAGENERIC/stellar_spectra/Flux_TRAPPIST1.txt $thisfolder/INIT/DATAGENERIC/stellar_spectra/Flux_TRAPPIST1.dat
