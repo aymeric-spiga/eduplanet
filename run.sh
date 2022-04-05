@@ -155,12 +155,18 @@ cd $thisfolder
 mkdir $dirname
 cp INIT/planet_start   $dirname/reglages_init.txt
 cp RUN/etu.def         $dirname/reglages_run.txt
+cp RUN/gases.def       $dirname/reglages_gases.txt
 cp $setupfile          $dirname/$setupfile
 sed 's/keyexp/'$dirname'/g' \
   TOOLS/atlas.ipynb >> $dirname/atlas.ipynb
 sed 's/keyexp/'$dirname'/g' \
   TOOLS/atlas-dyn.ipynb >> $dirname/atlas-dyn.ipynb
-cp -P RUN/* $dirname/.  2> /dev/null
+
+for ifile in callphys.def gcm.e run.def startfi.nc \
+  start.nc traceur.def z2sig.def gases.def etu.def ; do
+  cp -L RUN/$ifile $dirname/.  2> /dev/null
+done
+
 cp -r RUN/def_benj_earth $dirname/.
 cp -r RUN/def_saturn $dirname/.
 
