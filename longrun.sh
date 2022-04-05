@@ -6,16 +6,22 @@ if [ "`which qsub`" = "" ] ; then
   exit
 fi
 
+jobid=$$
+loginuser=`whoami`-$jobid
+sed 's/keyexpname/'$loginuser'/' longrun.qsub > longrun-$jobid.qsub
+
 echo "This script must be used to submit long runs to the cluster"
 echo "You are on "`hostname`
 echo "Here is the config file you are about to submit :"
-cat longrun.qsub
+echo "-----------------"
+cat longrun-$jobid.qsub
+echo "-----------------"
 echo "Do you want to continue ? (1=YES, 0=NO)"
 read answer
 
 if [ $answer -eq 1 ]
 then
-  qsub longrun.qsub
+  qsub longrun-$jobid.qsub
   echo "Job has been submitted :"
   qstat -u `whoami`
   echo "To see job status, use :"
