@@ -2,6 +2,7 @@
 
 edufolder=$PWD
 phystd="MODELES/LMDZ.GENERIC/libf/phystd/"
+userexit=0
 
 if [[ ! -e run.sh ]]
 then
@@ -10,7 +11,11 @@ then
   exit
 fi
 
-cat <<EOL
+#------------------------------------------------------------------
+while [ $userexit -eq 0 ]
+do
+  
+  cat <<EOL
 ----------------------------------------------
        eduplanet quick setup menu
 
@@ -28,65 +33,68 @@ cat <<EOL
   81) Earth 32x32x16
   82) Titan 32x32x28
 > File operations :
-  91) Clean simulation directories
+  91) Show folder sizes
+  92) Delete one folder
 > 0) Exit
 ----------------------------------------------
 EOL
+  
+  read userchoice
+  case $userchoice in
+   0) userexit=1 ;;
+   1) cat INIT/planet_start.earth > reglages_init.txt
+      cat INIT/compiler.default > reglages_compiler.txt
+      cat RUN/gases.def.default > reglages_gases.txt
+      cat RUN/etu.def.default > reglages_run.txt ;;
+   2) cat INIT/planet_start.earth.continents > reglages_init.txt
+      cat INIT/compiler.default > reglages_compiler.txt
+      cat RUN/gases.def.default > reglages_gases.txt
+      cat RUN/etu.def.default > reglages_run.txt ;;
+   3) cp $edufolder/INIT/newstart.F.ocean $edufolder/$phystd/newstart.F
+      cp $edufolder/INIT/iniphy.ocean $edufolder/$phystd/iniphysiq_mod.F90
+      cat INIT/planet_start.earth.continents > reglages_init.txt
+      cat RUN/etu.def.ocean > reglages_run.txt
+      cat RUN/gases.def.default > reglages_gases.txt
+      cat INIT/compiler.ocean > reglages_compiler.txt ;;
+   4) cat INIT/planet_start.earth.supercontinent > reglages_init.txt
+      cat INIT/compiler.default > reglages_compiler.txt
+      cat RUN/gases.def.default > reglages_gases.txt
+      cat RUN/etu.def.default > reglages_run.txt ;;
+   5) cat INIT/planet_start.titan > reglages_init.txt
+      cat INIT/compiler.default > reglages_compiler.txt
+      cat RUN/gases.def.default > reglages_gases.txt
+      cat RUN/etu.def.titan > reglages_run.txt ;;
+   9) cd INIT/DATAGENERIC
+      ls surface_*.nc ;;
+  #----------------------------------------------------------------
+   71) patch ./$phystd/physiq_mod.F90 < PLUG-INS/icealbedo.patch ;;
+   79) cd ./$phystd
+       svn revert physiq_mod.F90 
+       cd $edufolder ;;
+  #----------------------------------------------------------------
+   81) cat RUN/etu.def.dyn.earth >> reglages_run.txt ;;
+   82) cat RUN/etu.def.dyn.titan >> reglages_run.txt ;;
+  #----------------------------------------------------------------
+   91) du -hs exp_* | sort -rn ;;
+   92) find . -maxdepth 1 -type d -iname "exp_*" -print | \
+         awk '{print NR"-> "$1}'
+       echo "Which folder do you want to delete ?"
+       read delnumber
+       deldirname=`find . -maxdepth 1 -type d -iname "exp_*" -print | \
+         awk -v linenb=$delnumber 'NR==linenb {print $1}'`
+       rm -frv $deldirname ;;
+  #----------------------------------------------------------------
+    *) echo "Unknown option;" ;;
+  esac
+  
+  case $userchoice in
+   8?) echo "Dynamical core setup was added to reglages_run.txt"
+       echo "Don't forget to change keydyn, keynx and keyny"
+       echo "  accordingly in reglages_compiler.txt" ;;
+  esac
 
-read userchoice
-case $userchoice in
- 0) exit ;;
- 1) cat INIT/planet_start.earth > reglages_init.txt
-    cat INIT/compiler.default > reglages_compiler.txt
-    cat RUN/gases.def.default > reglages_gases.txt
-    cat RUN/etu.def.default > reglages_run.txt ;;
- 2) cat INIT/planet_start.earth.continents > reglages_init.txt
-    cat INIT/compiler.default > reglages_compiler.txt
-    cat RUN/gases.def.default > reglages_gases.txt
-    cat RUN/etu.def.default > reglages_run.txt ;;
- 3) cp $edufolder/INIT/newstart.F.ocean $edufolder/$phystd/newstart.F
-    cp $edufolder/INIT/iniphy.ocean $edufolder/$phystd/iniphysiq_mod.F90
-    cat INIT/planet_start.earth.continents > reglages_init.txt
-    cat RUN/etu.def.ocean > reglages_run.txt
-    cat RUN/gases.def.default > reglages_gases.txt
-    cat INIT/compiler.ocean > reglages_compiler.txt ;;
- 4) cat INIT/planet_start.earth.supercontinent > reglages_init.txt
-    cat INIT/compiler.default > reglages_compiler.txt
-    cat RUN/gases.def.default > reglages_gases.txt
-    cat RUN/etu.def.default > reglages_run.txt ;;
- 5) cat INIT/planet_start.titan > reglages_init.txt
-    cat INIT/compiler.default > reglages_compiler.txt
-    cat RUN/gases.def.default > reglages_gases.txt
-    cat RUN/etu.def.titan > reglages_run.txt ;;
- 9) cd INIT/DATAGENERIC
-    ls surface_*.nc ;;
+done
 #------------------------------------------------------------------
- 71) patch ./$phystd/physiq_mod.F90 < PLUG-INS/icealbedo.patch ;;
- 79) cd ./$phystd
-     svn revert physiq_mod.F90 
-     cd $edufolder ;;
-#------------------------------------------------------------------
- 81) cat RUN/etu.def.dyn.earth >> reglages_run.txt ;;
- 82) cat RUN/etu.def.dyn.titan >> reglages_run.txt ;;
-#------------------------------------------------------------------
- 91) find . -maxdepth 1 -type d -iname "exp_*" -print | \
-       awk '{print NR"-> "$1}'
-     echo "Which folder do you want to delete ?"
-     read delnumber
-     deldirname=`find . -maxdepth 1 -type d -iname "exp_*" -print | \
-       awk -v linenb=$delnumber 'NR==linenb {print $1}'`
-     rm -frv $deldirname ;;
-#------------------------------------------------------------------
-  *) echo "Unknown option; Exiting;"
-     exit ;;
-esac
-
-case $userchoice in
- 8?) echo "Dynamical core setup was added to reglages_run.txt"
-     echo "Don't forget to change keydyn, keynx and keyny"
-     echo "  accordingly in reglages_compiler.txt" ;;
-esac
-
 
 # WORK IN PROGRESS : TRAPPIST
 #cp $thisfolder/INIT/DATAGENERIC/stellar_spectra/Flux_TRAPPIST1.txt $thisfolder/INIT/DATAGENERIC/stellar_spectra/Flux_TRAPPIST1.dat
