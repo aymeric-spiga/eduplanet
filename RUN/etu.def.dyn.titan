@@ -1,6 +1,6 @@
 
 #------------------------------------------------------------------
-# Default parameters for dyncore using 32x32 grid
+# Parameters for Titan dyncore (16x16 or 32x32 grid)
 #------------------------------------------------------------------
 ecritphy = 4000
 day_step = 16000

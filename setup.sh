@@ -42,8 +42,8 @@ do
   71) Albedo feedback
   79) Disable all patches
 > Turn on the dynamical core (dyn)
-  81) Earth 32x32x16
-  82) Titan 32x32x28
+  81) Earth 16x16x16 or 32x32x16
+  82) Titan 16x16x28 or 32x32x28
 > File operations :
   91) Show folder sizes
   92) Delete one folder

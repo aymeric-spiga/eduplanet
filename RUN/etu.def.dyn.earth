@@ -1,6 +1,6 @@
 
 #------------------------------------------------------------------
-# Default parameters for dyncore using 32x32 grid
+# Parameters for Earth dyncore (16x16 or 32x32 grid)
 #------------------------------------------------------------------
 ecritphy = 480
 day_step = 240
