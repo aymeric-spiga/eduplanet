@@ -11,6 +11,18 @@ then
   exit
 fi
 
+# Functions
+#------------------------------------------------------------------
+select_folder () {
+  local delnumber
+  local linenb
+  find . -maxdepth 1 -type d -iname "exp_*" -print | \
+         awk '{print NR"-> "$1}'
+  read delnumber
+  selectdir=`find . -maxdepth 1 -type d -iname "exp_*" -print | \
+    awk -v linenb=$delnumber 'NR==linenb {print $1}'`
+}
+
 #------------------------------------------------------------------
 while [ $userexit -eq 0 ]
 do
@@ -35,6 +47,7 @@ do
 > File operations :
   91) Show folder sizes
   92) Delete one folder
+  93) Restart from previous run
 > 0) Exit
 ----------------------------------------------
 EOL
@@ -76,13 +89,13 @@ EOL
    82) cat RUN/etu.def.dyn.titan >> reglages_run.txt ;;
   #----------------------------------------------------------------
    91) du -hs exp_* | sort -rn ;;
-   92) find . -maxdepth 1 -type d -iname "exp_*" -print | \
-         awk '{print NR"-> "$1}'
-       echo "Which folder do you want to delete ?"
-       read delnumber
-       deldirname=`find . -maxdepth 1 -type d -iname "exp_*" -print | \
-         awk -v linenb=$delnumber 'NR==linenb {print $1}'`
-       rm -frv $deldirname ;;
+   92) echo "Which folder do you want to delete ?"
+       select_folder
+       rm -frv $selectdir ;;
+   93) echo "Which run do you want to use ?"
+       select_folder
+       sed -i "/exp_/c $selectdir" reglages_restart.txt
+       cat reglages_restart.txt ;;
   #----------------------------------------------------------------
     *) echo "Unknown option;" ;;
   esac
