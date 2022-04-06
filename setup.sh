@@ -1,7 +1,10 @@
 #!/bin/bash
 
 edufolder=$PWD
-phystd="MODELES/LMDZ.GENERIC/libf/phystd/"
+codedir="MODELES/LMDZ.GENERIC/"
+deftank="$codedir/deftank/"
+phystd="$codedir/libf/phystd/"
+datagen="RUN/DATAGENERIC/"
 userexit=0
 
 if [[ ! -e run.sh ]]
@@ -37,6 +40,7 @@ do
   3) Earth with slab ocean
   4) Earth with specified supercontinent
   5) Titan
+  6) Trappist
   9) Show available topographies
 > Apply a specific patch :
   71) Albedo feedback
@@ -63,6 +67,7 @@ EOL
       cat INIT/compiler.default > reglages_compiler.txt
       cat RUN/gases.def.default > reglages_gases.txt
       cat RUN/etu.def.default > reglages_run.txt ;;
+   # CONFIG 3 A VALIDER
    3) cp $edufolder/INIT/newstart.F.ocean $edufolder/$phystd/newstart.F
       cp $edufolder/INIT/iniphy.ocean $edufolder/$phystd/iniphysiq_mod.F90
       cat INIT/planet_start.earth.continents > reglages_init.txt
@@ -77,6 +82,12 @@ EOL
       cat INIT/compiler.default > reglages_compiler.txt
       cat RUN/gases.def.default > reglages_gases.txt
       cat RUN/etu.def.titan > reglages_run.txt ;;
+   6) cp -v $deftank/stellar_spectra/Flux_TRAPPIST1.dat $datagen/stellar_spectra/. 
+      cp -v $deftank/stellar_spectra/lambda_TRAPPIST1.dat $datagen/stellar_spectra/. 
+      cat INIT/planet_start.trappist > reglages_init.txt
+      cat INIT/compiler.default > reglages_compiler.txt
+      cat RUN/gases.def.default > reglages_gases.txt
+      cat RUN/etu.def.trappist > reglages_run.txt ;;
    9) cd INIT/DATAGENERIC
       ls surface_*.nc ;;
   #----------------------------------------------------------------
