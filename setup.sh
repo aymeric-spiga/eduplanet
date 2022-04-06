@@ -95,7 +95,15 @@ EOL
    93) echo "Which run do you want to use ?"
        select_folder
        sed -i "/exp_/c $selectdir" reglages_restart.txt
-       cat reglages_restart.txt ;;
+       echo "Do you also want to restore the same settings ?"
+       echo "(1 = yes, 0 = no)"
+       read answer
+       if [ $answer -eq 1 ] ; then
+         cat $selectdir/reglages_init.txt > reglages_init.txt
+         cat $selectdir/reglages_compiler.txt > reglages_compiler.txt
+         cat $selectdir/reglages_gases.txt > reglages_gases.txt
+         cat $selectdir/reglages_run.txt  > reglages_run.txt
+       fi ;;
   #----------------------------------------------------------------
     *) echo "Unknown option;" ;;
   esac

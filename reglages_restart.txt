@@ -1,3 +1,4 @@
-exp_default_2022-03-22_18-02-40
-# Ce fichier doit comporter sur la premiere ligne le
-# dossier de la simulation utilisee pour l'option isrestart
+./exp_default_2022-04-04_12-37-57
+# Please write the folder name of the simulation
+# you want to continue and where the start files
+# can be found ;
