@@ -7,7 +7,7 @@ phystd="$codedir/libf/phystd/"
 datagen="RUN/DATAGENERIC/"
 userexit=0
 
-if [[ ! -e run.sh ]]
+if [[ ! -f run.sh ]]
 then
   echo "Make sure you run this script from the eduplanet root"
   echo "directory, alongside the run.sh file, using ./setup.sh"
@@ -44,6 +44,7 @@ do
   9) Show available topographies
 > Setup tools :
   61) Compute orbital parameters
+  62) Change albedo of continents
 > Apply a specific patch :
   71) Albedo feedback
   79) Disable all patches
@@ -95,6 +96,27 @@ EOL
       ls surface_*.nc ;;
   #----------------------------------------------------------------
    61) python TOOLS/peri_day.py ;;
+   62) topofile=`grep "surface_" reglages_init.txt | head -n 1`
+       newfile="surface_user-settings.nc"
+       if [ -f $datagen/$topofile ] ; then
+         echo $topofile" found ;"
+         echo "Which albedo to you want to set on continents ?"
+         read newalb
+         ncap2 -O -s "where(thermal < 18000.) albedo=$newalb" \
+           $datagen/$topofile $datagen/$newfile
+         if [ -f $datagen/$newfile ] ; then
+           echo "New file can be found in $datagen/$newfile"
+           if ! [ -x "$(command -v ncview)" ]; then
+             echo "Install ncview if you want to check the new file"
+           else
+             ncview -no_auto_overlay $datagen/$newfile > /dev/null 2>&1 &
+           fi
+         else
+           echo "New file not created ; there's been a problem"
+         fi
+       else
+         echo "No topo file set in reglages_init.txt"
+       fi ;;
   #----------------------------------------------------------------
    71) patch ./$phystd/physiq_mod.F90 < PLUG-INS/icealbedo.patch ;;
    79) cd ./$phystd
