@@ -7,15 +7,16 @@ import math
 
 # PARAMETRES A RENSEIGNER:
 #------------------------------------------------------------------
-# Distance moyenne de la planete d (en unites astronomiques):
-distUA = 1.00
-# Excentricite de l'orbite e (Terre: e = 0.0167) :
-ecc = 0.0167
-# Longitude solaire du perihelie Lp (Terre: Lp = 283.) :
-Lp = 283.0
-# Nombre de jours dans l'annee:
-#  (voir year_day dans reglages_init.txt)
-year_day = 365.
+
+distUA = input("Mean distance to star in astro unit (Earth 1.0):")
+distUA = float(distUA)
+ecc = input("Orbit's excentricity (Earth e = 0.0167 ):")
+ecc = float(ecc)
+Lp = input("Solar longitude of perihelion (Earth Lp = 283. ):")
+Lp = float(Lp)
+year_day = input("Number of days in a year (Earth year_day = 365 ):")
+year_day = float(year_day)
+
 #------------------------------------------------------------------
 #------------------------------------------------------------------
 # CALCULS ET AFFICHAGE DES RESULTATS - !!! NE PAS MODIFIER !!!

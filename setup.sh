@@ -42,6 +42,8 @@ do
   5) Titan
   6) Trappist
   9) Show available topographies
+> Setup tools :
+  61) Compute orbital parameters
 > Apply a specific patch :
   71) Albedo feedback
   79) Disable all patches
@@ -90,6 +92,8 @@ EOL
       cat RUN/etu.def.trappist > reglages_run.txt ;;
    9) cd INIT/DATAGENERIC
       ls surface_*.nc ;;
+  #----------------------------------------------------------------
+   61) python TOOLS/peri_day.py ;;
   #----------------------------------------------------------------
    71) patch ./$phystd/physiq_mod.F90 < PLUG-INS/icealbedo.patch ;;
    79) cd ./$phystd
