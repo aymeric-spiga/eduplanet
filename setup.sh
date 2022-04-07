@@ -106,11 +106,6 @@ EOL
            $datagen/$topofile $datagen/$newfile
          if [ -f $datagen/$newfile ] ; then
            echo "New file can be found in $datagen/$newfile"
-           if ! [ -x "$(command -v ncview)" ]; then
-             echo "Install ncview if you want to check the new file"
-           else
-             ncview -no_auto_overlay $datagen/$newfile > /dev/null 2>&1 &
-           fi
          else
            echo "New file not created ; there's been a problem"
          fi
