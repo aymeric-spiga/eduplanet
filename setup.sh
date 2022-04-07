@@ -54,6 +54,7 @@ do
   91) Show folder sizes
   92) Delete one folder
   93) Restart from previous run
+  94) Recap all settings
 > 0) Exit
 ----------------------------------------------
 EOL
@@ -119,6 +120,11 @@ EOL
          cat $selectdir/reglages_gases.txt > reglages_gases.txt
          cat $selectdir/reglages_run.txt  > reglages_run.txt
        fi ;;
+   94) for ifile in reglages_*.txt ; do
+         echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> "$ifile":"
+         cat $ifile
+         echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> end"
+       done ;;
   #----------------------------------------------------------------
     *) echo "Unknown option;" ;;
   esac
