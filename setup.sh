@@ -47,6 +47,7 @@ do
   62) Change albedo of continents
 > Apply a specific patch :
   71) Albedo feedback
+  72) Add radiative fluxes to outputs
   79) Disable all patches
 > Turn on the dynamical core (dyn)
   81) Earth 16x16x16 or 32x32x16
@@ -114,6 +115,7 @@ EOL
        fi ;;
   #----------------------------------------------------------------
    71) patch ./$phystd/physiq_mod.F90 < PLUG-INS/icealbedo.patch ;;
+   72) patch ./$phystd/physiq_mod.F90 < PLUG-INS/radfluxes.patch ;;
    79) cd ./$phystd
        svn revert physiq_mod.F90 
        cd $edufolder ;;
