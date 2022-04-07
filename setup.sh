@@ -41,6 +41,7 @@ do
   4) Earth with specified supercontinent
   5) Titan
   6) Trappist
+  7) Mars
   9) Show available topographies
 > Setup tools :
   61) Compute orbital parameters
@@ -93,6 +94,10 @@ EOL
       cat INIT/compiler.default > reglages_compiler.txt
       cat RUN/gases.def.default > reglages_gases.txt
       cat RUN/etu.def.trappist > reglages_run.txt ;;
+   7) cat INIT/planet_start.mars.continents > reglages_init.txt
+      cat INIT/compiler.default > reglages_compiler.txt
+      cat RUN/gases.def.default > reglages_gases.txt
+      cat RUN/etu.def.default > reglages_run.txt ;;
    9) cd INIT/DATAGENERIC
       ls surface_*.nc ;;
   #----------------------------------------------------------------
