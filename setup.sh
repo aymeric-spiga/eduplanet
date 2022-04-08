@@ -141,6 +141,7 @@ EOL
        if [ $answer -eq 1 ] ; then
          cat $selectdir/reglages_init.txt > reglages_init.txt
          cat $selectdir/reglages_compiler.txt > reglages_compiler.txt
+	 sed -i '3 s/0/1/' reglages_compiler.txt
          cat $selectdir/reglages_gases.txt > reglages_gases.txt
          cat $selectdir/reglages_run.txt  > reglages_run.txt
        fi ;;
