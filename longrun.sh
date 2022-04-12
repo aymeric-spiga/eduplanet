@@ -9,6 +9,7 @@ fi
 jobid=$$
 loginuser=`whoami`-$jobid
 sed 's/keyexpname/'$loginuser'/' longrun.qsub > longrun-$jobid.qsub
+cat reglages_compiler.txt > longrun-$jobid.compiler
 
 echo "This script must be used to submit long runs to the cluster"
 echo "You are on "`hostname`
