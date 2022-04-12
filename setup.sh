@@ -54,6 +54,7 @@ do
 > Turn on the dynamical core (dyn)
   81) Earth 16x16x16 or 32x32x16
   82) Titan 16x16x28 or 32x32x28
+  83) Trappist 16x16x28 or 32x32x28
 > File operations :
   91) Show folder sizes
   92) Delete one folder
@@ -134,6 +135,7 @@ EOL
   #----------------------------------------------------------------
    81) cat RUN/etu.def.dyn.earth >> reglages_run.txt ;;
    82) cat RUN/etu.def.dyn.titan >> reglages_run.txt ;;
+   83) cat RUN/etu.def.dyn.trappist >> reglages_run.txt ;;
   #----------------------------------------------------------------
    91) du -hs exp_* | sort -rn ;;
    92) echo "Which folder do you want to delete ?"
