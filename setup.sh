@@ -88,7 +88,10 @@ EOL
       cat RUN/etu.def.default > reglages_run.txt 
       echo "Solar constant value at 1 astronomical unit ?"
       read Fat1AU
-      sed -i "s/Fat1AU = 1366.0/Fat1AU = $Fat1AU/" reglages_run.txt ;;
+      # comment lines that contain Fat1AU
+      sed -i '/Fat1AU/ s/^#*/#/' reglages_run.txt
+      # add the wanted value after each occurrence
+      sed -i "/Fat1AU/a Fat1AU = $Fat1AU" reglages_run.txt ;;
    5) cat INIT/planet_start.titan > reglages_init.txt
       cat INIT/compiler.titan > reglages_compiler.txt
       cat RUN/gases.def.default > reglages_gases.txt
@@ -125,7 +128,9 @@ EOL
        fi ;;
    63) echo "New obliquity ?"
        read obliquit
-       sed -i "26 s/^.*/$obliquit/" reglages_init.txt ;;
+       sed -i \
+         "/obliquit/{n;s/.*/$obliquit !! <-- Obliquite (degres)/}" \
+         reglages_init.txt ;;
   #----------------------------------------------------------------
    71) patch ./$phystd/physiq_mod.F90 < PLUG-INS/icealbedo.patch ;;
    72) patch ./$phystd/physiq_mod.F90 < PLUG-INS/radfluxes.patch ;;
@@ -150,7 +155,7 @@ EOL
        if [ $answer -eq 1 ] ; then
          cat $selectdir/reglages_init.txt > reglages_init.txt
          cat $selectdir/reglages_compiler.txt > reglages_compiler.txt
-	 sed -i '3 s/0/1/' reglages_compiler.txt
+         sed -i '/keydyn/ s/^0/1/' reglages_compiler.txt 
          cat $selectdir/reglages_gases.txt > reglages_gases.txt
          cat $selectdir/reglages_run.txt  > reglages_run.txt
        fi ;;
