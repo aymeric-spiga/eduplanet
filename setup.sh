@@ -89,7 +89,7 @@ EOL
       read Fat1AU
       sed -i "s/Fat1AU = 1366.0/Fat1AU = $Fat1AU/" reglages_run.txt ;;
    5) cat INIT/planet_start.titan > reglages_init.txt
-      cat INIT/compiler.default > reglages_compiler.txt
+      cat INIT/compiler.titan > reglages_compiler.txt
       cat RUN/gases.def.default > reglages_gases.txt
       cat RUN/etu.def.titan > reglages_run.txt ;;
    6) cp -v $deftank/stellar_spectra/Flux_TRAPPIST1.dat $datagen/stellar_spectra/. 
