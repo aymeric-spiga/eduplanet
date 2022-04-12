@@ -46,6 +46,7 @@ do
 > Setup tools :
   61) Compute orbital parameters
   62) Change albedo of continents
+  63) Change obliquity
 > Apply a specific patch :
   71) Albedo feedback
   72) Add radiative fluxes to outputs
@@ -83,7 +84,10 @@ EOL
    4) cat INIT/planet_start.earth.supercontinent > reglages_init.txt
       cat INIT/compiler.default > reglages_compiler.txt
       cat RUN/gases.def.default > reglages_gases.txt
-      cat RUN/etu.def.default > reglages_run.txt ;;
+      cat RUN/etu.def.default > reglages_run.txt 
+      echo "Solar constant value at 1 astronomical unit ?"
+      read Fat1AU
+      sed -i "s/Fat1AU = 1366.0/Fat1AU = $Fat1AU/" reglages_run.txt ;;
    5) cat INIT/planet_start.titan > reglages_init.txt
       cat INIT/compiler.default > reglages_compiler.txt
       cat RUN/gases.def.default > reglages_gases.txt
@@ -118,6 +122,9 @@ EOL
        else
          echo "No topo file set in reglages_init.txt"
        fi ;;
+   63) echo "New obliquity ?"
+       read obliquit
+       sed -i "26 s/^.*/$obliquit/" reglages_init.txt ;;
   #----------------------------------------------------------------
    71) patch ./$phystd/physiq_mod.F90 < PLUG-INS/icealbedo.patch ;;
    72) patch ./$phystd/physiq_mod.F90 < PLUG-INS/radfluxes.patch ;;
