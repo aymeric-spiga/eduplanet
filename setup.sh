@@ -41,6 +41,7 @@ do
   2 > Earth present day topo
   3 > Earth + water cycle
   4 > Earth + water cycle + slab ocean
+      (ongoing work...)
   5 > Earth with specified supercontinent
   6 > Titan
   7 > Trappist
