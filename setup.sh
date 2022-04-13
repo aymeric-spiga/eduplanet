@@ -5,6 +5,8 @@ codedir="MODELES/LMDZ.GENERIC/"
 deftank="$codedir/deftank/"
 phystd="$codedir/libf/phystd/"
 datagen="RUN/DATAGENERIC/"
+corrkwww="https://web.lmd.jussieu.fr/~mturbet/eduplanet/corrk_data/"
+
 userexit=0
 
 if [[ ! -f run.sh ]]
@@ -149,10 +151,6 @@ EOL
       esac
       #### download corrk_data
       case $gasmixnb in
-        1) corrkwww="https://web.lmd.jussieu.fr/~jnaar/eduplanet/corrk_data/" ;;
-        [2-9]*) corrkwww="https://web.lmd.jussieu.fr/~mturbet/eduplanet/corrk_data/" ;;
-      esac
-      case $gasmixnb in
         [1-9]*) cd $datagen"/corrk_data"
            if [[ ! (-d "$gasmix") ]] ; then
              wget $corrkwww"/"$gasmix".zip"
@@ -163,6 +161,9 @@ EOL
            fi
            cd $edufolder
            #### setup etu.def
+           echo "" >> reglages_run.txt
+           echo "# Radiative transfer setup" >> reglages_run.txt
+           echo "#   "$gasmix >> reglages_run.txt
            echo "corrkdir = $gasmix" >> reglages_run.txt
            echo "graybody = .false." >> reglages_run.txt
            #### setup gases.def
