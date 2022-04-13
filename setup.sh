@@ -251,8 +251,6 @@ EOL
        echo "  accordingly in reglages_compiler.txt" ;;
   esac
   
-  # slight delay to read messages
-  sleep 0.4
 done
 #------------------------------------------------------------------
 
