@@ -1,5 +1,5 @@
 # Nombre de jours d'intégration                
-nday = 1825
+nday = 2007
 
 # Periode d'appel a la physique (en pas)
 iphysiq = 1
