@@ -163,7 +163,7 @@ EOL
       case $gasmixnb in
         [1-9]*) cd $datagen"/corrk_data"
            if [[ ! (-d "$gasmix") ]] ; then
-             wget $corrkwww"/"$gasmix".zip"
+             wget --no-check-certificate $corrkwww"/"$gasmix".zip"
              unzip $gasmix".zip"
              rm -fv $gasmix".zip"
            else
