@@ -39,11 +39,12 @@ do
 > Setup a new simulation (nodyn)
   1 > Default "billard ball"
   2 > Earth present day topo
-  3 > Earth with slab ocean
-  4 > Earth with specified supercontinent
-  5 > Titan
-  6 > Trappist
-  7 > Mars
+  3 > Earth + water cycle
+  4 > Earth + slab ocean
+  5 > Earth with specified supercontinent
+  6 > Titan
+  7 > Trappist
+  8 > Mars
   9 > Show available topographies
 > Radiative transfer setup
   51 > Greenhouse gases
@@ -79,14 +80,20 @@ EOL
       cat INIT/compiler.default > reglages_compiler.txt
       cat RUN/gases.def.default > reglages_gases.txt
       cat RUN/etu.def.default > reglages_run.txt ;;
-   # CONFIG 3 A VALIDER
-   3) cp $edufolder/INIT/newstart.F.ocean $edufolder/$phystd/newstart.F
+   3) cat INIT/planet_start.earth.continents > reglages_init.txt
+      cat INIT/compiler.default > reglages_compiler.txt
+      cat RUN/gases.def.default > reglages_gases.txt
+      cat RUN/etu.def.default > reglages_run.txt
+      cat RUN/etu.def.watercycle >> reglages_run.txt
+      echo "Don't forget to turn on the dynamical core" && sleep 2 ;;
+   # CONFIG 4 A VALIDER
+   4) cp $edufolder/INIT/newstart.F.ocean $edufolder/$phystd/newstart.F
       cp $edufolder/INIT/iniphy.ocean $edufolder/$phystd/iniphysiq_mod.F90
       cat INIT/planet_start.earth.continents > reglages_init.txt
       cat RUN/etu.def.ocean > reglages_run.txt
       cat RUN/gases.def.default > reglages_gases.txt
       cat INIT/compiler.ocean > reglages_compiler.txt ;;
-   4) cat INIT/planet_start.earth.supercontinent > reglages_init.txt
+   5) cat INIT/planet_start.earth.supercontinent > reglages_init.txt
       cat INIT/compiler.default > reglages_compiler.txt
       cat RUN/gases.def.default > reglages_gases.txt
       cat RUN/etu.def.default > reglages_run.txt 
@@ -96,17 +103,17 @@ EOL
       sed -i '/Fat1AU/ s/^#*/#/' reglages_run.txt
       # add the wanted value after each occurrence
       sed -i "/Fat1AU/a Fat1AU = $Fat1AU" reglages_run.txt ;;
-   5) cat INIT/planet_start.titan > reglages_init.txt
+   6) cat INIT/planet_start.titan > reglages_init.txt
       cat INIT/compiler.titan > reglages_compiler.txt
       cat RUN/gases.def.default > reglages_gases.txt
       cat RUN/etu.def.titan > reglages_run.txt ;;
-   6) cp -v $deftank/stellar_spectra/Flux_TRAPPIST1.dat $datagen/stellar_spectra/. 
+   7) cp -v $deftank/stellar_spectra/Flux_TRAPPIST1.dat $datagen/stellar_spectra/. 
       cp -v $deftank/stellar_spectra/lambda_TRAPPIST1.dat $datagen/stellar_spectra/. 
       cat INIT/planet_start.trappist > reglages_init.txt
       cat INIT/compiler.default > reglages_compiler.txt
       cat RUN/gases.def.default > reglages_gases.txt
       cat RUN/etu.def.trappist > reglages_run.txt ;;
-   7) cat INIT/planet_start.mars.continents > reglages_init.txt
+   8) cat INIT/planet_start.mars.continents > reglages_init.txt
       cat INIT/compiler.default > reglages_compiler.txt
       cat RUN/gases.def.default > reglages_gases.txt
       cat RUN/etu.def.default > reglages_run.txt ;;

@@ -1,0 +1,23 @@
+
+## -----------------
+## Model water cycle
+water         = .true.
+## Model water cloud formation
+watercond     = .true.
+## Model water precipitation (including coagulation etc.)
+waterrain     = .true.
+## Use simple precipitation scheme?
+precip_scheme=4
+## multiplicative constant in Boucher 95 precip scheme
+Cboucher=0.6
+## Include hydrology ?
+hydrology     = .true.
+## active runoff ?
+activerunoff  = .true.
+## H2O snow (and ice) albedo ?
+albedosnow    = 0.65
+## Maximum sea ice thickness ?
+maxicethick   = 10.
+## Freezing point of seawater (degrees C) ?
+Tsaldiff      = 0.0
+
