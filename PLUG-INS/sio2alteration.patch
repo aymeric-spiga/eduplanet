@@ -1,0 +1,47 @@
+Index: physiq_mod.F90
+===================================================================
+--- physiq_mod.F90	(révision 2484)
++++ physiq_mod.F90	(copie de travail)
+@@ -435,6 +435,11 @@
+       real :: flux_o(ngrid),flux_g(ngrid),fluxgrdocean(ngrid)
+       real :: flux_sens_lat(ngrid)
+       real :: qsurfint(ngrid,nq)
++
++! sio2alteration silicate alteration
++      real :: Rf, mmolCO2,mmatm,Matm,  rate,  MCO2
++      real :: rCO2(ngrid)
++
+ #ifdef MESOSCALE 
+       REAL :: lsf_dt(nlayer)
+       REAL :: lsf_dq(nlayer)
+@@ -1741,6 +1746,18 @@
+          
+       endif !end of 'ok_slab_ocean'
+ 
++      ! sio2alteration computation of silicate alteration
++      ! after https://doi.org/10.1016/j.chemgeo.2002.10.001
++      Rf = 424. ! mm/yr
++      mmolCO2 = 44. ! g/mol
++      mmatm = 28.96 ! g/mol
++      Matm = 5.3E18 ! kg
++      do ig=1,ngrid
++        rate = Rf*323.44*exp(0.0642*(tsurf(ig)-273.15)) * cell_area(ig)*1E-6 ! mol/yr
++        !rate = Rf*323.44*exp(0.0642*(tsurf(ig)-273.15)) * 0.532E6 ! mol/yr
++        MCO2 = rate * mmolCO2 * 1E-3 ! kg/yr
++        rCO2(ig) = MCO2/Matm*mmatm/mmolCO2 * 1E6 ! ppm/yr
++      enddo
+ 
+       ! Test energy conservation
+       if(enertest)then
+@@ -2179,6 +2196,11 @@
+          call writediagfi(ngrid,"ISR","incoming stellar rad.","W m-2",2,fluxtop_dn)
+          call writediagfi(ngrid,"ASR","absorbed stellar rad.","W m-2",2,fluxabs_sw)
+          call writediagfi(ngrid,"OLR","outgoing longwave rad.","W m-2",2,fluxtop_lw)
++
++         ! sio2alteration Silicate alteration
++         call writediagfi(ngrid,"rCO2","CO2 consumption","ppm/yr",2,rCO2)
++         call writediagfi(ngrid,"area","cell area","m2",2,cell_area)
++
+          call writediagfi(ngrid,"shad","rings"," ", 2, fract)
+          
+ !           call writediagfi(ngrid,"ASRcs","absorbed stellar rad (cs).","W m-2",2,fluxabs_sw1)

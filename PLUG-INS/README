@@ -53,3 +53,9 @@ dans un intervalle de température donné.
 > patch ../MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90 < darkcity.patch
 -------------------------------------------------
 
+sio2alteration.patch (last update: SVN release 2484)
+-------------------------------------------------
+Calcul le taux d'altération des silicates dans une variable rCO2 (en ppm/yr)
+> patch ../MODELES/LMDZ.GENERIC/libf/phystd/physiq_mod.F90 < sio2alteration.patch
+-------------------------------------------------
+
