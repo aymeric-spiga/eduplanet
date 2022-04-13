@@ -35,32 +35,34 @@ do
        eduplanet quick setup menu
 
 > Setup a new simulation (nodyn)
-  1) Default "billard ball"
-  2) Earth present day topo
-  3) Earth with slab ocean
-  4) Earth with specified supercontinent
-  5) Titan
-  6) Trappist
-  7) Mars
-  9) Show available topographies
+  1 > Default "billard ball"
+  2 > Earth present day topo
+  3 > Earth with slab ocean
+  4 > Earth with specified supercontinent
+  5 > Titan
+  6 > Trappist
+  7 > Mars
+  9 > Show available topographies
+> Radiative transfer setup
+  51 > Greenhouse gases
 > Setup tools :
-  61) Compute orbital parameters
-  62) Change albedo of continents
-  63) Change obliquity
+  61 > Compute orbital parameters
+  62 > Change albedo of continents
+  63 > Change obliquity
 > Apply a specific patch :
-  71) Albedo feedback
-  72) Add radiative fluxes to outputs
-  79) Disable all patches
+  71 > Albedo feedback
+  72 > Add radiative fluxes to outputs
+  79 > Disable all patches
 > Turn on the dynamical core (dyn)
-  81) Earth 16x16x16 or 32x32x16
-  82) Titan 16x16x28 or 32x32x28
-  83) Trappist 16x16x28 or 32x32x28
+  81 > Earth 16x16x16 or 32x32x16
+  82 > Titan 16x16x28 or 32x32x28
+  83 > Trappist 16x16x28 or 32x32x28
 > File operations :
-  91) Show folder sizes
-  92) Delete one folder
-  93) Restart from previous run
-  94) Recap all settings
-> 0) Exit
+  91 > Show folder sizes
+  92 > Delete one folder
+  93 > Restart from previous run
+  94 > Recap all settings
+> 0 > Exit
 ----------------------------------------------
 EOL
   
@@ -107,7 +109,81 @@ EOL
       cat RUN/gases.def.default > reglages_gases.txt
       cat RUN/etu.def.default > reglages_run.txt ;;
    9) cd INIT/DATAGENERIC
-      ls surface_*.nc ;;
+      ls surface_*.nc 
+      cd $edufolder ;;
+  #----------------------------------------------------------------
+   51) cat <<EOL
+      1 > earth
+      2 > megaCO2
+      3 > Earth_1mbarH2O (not available yet)
+      4 > Earth_0.1mbarH2O (not available yet)
+      5 > Earth_10mbarH2O (not available yet)
+      6 > Earth_100mbCO2_1mbH2O (not available yet)
+      7 > Earth_100mbCO2_2mbCH4_1mbH2O (not available yet)
+      8 > Earth_900ppmCO2_1mbH2O
+      9 > Earth_900ppmCO2_900ppmCH4_1mbH2O (not available yet)
+      ----
+      Please select a gas mix :
+EOL
+      read gasmixnb
+      case $gasmixnb in
+        1) gasmix="earth"
+           echo $gasmix ;;
+        2) gasmix="megaCO2"
+           echo $gasmix ;;
+        3) gasmix="Earth_1mbarH2O"
+           echo $gasmix not available yet && continue ;;
+        4) gasmix="Earth_0.1mbarH2O"
+           echo $gasmix not available yet && continue ;;
+        5) gasmix="Earth_10mbarH2O"
+           echo $gasmix not available yet && continue ;;
+        6) gasmix="Earth_100mbCO2_1mbH2O"
+           echo $gasmix not available yet && continue ;;
+        7) gasmix="Earth_100mbCO2_2mbCH4_1mbH2O"
+           echo $gasmix not available yet && continue ;;
+        8) gasmix="Earth_900ppmCO2_1mbH2O"
+           echo $gasmix ;;
+        9) gasmix="Earth_900ppmCO2_900ppmCH4_1mbH2O"
+           echo $gasmix not available yet && continue ;;
+        *) echo Unknown option && continue ;;
+      esac
+      #### download corrk_data
+      case $gasmixnb in
+        1) corrkwww="https://web.lmd.jussieu.fr/~jnaar/eduplanet/corrk_data/" ;;
+        [2-9]*) corrkwww="https://web.lmd.jussieu.fr/~mturbet/eduplanet/corrk_data/" ;;
+      esac
+      case $gasmixnb in
+        [1-9]*) cd $datagen"/corrk_data"
+           if [[ ! (-d "$gasmix") ]] ; then
+             wget $corrkwww"/"$gasmix".zip"
+             unzip $gasmix".zip"
+             rm -fv $gasmix".zip"
+           else
+             echo $gasmix folder found
+           fi
+           cd $edufolder
+           #### setup etu.def
+           echo "corrkdir = $gasmix" >> reglages_run.txt
+           echo "graybody = .false." >> reglages_run.txt
+           #### setup gases.def
+           cat "RUN/gases.def.$gasmix" > reglages_gases.txt ;;
+      esac
+      #### setup number of bands in compiler options
+      #### (make sure to use 3 digits!)
+      case $gasmixnb in
+        #earth
+        1) nbir="38 "
+           nbvi="36 ";;
+        #megaCO2
+        2) nbir="8  "
+           nbvi="12 ";;
+        #Earth_900ppmCO2_1mbH2O
+        8) nbir="38 "
+           nbvi="36 ";;
+      esac
+      # replace the three first digits to specify band number
+      sed -ri "/keybir/ s/^(.{0})(.{3})/$nbir/" reglages_compiler.txt
+      sed -ri "/keybvi/ s/^(.{0})(.{3})/$nbvi/" reglages_compiler.txt ;;
   #----------------------------------------------------------------
    61) python TOOLS/peri_day.py ;;
    62) topofile=`grep "surface_" reglages_init.txt | head -n 1`
