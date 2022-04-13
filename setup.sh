@@ -59,8 +59,9 @@ do
   79 > Disable all patches
 > Turn on the dynamical core (dyn)
   81 > Earth 16x16x16 or 32x32x16
-  82 > Titan 16x16x28 or 32x32x28
-  83 > Trappist 16x16x28 or 32x32x28
+  82 > Mars 16x16x16 or 32x32x16
+  83 > Titan 16x16x28 or 32x32x28
+  84 > Trappist 16x16x28 or 32x32x28
 > File operations :
   91 > Show folder sizes
   92 > Delete one folder
@@ -118,7 +119,7 @@ EOL
    8) cat INIT/planet_start.mars.continents > reglages_init.txt
       cat INIT/compiler.default > reglages_compiler.txt
       cat RUN/gases.def.default > reglages_gases.txt
-      cat RUN/etu.def.default > reglages_run.txt ;;
+      cat RUN/etu.def.mars > reglages_run.txt ;;
    9) cd INIT/DATAGENERIC
       ls surface_*.nc 
       cd $edufolder ;;
@@ -225,8 +226,9 @@ EOL
        cd $edufolder ;;
   #----------------------------------------------------------------
    81) cat RUN/etu.def.dyn.earth >> reglages_run.txt ;;
-   82) cat RUN/etu.def.dyn.titan >> reglages_run.txt ;;
-   83) cat RUN/etu.def.dyn.trappist >> reglages_run.txt ;;
+   82) cat RUN/etu.def.dyn.mars >> reglages_run.txt ;;
+   83) cat RUN/etu.def.dyn.titan >> reglages_run.txt ;;
+   84) cat RUN/etu.def.dyn.trappist >> reglages_run.txt ;;
   #----------------------------------------------------------------
    91) du -hs exp_* | sort -rn ;;
    92) echo "Which folder do you want to delete ?"
