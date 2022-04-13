@@ -232,7 +232,6 @@ EOL
        if [ $answer -eq 1 ] ; then
          cat $selectdir/reglages_init.txt > reglages_init.txt
          cat $selectdir/reglages_compiler.txt > reglages_compiler.txt
-         sed -i '/keydyn/ s/^0/1/' reglages_compiler.txt 
          cat $selectdir/reglages_gases.txt > reglages_gases.txt
          cat $selectdir/reglages_run.txt  > reglages_run.txt
        fi ;;
@@ -246,9 +245,9 @@ EOL
   esac
   
   case $userchoice in
-   8?) echo "Dynamical core setup was added to reglages_run.txt"
-       echo "Don't forget to change keydyn, keynx and keyny"
-       echo "  accordingly in reglages_compiler.txt" ;;
+    8?) sed -i '/keydyn/ s/^0/1/' reglages_compiler.txt 
+        sed -ri "/keynx/ s/^(.{0})(.{3})/16 /" reglages_compiler.txt
+        sed -ri "/keyny/ s/^(.{0})(.{3})/16 /" reglages_compiler.txt ;;
   esac
   
 done
