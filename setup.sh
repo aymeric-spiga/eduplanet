@@ -40,7 +40,7 @@ do
   1 > Default "billard ball"
   2 > Earth present day topo
   3 > Earth + water cycle
-  4 > Earth + slab ocean
+  4 > Earth + water cycle + slab ocean
   5 > Earth with specified supercontinent
   6 > Titan
   7 > Trappist
@@ -86,13 +86,14 @@ EOL
       cat RUN/etu.def.default > reglages_run.txt
       cat RUN/etu.def.watercycle >> reglages_run.txt
       echo "Don't forget to turn on the dynamical core" && sleep 2 ;;
-   # CONFIG 4 A VALIDER
-   4) cp $edufolder/INIT/newstart.F.ocean $edufolder/$phystd/newstart.F
-      cp $edufolder/INIT/iniphy.ocean $edufolder/$phystd/iniphysiq_mod.F90
-      cat INIT/planet_start.earth.continents > reglages_init.txt
-      cat RUN/etu.def.ocean > reglages_run.txt
+   # CONFIG 4 NE FONCTIONNE PAS POUR L'INSTANT
+   4) cat INIT/planet_start.earth.slabocean > reglages_init.txt
+      cat INIT/compiler.default > reglages_compiler.txt
       cat RUN/gases.def.default > reglages_gases.txt
-      cat INIT/compiler.ocean > reglages_compiler.txt ;;
+      cat RUN/etu.def.default > reglages_run.txt
+      cat RUN/etu.def.watercycle >> reglages_run.txt
+      cat RUN/etu.def.slabocean >> reglages_run.txt
+      echo "Don't forget to turn on the dynamical core" && sleep 2 ;;
    5) cat INIT/planet_start.earth.supercontinent > reglages_init.txt
       cat INIT/compiler.default > reglages_compiler.txt
       cat RUN/gases.def.default > reglages_gases.txt
