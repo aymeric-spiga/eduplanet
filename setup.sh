@@ -102,9 +102,9 @@ EOL
       echo "Solar constant value at 1 astronomical unit ?"
       read Fat1AU
       # comment lines that contain Fat1AU
-      sed -i '/Fat1AU/ s/^#*/#/' reglages_run.txt
+      sed -i --follow-symlinks '/Fat1AU/ s/^#*/#/' reglages_run.txt
       # add the wanted value after each occurrence
-      sed -i "/Fat1AU/a Fat1AU = $Fat1AU" reglages_run.txt ;;
+      sed -i --follow-symlinks "/Fat1AU/a Fat1AU = $Fat1AU" reglages_run.txt ;;
    6) cat INIT/planet_start.titan > reglages_init.txt
       cat INIT/compiler.titan > reglages_compiler.txt
       cat RUN/gases.def.default > reglages_gases.txt
@@ -192,8 +192,8 @@ EOL
            nbvi="36 ";;
       esac
       # replace the three first digits to specify band number
-      sed -ri "/keybir/ s/^(.{0})(.{3})/$nbir/" reglages_compiler.txt
-      sed -ri "/keybvi/ s/^(.{0})(.{3})/$nbvi/" reglages_compiler.txt ;;
+      sed -ri --follow-symlinks "/keybir/ s/^(.{0})(.{3})/$nbir/" reglages_compiler.txt
+      sed -ri --follow-symlinks "/keybvi/ s/^(.{0})(.{3})/$nbvi/" reglages_compiler.txt ;;
   #----------------------------------------------------------------
    61) python TOOLS/peri_day.py ;;
    62) topofile=`grep "surface_" reglages_init.txt | head -n 1`
@@ -214,7 +214,7 @@ EOL
        fi ;;
    63) echo "New obliquity ?"
        read obliquit
-       sed -i \
+       sed -i --follow-symlinks \
          "/obliquit/{n;s/.*/$obliquit !! <-- Obliquite (degres)/}" \
          reglages_init.txt ;;
   #----------------------------------------------------------------
@@ -254,9 +254,9 @@ EOL
   esac
   
   case $userchoice in
-    8?) sed -i '/keydyn/ s/^0/1/' reglages_compiler.txt 
-        sed -ri "/keynx/ s/^(.{0})(.{3})/16 /" reglages_compiler.txt
-        sed -ri "/keyny/ s/^(.{0})(.{3})/16 /" reglages_compiler.txt ;;
+    8?) sed -i --follow-symlinks '/keydyn/ s/^0/1/' reglages_compiler.txt 
+        sed -ri --follow-symlinks "/keynx/ s/^(.{0})(.{3})/16 /" reglages_compiler.txt
+        sed -ri --follow-symlinks "/keyny/ s/^(.{0})(.{3})/16 /" reglages_compiler.txt ;;
   esac
   
 done
