@@ -52,6 +52,7 @@ do
 > Setup tools :
   61 > Compute orbital parameters
   62 > Change albedo of continents
+  62.1 > Change albedo of continents over a specific region
   63 > Change obliquity
 > Apply a specific patch :
   71 > Albedo feedback
@@ -213,6 +214,13 @@ EOL
        else
          echo "No topo file set in reglages_init.txt"
        fi ;;
+   62.1) echo "New albedo value ?" ; read value
+	 echo "Region setting" ; echo "Min. longitude ?" ; read lonmin
+	 echo "Max. longitude ?" ; read lonmax
+	 echo "Min latitude ?" ; read latmin
+	 echo "Max latitude ?" ; read latmax
+	 TOOLS/newalb.sh $value $lonmin $lonmax $latmin $latmax
+	 sed -i 's/surface_earth.nc/surface_earth_newalb.nc/' reglages_init.txt ;;
    63) echo "New obliquity ?"
        read obliquit
        sed -i --follow-symlinks \
